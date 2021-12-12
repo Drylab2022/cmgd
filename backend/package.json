@@ -1,0 +1,38 @@
+{
+  "name": "programs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "1": " echo '测试1:显示配置信息' &&cd config && node configDefault.js",
+    "2": " echo '测试2:日志功能测试' &&cd log && node logger.js",
+    "3": " echo '测试3:文本文件处理测试' &&cd CsvFileProcessor && node TxtFileProcessor.js",
+    "4": " echo '测试4:多行文本文件处理测试' &&cd CsvFileProcessor && node TxtLinesProcessor.js",
+    "5": " echo '测试5:CSV文件解析测试' &&cd CsvFileProcessor && node CsvFileProcessor.js",
+    "6": " echo '测试6:数据库连接模块功能测试' &&cd SequelizeDB && node connect.js",
+    "7": " echo '测试7:动态建表模块功能测试' &&cd SequelizeDB && node tableCreator.js",
+    "8": " echo '测试8:研究枚举测试' &&cd CsvFileProcessor && node studiesEnumerator.js",
+    "9": " echo '测试:研究的TSV文件枚举测试' &&cd CsvFileProcessor && node importerV1.js",
+    "a": " echo '测试:导入study的名字' &&cd CsvFileProcessor && node importerV2.js",
+    "b": " echo '测试:导入字段类型' &&cd CsvFileProcessor && node csvFileImporter.js",
+    "c": " echo '测试:导入所有研究' &&cd CsvFileProcessor && node importerV3.js",
+    "d": " echo '测试:必要字段存在性' &&cd SequelizeDB/check && node requiredCheck.js",
+    "e": " echo '测试:sampleID唯一性' &&cd SequelizeDB/check && node uniqueSampleIDCheck.js",
+    "f": " echo '测试:创建样本中心' &&cd sampleCenter && node tableBaseV2.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.11",
+    "@types/node": "^14.14.16",
+    "express": "^4.17.1",
+    "log4js": "^6.3.0",
+    "pg": "^8.5.1",
+    "sequelize": "^6.3.5",
+    "swagger-jsdoc": "^6.0.1",
+    "swagger-ui-express": "^4.1.6",
+    "typescript": "^4.2.3"
+  },
+  "description": ""
+}

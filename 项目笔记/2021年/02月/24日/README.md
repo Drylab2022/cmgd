@@ -1,0 +1,32 @@
+# 文档服务器配置信息归档
+
+## docker相关的文件存储目录
+
+```bash
+/data/work/books/quan
+```
+
+## 查看服务器运行状态
+
+```bash
+docker stats books-quan
+```
+
+## 重新启动文档服务器
+
+```bash
+docker restart books-quan
+```
+
+## 查看服务器运行日志
+
+```bash
+docker logs books-quan
+```
+
+## 清空日志(root权限之后)
+
+```bash
+echo '' > /var/lib/docker/containers/de00e47bcdfe850c24340d02c20b0059f0403ab9890fbfdff8dfbd94323a4ddf/de00e47bcdfe850c24340d02c20b0059f0403ab9890fbfdff8dfbd94323a4ddf-json.log
+```
+
