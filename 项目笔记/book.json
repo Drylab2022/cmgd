@@ -1,0 +1,34 @@
+{
+  "title" : "project开发笔记",
+  "author" : "何飞",
+  "description" : "project开发笔记",
+  "language" : "zh-hans",
+    "plugins": [
+        "highlight",
+        "-search",
+        "-lunr",
+        "-sharing",
+        "fontsettings",
+        "theme-default",
+        "splitter",
+        "search-pro",
+        "livereload",
+        "hide-element",
+        "anchor-navigation-ex-toc",
+        "code",
+        "expandable-chapters",
+        "chapter-fold",
+        "lightbox",
+        "accordion",
+        "sectionx"
+    ],
+    "pluginsConfig": {
+        "hide-element": {
+            "elements": [".gitbook-link"]
+        }
+        ,
+        "sectionx": {
+          "tag": "b"
+        }       
+    }
+}

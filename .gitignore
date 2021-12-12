@@ -1,0 +1,10 @@
+/.git-accounts.txt
+/programs/.idea
+/programs/node_modules
+/programs/package-lock.json
+/programs/logs
+/programs/*.map
+/programs/*.js
+/programs/log/logs
+*.map
+*.js
