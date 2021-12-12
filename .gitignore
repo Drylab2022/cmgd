@@ -6,5 +6,6 @@
 /programs/*.map
 /programs/*.js
 /backend/log/logs
+/.idea
 *.map
 *.js
