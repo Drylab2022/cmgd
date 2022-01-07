@@ -1,22 +1,7 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { API, Auth } from "aws-amplify";
-import { withAuthenticator } from "@aws-amplify/ui-react";
-import "@aws-amplify/ui/dist/style.css";
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
-  async function callApi() {
-    const user = await Auth.currentAuthenticatedUser();
-    const token = user.signInUserSession.idToken.jwtToken;
-    console.log({ token });
-    const requestInfo = {
-      headers: { Authorization: token },
-    };
-    const data = await API.get("metagenomiccuration", "/", requestInfo);
-    console.log({ data });
-  }
-
   return (
     <div className="App">
       <header className="App-header">
@@ -24,10 +9,17 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <button onClick={callApi}>Call API</button>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
       </header>
     </div>
   );
 }
 
-export default withAuthenticator(App);
+export default App;

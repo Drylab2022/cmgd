@@ -1,14 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
-    "hosting": {
-        "S3AndCloudFront": {
-            "Region": "string",
-            "HostingBucketName": "string",
-            "WebsiteURL": "string",
-            "S3BucketSecureURL": "string"
-        }
-    },
     "auth": {
-        "metagenomiccurations": {
+        "cmgd": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",
@@ -19,13 +11,21 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "api": {
-        "metagenomiccuration": {
+        "cmgdapi": {
             "ServiceName": "string",
             "ClusterName": "string",
             "PipelineName": "string",
             "ContainerNames": "string",
             "ApiName": "string",
             "RootUrl": "string"
+        }
+    },
+    "hosting": {
+        "S3AndCloudFront": {
+            "Region": "string",
+            "HostingBucketName": "string",
+            "WebsiteURL": "string",
+            "S3BucketSecureURL": "string"
         }
     }
 }

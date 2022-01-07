@@ -1,22 +1,20 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-metagenomiccurations-dev-121001-authRole",
-      "UnauthRoleArn": "arn:aws:iam::563113759477:role/amplify-metagenomiccurations-dev-121001-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::563113759477:role/amplify-metagenomiccurations-dev-121001-authRole",
+      "AuthRoleName": "amplify-cmgd-dev-201522-authRole",
+      "UnauthRoleArn": "arn:aws:iam::563113759477:role/amplify-cmgd-dev-201522-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::563113759477:role/amplify-cmgd-dev-201522-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-metagenomiccurations-dev-121001-deployment",
-      "UnauthRoleName": "amplify-metagenomiccurations-dev-121001-unauthRole",
-      "StackName": "amplify-metagenomiccurations-dev-121001",
-      "StackId": "arn:aws:cloudformation:us-east-1:563113759477:stack/amplify-metagenomiccurations-dev-121001/00d7a030-6801-11ec-addb-0e29ddcc2d21",
-      "AmplifyAppId": "d1dk3qfjeqzprn",
-      "NetworkStackS3Url": "https://s3.amazonaws.com/amplify-metagenomiccurations-dev-121001-deployment/amplify-cfn-templates/networkingStackTemplate.json"
+      "DeploymentBucketName": "amplify-cmgd-dev-201522-deployment",
+      "UnauthRoleName": "amplify-cmgd-dev-201522-unauthRole",
+      "StackName": "amplify-cmgd-dev-201522",
+      "StackId": "arn:aws:cloudformation:us-east-1:563113759477:stack/amplify-cmgd-dev-201522/4b1f1990-6f57-11ec-ba70-0a22f5b12cc3",
+      "AmplifyAppId": "d3n3eptguknlm9",
+      "NetworkStackS3Url": "https://s3.amazonaws.com/amplify-cmgd-dev-201522-deployment/amplify-cfn-templates/networkingStackTemplate.json"
     },
     "categories": {
       "auth": {
-        "undefined": {},
-        "true": {},
-        "false": {}
+        "undefined": {}
       }
     }
   }
