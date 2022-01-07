@@ -1,12 +1,6 @@
 {
-  "hosting": {
-    "S3AndCloudFront": {
-      "service": "S3AndCloudFront",
-      "providerPlugin": "awscloudformation"
-    }
-  },
   "auth": {
-    "metagenomiccurations": {
+    "cmgd": {
       "service": "Cognito",
       "serviceType": "managed",
       "providerPlugin": "awscloudformation",
@@ -32,8 +26,8 @@
     }
   },
   "api": {
-    "metagenomiccuration": {
-      "resourceName": "metagenomiccuration",
+    "cmgdapi": {
+      "resourceName": "cmgdapi",
       "dependsOn": [
         {
           "category": "",
@@ -49,7 +43,7 @@
         },
         {
           "category": "auth",
-          "resourceName": "metagenomiccurations",
+          "resourceName": "cmgd",
           "attributes": [
             "UserPoolId",
             "AppClientIDWeb"
@@ -65,10 +59,16 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "ElasticContainer",
-      "authName": "metagenomiccurations",
+      "authName": "cmgd",
       "skipHashing": false,
       "apiType": "REST",
       "iamAccessUnavailable": true
+    }
+  },
+  "hosting": {
+    "S3AndCloudFront": {
+      "service": "S3AndCloudFront",
+      "providerPlugin": "awscloudformation"
     }
   }
 }

@@ -36,10 +36,10 @@
     "NetworkStackCloudMapNamespaceId": {
       "Type": "String"
     },
-    "authmetagenomiccurationsUserPoolId": {
+    "authcmgdUserPoolId": {
       "Type": "String"
     },
-    "authmetagenomiccurationsAppClientIDWeb": {
+    "authcmgdAppClientIDWeb": {
       "Type": "String"
     },
     "rootStackName": {
@@ -67,7 +67,7 @@
             {
               "Fn::Equals": [
                 {
-                  "Ref": "authmetagenomiccurationsUserPoolId"
+                  "Ref": "authcmgdUserPoolId"
                 },
                 ""
               ]
@@ -79,7 +79,7 @@
             {
               "Fn::Equals": [
                 {
-                  "Ref": "authmetagenomiccurationsAppClientIDWeb"
+                  "Ref": "authcmgdAppClientIDWeb"
                 },
                 ""
               ]
@@ -105,7 +105,7 @@
           },
           "RoutingPolicy": "MULTIVALUE"
         },
-        "Name": "metagenomiccuration"
+        "Name": "cmgdapi"
       }
     },
     "TaskDefinitionTaskRoleFD40A61D": {
@@ -139,17 +139,47 @@
                 "",
                 [
                   {
-                    "Ref": "AWS::AccountId"
+                    "Fn::Select": [
+                      4,
+                      {
+                        "Fn::Split": [
+                          ":",
+                          {
+                            "Fn::GetAtt": [
+                              "apiRepository",
+                              "Arn"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
                   },
                   ".dkr.ecr.",
                   {
-                    "Ref": "AWS::Region"
+                    "Fn::Select": [
+                      3,
+                      {
+                        "Fn::Split": [
+                          ":",
+                          {
+                            "Fn::GetAtt": [
+                              "apiRepository",
+                              "Arn"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
                   },
                   ".",
                   {
                     "Ref": "AWS::URLSuffix"
                   },
-                  "/amplify-metagenomiccurations-dev-121001-api-metagenomiccuration-api:latest"
+                  "/",
+                  {
+                    "Ref": "apiRepository"
+                  },
+                  ":latest"
                 ]
               ]
             },
@@ -189,7 +219,7 @@
               {
                 "Ref": "rootStackName"
               },
-              "-metagenomiccuration"
+              "-cmgdapi"
             ]
           ]
         },
@@ -236,23 +266,9 @@
               ],
               "Effect": "Allow",
               "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition"
-                    },
-                    ":ecr:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":repository/amplify-metagenomiccurations-dev-121001-api-metagenomiccuration-api"
-                  ]
+                "Fn::GetAtt": [
+                  "apiRepository",
+                  "Arn"
                 ]
               }
             },
@@ -314,7 +330,7 @@
               {
                 "Ref": "rootStackName"
               },
-              "-metagenomiccuration-api"
+              "-cmgdapi-api"
             ]
           ]
         },
@@ -322,6 +338,27 @@
       },
       "UpdateReplacePolicy": "Delete",
       "DeletionPolicy": "Delete"
+    },
+    "apiRepository": {
+      "Type": "AWS::ECR::Repository",
+      "Properties": {
+        "LifecyclePolicy": {
+          "LifecyclePolicyText": "{\"rules\":[{\"rulePriority\":10,\"selection\":{\"tagStatus\":\"tagged\",\"tagPrefixList\":[\"latest\"],\"countType\":\"imageCountMoreThan\",\"countNumber\":1},\"action\":{\"type\":\"expire\"}},{\"rulePriority\":100,\"selection\":{\"tagStatus\":\"any\",\"countType\":\"sinceImagePushed\",\"countNumber\":7,\"countUnit\":\"days\"},\"action\":{\"type\":\"expire\"}}]}"
+        },
+        "RepositoryName": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "rootStackName"
+              },
+              "-api-cmgdapi-api"
+            ]
+          ]
+        }
+      },
+      "UpdateReplacePolicy": "Retain",
+      "DeletionPolicy": "Retain"
     },
     "ServiceSG": {
       "Type": "AWS::EC2::SecurityGroup",
@@ -355,7 +392,7 @@
         "Cluster": {
           "Ref": "NetworkStackClusterName"
         },
-        "DesiredCount": 1,
+        "DesiredCount": 0,
         "LaunchType": "FARGATE",
         "NetworkConfiguration": {
           "AwsvpcConfiguration": {
@@ -373,7 +410,7 @@
             }
           }
         },
-        "ServiceName": "metagenomiccuration-service-api-8080",
+        "ServiceName": "cmgdapi-service-api-8080",
         "ServiceRegistries": [
           {
             "ContainerName": "api",
@@ -678,7 +715,7 @@
             "CLUSTER_NAME": {
               "Ref": "NetworkStackClusterName"
             },
-            "SERVICE_NAME": "metagenomiccuration-service-api-8080"
+            "SERVICE_NAME": "cmgdapi-service-api-8080"
           }
         },
         "Handler": "index.handler",
@@ -880,17 +917,47 @@
                         },
                         "\"},{\"name\":\"api_REPOSITORY_URI\",\"type\":\"PLAINTEXT\",\"value\":\"",
                         {
-                          "Ref": "AWS::AccountId"
+                          "Fn::Select": [
+                            4,
+                            {
+                              "Fn::Split": [
+                                ":",
+                                {
+                                  "Fn::GetAtt": [
+                                    "apiRepository",
+                                    "Arn"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
                         },
                         ".dkr.ecr.",
                         {
-                          "Ref": "AWS::Region"
+                          "Fn::Select": [
+                            3,
+                            {
+                              "Fn::Split": [
+                                ":",
+                                {
+                                  "Fn::GetAtt": [
+                                    "apiRepository",
+                                    "Arn"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
                         },
                         ".",
                         {
                           "Ref": "AWS::URLSuffix"
                         },
-                        "/amplify-metagenomiccurations-dev-121001-api-metagenomiccuration-api\"}]"
+                        "/",
+                        {
+                          "Ref": "apiRepository"
+                        },
+                        "\"}]"
                       ]
                     ]
                   }
@@ -956,7 +1023,7 @@
                   "ClusterName": {
                     "Ref": "NetworkStackClusterName"
                   },
-                  "ServiceName": "metagenomiccuration-service-api-8080"
+                  "ServiceName": "cmgdapi-service-api-8080"
                 },
                 "InputArtifacts": [
                   {
@@ -989,7 +1056,7 @@
               {
                 "Ref": "rootStackName"
               },
-              "-metagenomiccuration-service-api-8080"
+              "-cmgdapi-service-api-8080"
             ]
           ]
         }
@@ -2043,7 +2110,7 @@
               {
                 "Ref": "rootStackName"
               },
-              "-metagenomiccuration"
+              "-cmgdapi"
             ]
           ]
         },
@@ -2088,14 +2155,14 @@
           "Ref": "Api"
         },
         "AuthorizerType": "JWT",
-        "Name": "metagenomiccurationAuthorizer",
+        "Name": "cmgdapiAuthorizer",
         "IdentitySource": [
           "$request.header.Authorization"
         ],
         "JwtConfiguration": {
           "Audience": [
             {
-              "Ref": "authmetagenomiccurationsAppClientIDWeb"
+              "Ref": "authcmgdAppClientIDWeb"
             }
           ],
           "Issuer": {
@@ -2108,7 +2175,7 @@
                 },
                 ".amazonaws.com/",
                 {
-                  "Ref": "authmetagenomiccurationsUserPoolId"
+                  "Ref": "authcmgdUserPoolId"
                 }
               ]
             ]
@@ -2177,7 +2244,7 @@
   },
   "Outputs": {
     "ServiceName": {
-      "Value": "metagenomiccuration-service-api-8080"
+      "Value": "cmgdapi-service-api-8080"
     },
     "ClusterName": {
       "Value": {
@@ -2192,7 +2259,7 @@
             {
               "Ref": "rootStackName"
             },
-            "-metagenomiccuration-service-api-8080"
+            "-cmgdapi-service-api-8080"
           ]
         ]
       }
@@ -2201,7 +2268,7 @@
       "Value": "api"
     },
     "ApiName": {
-      "Value": "metagenomiccuration"
+      "Value": "cmgdapi"
     },
     "RootUrl": {
       "Value": {
@@ -2211,5 +2278,6 @@
         ]
       }
     }
-  }
+  },
+  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"7.6.5\",\"stackType\":\"api-ElasticContainer\",\"metadata\":{}}"
 }

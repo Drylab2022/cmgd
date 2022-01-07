@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "metagenomiccurations_identitypool_4aa75105",
+    "identityPoolName": "cmgd_identitypool_5ec4c90e",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "metage4aa75105",
-    "userPoolName": "metagenomiccurations_userpool_4aa75105",
+    "resourceNameTruncated": "cmgd5ec4c90e",
+    "userPoolName": "cmgd_userpool_5ec4c90e",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -31,11 +31,11 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "metage4aa75105_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "cmgd5ec4c90e_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
     "authSelections": "identityPoolAndUserPool",
-    "resourceName": "metagenomiccurations",
-    "sharedId": "4aa75105",
+    "resourceName": "cmgd",
+    "sharedId": "5ec4c90e",
     "serviceName": "Cognito",
     "useDefault": "manual"
   }
