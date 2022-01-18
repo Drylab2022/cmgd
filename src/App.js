@@ -1,20 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-import Amplify from 'aws-amplify';
-import awsconfig from './aws-exports';
-import { AmplifySignOut, withAuthenticator } from '@aws-amplify/ui-react';
+import React from "react";
+import Navbar from "react-bootstrap/Navbar";
+import Routes from "./Routes";
+import Nav from "react-bootstrap/Nav"
 
-Amplify.configure(awsconfig);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <AmplifySignOut />
-        <h2>My App Content</h2>
-      </header>
+    <div className="App container py-3">
+      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
+        <Navbar.Brand href="/" className="font-weight-bold text-muted">
+        Metagenomic Data Curation System
+        </Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          <Nav>
+            <Nav.Link href="/signup">Signup</Nav.Link>
+            <Nav.Link href="/login">Login</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+      <Routes />
     </div>
   );
 }
 
-export default withAuthenticator (App);
+export default App;
