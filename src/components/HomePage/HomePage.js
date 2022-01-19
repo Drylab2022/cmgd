@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./HomePage.css"
 import axios from "axios";
 import WorkingPage from "./WorkingPage";
+import { Auth } from 'aws-amplify';
 
 const cursorMaximumSize = 999;
 const projectStatus = 'active';
@@ -12,9 +13,9 @@ class HomePage extends Component{
     super(props)
     this.state={
       projectId: '',
-      user: 'Tian',
       samplesInfo: new Map(),
       projects: [],
+      username: ''
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -23,6 +24,11 @@ class HomePage extends Component{
     this.processData = this.processData.bind(this);
     this.calculateTotalSpots = this.calculateTotalSpots.bind(this);
     this.generateJsonObject = this.generateJsonObject.bind(this);
+    this.getUserInfo = this.getUserInfo.bind(this);
+  }
+
+  async componentDidMount() {
+    this.getUserInfo();
   }
 
   handleChange(event) {
@@ -83,7 +89,7 @@ class HomePage extends Component{
       projectId: this.state.projectId,
       numberOfSamples: this.state.samplesInfo.size,
       status: projectStatus,
-      assignee: this.state.user,
+      assignee: this.state.username,
       samples: samples,
     }
   };
@@ -118,12 +124,29 @@ class HomePage extends Component{
 
     const json = this.generateJsonObject();
 
-    const createRes = await axios.post("http://localhost:5000/api/project", json);
-    const getRes = await axios.get(`http://localhost:5000/api/project/${this.state.user}`);
-    console.log("test", getRes);
+    const createRes = await axios.post("http://localhost:5001/api/project", json);
+    const newProject = createRes.data;
+    const projects = this.state.projects;
+    projects.push(newProject);
 
-    this.setState({projects : getRes.data});
-    this.setState({samplesInfo : new Map()});
+    console.log("test", createRes);
+    this.setState({
+      samplesInfo : new Map(),
+      projects: projects,
+    });
+  }
+
+  async getUserInfo() {
+    const res = await Auth.currentUserInfo();
+    const username = res.username;
+
+    let projects = await axios.get(`http://localhost:5001/api/project/${username}`);
+    projects = projects.data;
+    
+    this.setState({
+      projects : projects,
+      username : username
+    });
   }
 
   render() {
@@ -133,7 +156,7 @@ class HomePage extends Component{
         <hr />
         <form onSubmit={this.initializeProject}>
           <label>
-           SRA Project ID:
+           SRA Project ID: 
             <input type="text" value={this.state.projectID} onChange={this.handleChange} />
           </label>
            <input type="submit" value="Initialize" />
