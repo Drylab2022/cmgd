@@ -118,8 +118,8 @@ class HomePage extends Component{
 
     const json = this.generateJsonObject();
 
-    const createRes = await axios.post("http://localhost:5000/api/project", json);
-    const getRes = await axios.get(`http://localhost:5000/api/project/${this.state.user}`);
+    const createRes = await axios.post("http://localhost:6000/api/project", json);
+    const getRes = await axios.get(`http://localhost:6000/api/project/${this.state.user}`);
     console.log("test", getRes);
 
     this.setState({projects : getRes.data});
@@ -133,7 +133,7 @@ class HomePage extends Component{
         <hr />
         <form onSubmit={this.initializeProject}>
           <label>
-           SRA Project ID:
+           SRA Project ID: 
             <input type="text" value={this.state.projectID} onChange={this.handleChange} />
           </label>
            <input type="submit" value="Initialize" />
