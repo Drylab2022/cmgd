@@ -32,7 +32,7 @@ export default function Login() {
     try {
       await Auth.signIn(fields.username, fields.password);
       userHasAuthenticated(true);
-      history.push("/HomePage");
+      history.push("/home");
     } catch (e) {
       onError(e);
       setIsLoading(false);
