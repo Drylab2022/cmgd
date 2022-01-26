@@ -32,7 +32,7 @@ class HomePage extends Component{
   }
 
   handleChange(event) {
-    this.setState({projectId: event.target.value});
+    this.setState({ projectId: event.target.value });
   }
 
   generateURL(cursor) {
@@ -94,11 +94,15 @@ class HomePage extends Component{
     }
   };
 
-
   async initializeProject(event){
     event.preventDefault();
     let cursor = '';
     const projectID = this.state.projectID;
+
+    //check if input is empty or whitespace
+    if(document.getElementById("projectId").value.trim().length === 0 || document.getElementById("projectId").value === null){
+      alert("Please enter a valid value");
+    }
 
     //Todo: Currently we only call the external api once due to the unfixed CORS error,
     // after we figure out how to solve it, we will uncomment the loop to call the api
@@ -112,11 +116,14 @@ class HomePage extends Component{
     //   this.processData(res.data.hits);
     // }
 
-
     //Single
-    const url = this.generateURL(cursor, projectID);
-    const res = await axios.get(url);
-    this.processData(res.data.hits);
+    try {
+      const url = this.generateURL(cursor, projectID);
+      const res = await axios.get(url);
+      this.processData(res.data.hits);
+    } catch (error) {
+      alert("Oops! Something went wrong. Please check you have the correct project id.");
+    }
 
     this.state.samplesInfo.forEach((sample) => {
       sample.avgLength /= sample.srrIds.length;
@@ -133,6 +140,7 @@ class HomePage extends Component{
     this.setState({
       samplesInfo : new Map(),
       projects: projects,
+      projectId : this.state.projectId
     });
   }
 
@@ -142,24 +150,23 @@ class HomePage extends Component{
 
     let projects = await axios.get(`http://localhost:5001/api/project/${username}`);
     projects = projects.data;
-    
+
     this.setState({
       projects : projects,
       username : username
     });
   }
-
   render() {
     return (
       <div className="new">
         <h4>Start a new project: </h4>
         <hr />
-        <form onSubmit={this.initializeProject}>
+        <form name="form" onSubmit={this.initializeProject}>
           <label>
            SRA Project ID: 
-            <input type="text" value={this.state.projectID} onChange={this.handleChange} />
+            <input id="projectId" type="text" value={this.state.projectID} className="inputText" required="required" onChange={this.handleChange} />
           </label>
-           <input type="submit" value="Initialize" />
+          <input type="submit" value="Initialize" className="submitbtn"/>
          </form>
          <WorkingPage projects = {this.state.projects} />
       </div>

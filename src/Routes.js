@@ -23,7 +23,7 @@ export default function Routes() {
         <Signup />
       </Route>
 
-      <Route exact path="/homepage">
+      <Route exact path="/home">
         <HomePage />
       </Route>
 
