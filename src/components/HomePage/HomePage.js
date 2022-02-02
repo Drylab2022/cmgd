@@ -120,15 +120,8 @@ class HomePage extends Component{
     try {
       const url = this.generateURL(cursor, projectID);
       const res = await axios.get(url);
-<<<<<<< HEAD
       this.processData(res.data.hits);
     } catch (error) {
-=======
-      console.log("test", res.status);
-      this.processData(res.data.hits);
-    } catch (error) {
-      console.log(error);
->>>>>>> 0c3c63ed06a0c9997140d7bac52935ebc842568b
       alert("Oops! Something went wrong. Please check you have the correct project id.");
     }
 
