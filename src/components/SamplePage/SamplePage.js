@@ -12,22 +12,6 @@ class SamplePage extends React.Component {
             errorMessage: '',
         };
     }
-
-    //handle the submit action 
-    submitForm =(event) => {
-        // const { item, onFormSubmit } = this.props;
-        // const editMode = !!item;
-
-        // const sampleId = this.sampleIdInput.value.trim();
-        // const platForm = this.platFormInput.value.trim();
-        // const number = this.numberInput.value.trim();
-        // const averageRead = this.averageReadInput.trim();
-        // const SRR = this.SRRInput.trim();
-        
-        // if (sampleId && platForm && number && averageRead && SRR){
-        //     if (sampleId)
-        // }
-    }
     render(){
         return (
             <div className="new">
