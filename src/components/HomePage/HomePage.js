@@ -8,14 +8,14 @@ const cursorMaximumSize = 999;
 const projectStatus = 'active';
 
 class HomePage extends Component{
-  
   constructor(props){
     super(props)
     this.state={
       projectId: '',
       samplesInfo: new Map(),
       projects: [],
-      username: ''
+      username: '',
+      loading: false
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -102,7 +102,15 @@ class HomePage extends Component{
     //check if input is empty or whitespace
     if(document.getElementById("projectId").value.trim().length === 0 || document.getElementById("projectId").value === null){
       alert("Please enter a valid value");
+      return;
     }
+
+    //display loading on button on submit
+    this.setState({ loading: true });
+
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 2000)
 
     //Todo: Currently we only call the external api once due to the unfixed CORS error,
     // after we figure out how to solve it, we will uncomment the loop to call the api
@@ -120,11 +128,10 @@ class HomePage extends Component{
     try {
       const url = this.generateURL(cursor, projectID);
       const res = await axios.get(url);
-      console.log("test", res.status);
       this.processData(res.data.hits);
     } catch (error) {
-      console.log(error);
       alert("Oops! Something went wrong. Please check you have the correct project id.");
+      return;
     }
 
     this.state.samplesInfo.forEach((sample) => {
@@ -141,8 +148,7 @@ class HomePage extends Component{
     console.log("test", createRes);
     this.setState({
       samplesInfo : new Map(),
-      projects: projects,
-      projectId : this.state.projectId
+      projects: projects
     });
   }
 
@@ -159,8 +165,10 @@ class HomePage extends Component{
     });
   }
   render() {
+    const { loading } = this.state;
     return (
       <div className="new">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
         <h4>Start a new project: </h4>
         <hr />
         <form name="form" onSubmit={this.initializeProject}>
@@ -168,7 +176,11 @@ class HomePage extends Component{
            SRA Project ID: 
             <input id="projectId" type="text" value={this.state.projectID} className="inputText" required="required" onChange={this.handleChange} />
           </label>
-          <input type="submit" value="Initialize" className="submitbtn"/>
+          <button type="submit" value="Initialize" className="submitbtn" disabled={loading}>
+            { loading && <i class="fa fa-spinner fa-spin" style={{ marginRight: "5px" }}></i>}
+            { loading && <span>loading</span> }
+            { !loading && <span>Initialize</span> }
+          </button>
          </form>
          <WorkingPage projects = {this.state.projects} />
       </div>

@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Link } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme })=>({
     [`&.${tableCellClasses.head}`]: {
@@ -47,7 +48,6 @@ class WorkingPage extends Component {
             <div className="newWorking">
                 <h4>Current working project: </h4>
                 <hr />
-
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 600 }} aria-label="customized table">
                         <TableHead>
@@ -61,12 +61,14 @@ class WorkingPage extends Component {
                         <TableBody>
                             {this.state.projects.map((project)=>(
                                 <StyledTableRow key={project.id}>
-                                    <StyledTableCell component='th' scope='row'>
+                                    <StyledTableCell component='th' scope='row' > 
+                                    <Link to={'/projects/: '+ project.projectId}>
                                         {project.projectId}
+                                    </Link>
                                     </StyledTableCell>
                                     <StyledTableCell align="center">{project.numberOfSamples}</StyledTableCell>
                                     <StyledTableCell align="center">{project.status}</StyledTableCell>
-                                    <StyledTableCell align="center">{project.createdAt}</StyledTableCell>
+                                    <StyledTableCell align="center">{new Date(project.createdAt).toLocaleString('en-US', { timeZone: 'America/New_York' })}</StyledTableCell>
                                 </StyledTableRow>
                             ))}
                         </TableBody>
