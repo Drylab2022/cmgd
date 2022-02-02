@@ -29,22 +29,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(id, project, samples, status, date) {
-    return { id, project, samples, status, date };
-  }
-
-const rows = [
-  createData('SRP11101', 159, 80, 'In Progress', '12/07/2021'),
-  createData('SRP23455', 237, 90, 'Under Review', '11/07/2020'),
-  createData('SRP78911', 262, 160, 'Approved', '02/07/2021'),
-  createData('SRP78999', 305, 37, 'Approved', '02/03/2021'),
-  createData('SRP66666', 356, 160, 'In Progress', '07/07/2021'),
-];
 class ProjectPage extends Component {
     constructor(props){
         super(props);
         this.state = {
+            projectId:[]
+        }
+    }
 
+    componentDidUpdate(prevProps){
+        if(this.props.projectId !== prevProps.projectId){
+            this.setState({ projectId: this.props.match.params.projectId });
         }
     }
 
@@ -75,15 +70,15 @@ class ProjectPage extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row)=>(
-                                <StyledTableRow key={row.id}>
+                            {this.state.projectId.map((sample)=>(
+                                <StyledTableRow key={sample.id}>
                                     <StyledTableCell component='th' scope='row'>
-                                        {row.id}
+                                        {sample.sampleId}
                                     </StyledTableCell>
-                                    <StyledTableCell align="right">{row.project}</StyledTableCell>
-                                    <StyledTableCell align="right">{row.samples}</StyledTableCell>
-                                    <StyledTableCell align="right">{row.status}</StyledTableCell>
-                                    <StyledTableCell align="right">{row.date}</StyledTableCell>
+                                    <StyledTableCell align="right">{sample.numberOfReads}</StyledTableCell>
+                                    <StyledTableCell align="right">{sample.avgReadLength}</StyledTableCell>
+                                    <StyledTableCell align="right">{sample.ncbiAccession}</StyledTableCell>
+                                    <StyledTableCell align="right">{sample.sequencingPlatform}</StyledTableCell>
                                 </StyledTableRow>
                             ))}
                         </TableBody>
