@@ -64,7 +64,7 @@ export default function Signup() {
 
     setIsLoading(true);
     try {
-        await Auth.confirmSignUp(fields.username, fields.email, fields.confirmationCode);
+        await Auth.confirmSignUp(fields.username, fields.confirmationCode);
         await Auth.signIn(fields.username, fields.password);
     
         userHasAuthenticated(true);
@@ -92,7 +92,6 @@ export default function Signup() {
           block
           size="lg"
           type="submit"
-          variant="success"
           isLoading={isLoading}
           disabled={!validateConfirmationForm()}
         >
@@ -145,7 +144,6 @@ export default function Signup() {
           block
           size="lg"
           type="submit"
-          variant="success"
           isLoading={isLoading}
           disabled={!validateForm()}
         >
