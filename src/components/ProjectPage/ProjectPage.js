@@ -1,52 +1,137 @@
 import React, { Component } from 'react'
-import { styled } from '@mui/material/styles';
+import PropTypes from 'prop-types';
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
+import TableFooter from '@mui/material/TableFooter';
+import TablePagination from '@mui/material/TablePagination';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import "./ProjectPage.css"
+import "./ProjectPage.css";
+import axios from "axios";
+import IconButton from '@mui/material/IconButton';
+import FirstPageIcon from '@mui/icons-material/FirstPage';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import LastPageIcon from '@mui/icons-material/LastPage';
+import { styled } from '@mui/system';
 
-const StyledTableCell = styled(TableCell)(({ theme })=>({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.action.hover,
-        color: theme.palette.common.black,
-      },
-      [`&.${tableCellClasses.body}`]: {
-        fontSize: 14,
-      },
-    }));
-    
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.common.white,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
+function TablePaginationActions(props) {
+    const theme = useTheme();
+    const { count, page, rowsPerPage, onPageChange } = props;
+  
+    const handleFirstPageButtonClick = (event) => {
+      onPageChange(event, 0);
+    };
+  
+    const handleBackButtonClick = (event) => {
+      onPageChange(event, page - 1);
+    };
+  
+    const handleNextButtonClick = (event) => {
+      onPageChange(event, page + 1);
+    };
+  
+    const handleLastPageButtonClick = (event) => {
+      onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+    };
+  
+    return (
+      <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+        <IconButton
+          onClick={handleFirstPageButtonClick}
+          disabled={page === 0}
+          aria-label="first page"
+        >
+          {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+        </IconButton>
+        <IconButton
+          onClick={handleBackButtonClick}
+          disabled={page === 0}
+          aria-label="previous page"
+        >
+          {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+        </IconButton>
+        <IconButton
+          onClick={handleNextButtonClick}
+          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+          aria-label="next page"
+        >
+          {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+        </IconButton>
+        <IconButton
+          onClick={handleLastPageButtonClick}
+          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+          aria-label="last page"
+        >
+          {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+        </IconButton>
+      </Box>
+    );
+  }
+  
+TablePaginationActions.propTypes = {
+    count: PropTypes.number.isRequired,
+    onPageChange: PropTypes.func.isRequired,
+    page: PropTypes.number.isRequired,
+    rowsPerPage: PropTypes.number.isRequired,
+};
+
+const CustomTablePagination = styled(TablePagination)`
+  & .css-pdct74-MuiTablePagination-selectLabel {
+      margin-top: auto;
+  }
+  & .css-levciy-MuiTablePagination-displayedRows {
+    margin-top: auto;
+  }
+`;
 
 class ProjectPage extends Component {
     constructor(props){
         super(props);
         this.state = {
-            projectId:[]
+            samples:[], 
+            page: 0,
+            rowsPerPage: 5
         }
+        this.handleChangePage = this.handleChangePage.bind(this);
+        this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
+        this.goBack = this.goBack.bind(this);
     }
-
-    componentDidUpdate(prevProps){
-        if(this.props.projectId !== prevProps.projectId){
-            this.setState({ projectId: this.props.match.params.projectId });
-        }
+    handleChangePage(event, newPage){
+        this.setState({ page: newPage })
+    }
+    handleChangeRowsPerPage(event){
+        this.setState({ 
+            rowsPerPage: parseInt(event.target.value, 10),
+            page: 0
+        })
+    }
+    
+    componentDidMount(){
+        const url = `http://localhost:5001/api/project/${this.props.match.params.projectId}/samples`;
+        axios.get(url).then(res => {
+            this.setState({ samples: res.data[0].samples });
+            console.log(res.data[0].samples);
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+    goBack(){
+        this.props.history.goBack();
     }
 
     render() {
+        const { rowsPerPage, page } = this.state;
+        const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - this.state.samples.length) : 0;
         return (
             <div className="new">
-                <h4 className='project'>ProjectID  { this.props.match.params.projectId }</h4>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+                <h4 className='project'>ProjectID:  { this.props.match.params.projectId }</h4>
 
                 <button type="submit" value="Initialize" className="projectbtn">
                     <span>Reset</span>
@@ -59,33 +144,65 @@ class ProjectPage extends Component {
                 </button>
                 
                 <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 600 }} aria-label="customized table">
+                    <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
                         <TableHead>
-                            <TableRow>
-                                <StyledTableCell>Sample ID</StyledTableCell>
-                                <StyledTableCell align="right">Number of Reads</StyledTableCell>
-                                <StyledTableCell align="right">avgReadLength</StyledTableCell>
-                                <StyledTableCell align="right">ncbiAccession</StyledTableCell>
-                                <StyledTableCell align="right">sequencingPlatform</StyledTableCell>
+                            <TableRow style={{ backgroundColor:"rgba(0, 0, 0, 0.04)" }}>
+                                <TableCell>Sample ID</TableCell>
+                                <TableCell align="right">Number of Reads</TableCell>
+                                <TableCell align="right">avgReadLength</TableCell>
+                                <TableCell align="right">ncbiAccession</TableCell>
+                                <TableCell align="right">sequencingPlatform</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.state.projectId.map((sample)=>(
-                                <StyledTableRow key={sample.id}>
-                                    <StyledTableCell component='th' scope='row'>
+                            {( rowsPerPage > 0
+                                ? this.state.samples.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                : this.state.samples
+                            ).map((sample) =>(
+                                <TableRow key={sample.id}>
+                                    <TableCell component='th' scope='row'>
                                         {sample.sampleId}
-                                    </StyledTableCell>
-                                    <StyledTableCell align="right">{sample.numberOfReads}</StyledTableCell>
-                                    <StyledTableCell align="right">{sample.avgReadLength}</StyledTableCell>
-                                    <StyledTableCell align="right">{sample.ncbiAccession}</StyledTableCell>
-                                    <StyledTableCell align="right">{sample.sequencingPlatform}</StyledTableCell>
-                                </StyledTableRow>
+                                    </TableCell>
+                                    <TableCell align="right">{sample.numberOfReads}</TableCell>
+                                    <TableCell align="right">{sample.avgReadLength}</TableCell>
+                                    <TableCell align="right">{sample.ncbiAccession}</TableCell>
+                                    <TableCell align="right">{sample.sequencingPlatform}</TableCell>
+                                </TableRow>
                             ))}
+                            {emptyRows > 0 && (
+                                <TableRow style={{ height: 53 * emptyRows }}>
+                                    <TableCell colSpan={6} />
+                                </TableRow>
+                            )}
                         </TableBody>
+                        <TableFooter>
+                            <TableRow>
+                                <CustomTablePagination
+                                    rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                                    colSpan={5}
+                                    count={this.state.samples.length}
+                                    rowsPerPage={rowsPerPage}
+                                    page={page}
+                                    SelectProps={{
+                                        inputProps: {
+                                        'aria-label': 'rows per page',
+                                        },
+                                        native: true,
+                                    }}
+                                    onPageChange={this.handleChangePage}
+                                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                                    ActionsComponent={TablePaginationActions}
+                                />
+                            </TableRow>
+                        </TableFooter>
                     </Table>
                 </TableContainer>
             
                 <div>
+                    <button type="submit" value="Initialize" className="returnbtn" onClick={this.goBack}>
+                        <i class="fa fa-angle-left" style={{paddingRight:"10px"}}></i>
+                        <span>Return</span>
+                    </button>
                     <button type="submit" value="Initialize" className="checkbtn">
                         <span>Check</span>
                     </button>
