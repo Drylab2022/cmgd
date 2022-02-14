@@ -58,3 +58,7 @@
   border-color: rgba(0, 0, 0, 0.04);
   transition: all .3s ease-in-out;
 }
+
+input[type="file"] {
+    display: none;
+}

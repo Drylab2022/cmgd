@@ -20,6 +20,8 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { styled } from '@mui/system';
 
+import * as Papa from 'papaparse';
+
 function TablePaginationActions(props) {
     const theme = useTheme();
     const { count, page, rowsPerPage, onPageChange } = props;
@@ -94,17 +96,23 @@ class ProjectPage extends Component {
     constructor(props){
         super(props);
         this.state = {
-            samples:[], 
+            samples:[],
+            projectId: '',
             page: 0,
             rowsPerPage: 5
         }
         this.handleChangePage = this.handleChangePage.bind(this);
         this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
         this.goBack = this.goBack.bind(this);
+        this.uploadFile = this.uploadFile.bind(this);
+        this.downloadFile = this.downloadFile.bind(this);
+        this.downloadBlob = this.downloadBlob.bind(this);
     }
+
     handleChangePage(event, newPage){
         this.setState({ page: newPage })
     }
+
     handleChangeRowsPerPage(event){
         this.setState({ 
             rowsPerPage: parseInt(event.target.value, 10),
@@ -113,16 +121,70 @@ class ProjectPage extends Component {
     }
     
     componentDidMount(){
-        const url = `http://localhost:5001/api/project/${this.props.match.params.projectId}/samples`;
+        const projectId = this.props.match.params.projectId;
+        const url = `http://localhost:5001/api/project/${projectId}/samples`;
+
         axios.get(url).then(res => {
             this.setState({ samples: res.data[0].samples });
-            console.log(res.data[0].samples);
+            //console.log(res.data[0].samples)
         }).catch(error => {
             console.log(error);
         });
+
+        this.setState({projectId: projectId});
     }
+
     goBack(){
         this.props.history.goBack();
+    }
+
+    async uploadFile(event){
+
+        Papa.parse(event.target.files[0], {
+            worker: true, // Don't bog down the main thread if its a big file
+            header: true,
+            complete: function(results, file) {
+
+                console.log('parsing complete read', results.data);
+                this.setState({samples: results.data});
+            }.bind(this)
+        });
+    }
+
+    downloadFile(event){
+        console.log("download");
+        const csv = Papa.unparse(this.state.samples);
+        console.log(csv);
+        const blob = new Blob([csv]);
+        this.downloadBlob(blob, `${this.state.projectId}.csv`);
+    }
+
+    downloadBlob(blob, name) {
+        // Convert your blob into a Blob URL (a special url that points to an object in the browser's memory)
+        const blobUrl = URL.createObjectURL(blob);
+
+        // Create a link element
+        const link = document.createElement("a");
+
+        // Set link's href to point to the Blob URL
+        link.href = blobUrl;
+        link.download = name;
+
+        // Append link to the body
+        document.body.appendChild(link);
+
+        // Dispatch click event on the link
+        // This is necessary as link.click() does not work on the latest firefox
+        link.dispatchEvent(
+            new MouseEvent('click', {
+                bubbles: true,
+                cancelable: true,
+                view: window
+            })
+        );
+
+        // Remove link from body
+        document.body.removeChild(link);
     }
 
     render() {
@@ -136,12 +198,15 @@ class ProjectPage extends Component {
                 <button type="submit" value="Initialize" className="projectbtn">
                     <span>Reset</span>
                 </button>
-                <button type="submit" value="Initialize" className="projectbtn">
+
+                <button type="submit" className="projectbtn" onClick={this.downloadFile}>
                     <span>Download</span>
                 </button>
-                <button type="submit" value="Initialize" className="projectbtn">
-                    <span>Upload</span>
-                </button>
+
+                <label className="projectbtn">
+                    <input type="file" accept={".csv"} onChange={this.uploadFile}/>
+                    Upload
+                </label>
                 
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
@@ -200,7 +265,7 @@ class ProjectPage extends Component {
             
                 <div>
                     <button type="submit" value="Initialize" className="returnbtn" onClick={this.goBack}>
-                        <i class="fa fa-angle-left" style={{paddingRight:"10px"}}></i>
+                        <i className="fa fa-angle-left" style={{paddingRight:"10px"}}></i>
                         <span>Return</span>
                     </button>
                     <button type="submit" value="Initialize" className="checkbtn">
