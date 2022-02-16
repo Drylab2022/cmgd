@@ -23,17 +23,14 @@ export default function Routes() {
         <Signup />
       </Route>
 
-      <Route exact path="/homepage">
+      <Route exact path="/home">
         <HomePage />
       </Route>
 
+      <Route exact path="/projects/:projectId" component={ProjectPage}/>
 
-      <Route exact path="/samplepage">
+      <Route exact path="/sample">
         <SamplePage />
-      </Route>
-
-      <Route exact path="/projectpage">
-        <ProjectPage />
       </Route>
 
       <Route>

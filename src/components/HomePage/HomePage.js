@@ -2,7 +2,15 @@ import React, { Component } from "react";
 import "./HomePage.css";
 import axios from "axios";
 import WorkingPage from "./WorkingPage";
-import { API, Auth } from "aws-amplify";
+import { Auth } from "aws-amplify";
+import {
+  Dialog,
+  Button,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 
 const cursorMaximumSize = 999;
 const projectStatus = "active";
@@ -15,7 +23,9 @@ class HomePage extends Component {
       samplesInfo: new Map(),
       projects: [],
       username: "",
-      token: "",
+      loading: false,
+      open: false,
+      alertContent: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -108,6 +118,26 @@ class HomePage extends Component {
     let cursor = "";
     const projectID = this.state.projectID;
 
+    //check if input is empty or whitespace
+    if (
+      document.getElementById("projectId").value.trim().length === 0 ||
+      document.getElementById("projectId").value === null
+    ) {
+      this.setState({
+        alert: true,
+        alertContent:
+          "The projectId you entered dose not match with required format. Please enter ProjectId using standard format.",
+      });
+      return;
+    }
+
+    //display loading on button on submit
+    this.setState({ loading: true });
+
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 2000);
+
     //Todo: Currently we only call the external api once due to the unfixed CORS error,
     // after we figure out how to solve it, we will uncomment the loop to call the api
     // multiple times.
@@ -121,9 +151,18 @@ class HomePage extends Component {
     // }
 
     //Single
-    const url = this.generateURL(cursor, projectID);
-    const res = await axios.get(url);
-    this.processData(res.data.hits);
+    try {
+      const url = this.generateURL(cursor, projectID);
+      const res = await axios.get(url);
+      this.processData(res.data.hits);
+    } catch (error) {
+      this.setState({
+        alert: true,
+        alertContent:
+          "Oops! Something went wrong. Please check you have the correct project id.",
+      });
+      return;
+    }
 
     this.state.samplesInfo.forEach((sample) => {
       sample.avgLength /= sample.srrIds.length;
@@ -175,27 +214,77 @@ class HomePage extends Component {
     console.log("getUserInfo", projects);
     // projects = projects.data;
 
+    let projects = await axios.get(
+      `http://localhost:5001/api/project/${username}`
+    );
+    projects = projects.data;
+
     this.setState({
       projects: projects,
       username: username,
     });
   }
-
   render() {
+    const { loading, alert, alertContent } = this.state;
     return (
       <div className="new">
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
         <h4>Start a new project: </h4>
         <hr />
-        <form onSubmit={this.initializeProject}>
+        <form name="form" onSubmit={this.initializeProject}>
           <label>
             SRA Project ID:
             <input
+              id="projectId"
               type="text"
               value={this.state.projectID}
+              className="inputText"
+              required="required"
               onChange={this.handleChange}
             />
           </label>
-          <input type="submit" value="Initialize" />
+          <button
+            type="submit"
+            value="Initialize"
+            className="submitbtn"
+            disabled={loading}
+          >
+            {loading && (
+              <i
+                class="fa fa-spinner fa-spin"
+                style={{ marginRight: "5px" }}
+              ></i>
+            )}
+            {loading && <span>loading</span>}
+            {!loading && <span>Initialize</span>}
+          </button>
+          {alert ? (
+            <div>
+              <Dialog
+                open={alert}
+                onClose={() => this.setState({ alert: false })}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">{"Error"}</DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    {alertContent}
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={() => this.setState({ alert: false })}>
+                    Close
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </div>
+          ) : (
+            <></>
+          )}
         </form>
         <WorkingPage projects={this.state.projects} />
       </div>

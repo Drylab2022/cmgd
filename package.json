@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@aws-amplify/ui-react": "^1.2.26",
-    "aws-amplify": "^4.3.12",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.2.5",
@@ -12,7 +11,9 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "aws-amplify": "^4.3.12",
     "axios": "^0.24.0",
+    "papaparse": "^5.3.1",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",

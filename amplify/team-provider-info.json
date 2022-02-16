@@ -14,9 +14,13 @@
     },
     "categories": {
       "auth": {
+<<<<<<< HEAD
         "undefined": {},
         "cmgd": {},
         "true": {}
+=======
+        "cmgd": {}
+>>>>>>> main
       }
     }
   }
