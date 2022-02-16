@@ -25,14 +25,17 @@ module.exports = (sequelize, DataTypes) => {
       sequencingPlatform: {
         type: DataTypes.STRING,
       },
-      projectId: {
-        type: DataTypes.INTEGER,
-        // This links the categoryId column to the id column in the categories table
-        references: {
-          model: "Project",
-          key: "id",
-        },
+      curation: {
+        type: DataTypes.JSON,
       },
+      // projectId: {
+      //   type: DataTypes.INTEGER,
+      //   // // This links the projectId column to the id column in the Project table
+      //   // references: {
+      //   //   model: "Project",
+      //   //   key: "id",
+      //   // },
+      // },
     },
     {
       timestamps: true,

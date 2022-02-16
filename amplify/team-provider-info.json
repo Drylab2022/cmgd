@@ -15,7 +15,8 @@
     "categories": {
       "auth": {
         "undefined": {},
-        "cmgd": {}
+        "cmgd": {},
+        "true": {}
       }
     }
   }

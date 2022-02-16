@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const projectController = require("../controllers/").project;
-//const sampleController = require("../controllers/").sample;
+const sampleController = require("../controllers/").sample;
 
 /* GET home page. */
 // router.get("/", function (req, res, next) {
@@ -20,6 +20,7 @@ router.post("/api/project", projectController.addWithSamples);
 //router.delete('/api/classroom/:id', classroomController.delete);
 
 /* Sample Router */
-//router.get("/api/sample/:projectId", sampleController.list);
+router.get("/api/sample/:id", sampleController.getByPk);
+router.post("/api/samples", sampleController.upSert);
 
 module.exports = router;

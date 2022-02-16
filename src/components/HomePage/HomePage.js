@@ -1,22 +1,22 @@
 import React, { Component } from "react";
-import "./HomePage.css"
+import "./HomePage.css";
 import axios from "axios";
 import WorkingPage from "./WorkingPage";
-import { Auth } from 'aws-amplify';
+import { API, Auth } from "aws-amplify";
 
 const cursorMaximumSize = 999;
-const projectStatus = 'active';
+const projectStatus = "active";
 
-class HomePage extends Component{
-  
-  constructor(props){
-    super(props)
-    this.state={
-      projectId: '',
+class HomePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      projectId: "",
       samplesInfo: new Map(),
       projects: [],
-      username: ''
-    }
+      username: "",
+      token: "",
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.initializeProject = this.initializeProject.bind(this);
@@ -28,23 +28,26 @@ class HomePage extends Component{
   }
 
   async componentDidMount() {
+    this.getUserToken();
     this.getUserInfo();
   }
 
   handleChange(event) {
-    this.setState({projectId: event.target.value});
+    this.setState({ projectId: event.target.value });
   }
 
   generateURL(cursor) {
     const params = new URLSearchParams();
-    params.set('size', cursorMaximumSize);
-    params.set('cursor', cursor);
-    return `https://api.omicidx.cancerdatasci.org/sra/studies/${this.state.projectId}/runs?include_fields=accession&include_fields=sample_accession&include_fields=experiment.platform&include_fields=experiment.library_layout&include_fields=total_spots&include_fields=avg_length&${params.toString()}`;
+    params.set("size", cursorMaximumSize);
+    params.set("cursor", cursor);
+    return `https://api.omicidx.cancerdatasci.org/sra/studies/${
+      this.state.projectId
+    }/runs?include_fields=accession&include_fields=sample_accession&include_fields=experiment.platform&include_fields=experiment.library_layout&include_fields=total_spots&include_fields=avg_length&${params.toString()}`;
   }
 
   calculateTotalSpots(layout, totalSpots) {
     totalSpots = parseInt(totalSpots);
-    return layout === 'PAIRED' ? totalSpots * 2 : totalSpots;
+    return layout === "PAIRED" ? totalSpots * 2 : totalSpots;
   }
 
   processData(datas) {
@@ -55,21 +58,27 @@ class HomePage extends Component{
       const srrId = data.accession;
       const info = tempMap.get(sampleId);
 
-      if(!info) {
+      if (!info) {
         tempMap.set(sampleId, {
           avgLength: data.avg_length,
           platform: data.experiment.platform,
-          totalSpots: this.calculateTotalSpots(data.experiment.library_layout, data.total_spots),
+          totalSpots: this.calculateTotalSpots(
+            data.experiment.library_layout,
+            data.total_spots
+          ),
           srrIds: [srrId],
         });
       } else {
         info.avgLength += data.avg_length;
-        info.totalSpots += this.calculateTotalSpots(data.experiment.library_layout, data.total_spots);
+        info.totalSpots += this.calculateTotalSpots(
+          data.experiment.library_layout,
+          data.total_spots
+        );
         info.srrIds.push(srrId);
       }
     });
 
-    this.setState({sampleInfo: tempMap});
+    this.setState({ sampleInfo: tempMap });
   }
 
   generateJsonObject() {
@@ -80,8 +89,8 @@ class HomePage extends Component{
         sampleId: key,
         numberOfReads: value.totalSpots,
         avgReadLength: value.avgLength,
-        ncbiAccession: value.srrIds.join(';'),
-        sequencingPlatform: value.platform
+        ncbiAccession: value.srrIds.join(";"),
+        sequencingPlatform: value.platform,
       });
     });
 
@@ -91,13 +100,12 @@ class HomePage extends Component{
       status: projectStatus,
       assignee: this.state.username,
       samples: samples,
-    }
-  };
+    };
+  }
 
-
-  async initializeProject(event){
+  async initializeProject(event) {
     event.preventDefault();
-    let cursor = '';
+    let cursor = "";
     const projectID = this.state.projectID;
 
     //Todo: Currently we only call the external api once due to the unfixed CORS error,
@@ -112,7 +120,6 @@ class HomePage extends Component{
     //   this.processData(res.data.hits);
     // }
 
-
     //Single
     const url = this.generateURL(cursor, projectID);
     const res = await axios.get(url);
@@ -123,29 +130,54 @@ class HomePage extends Component{
     });
 
     const json = this.generateJsonObject();
+    console.log("line133", json);
 
-    const createRes = await axios.post("http://localhost:5001/api/project", json);
-    const newProject = createRes.data;
+    const requestInfo = {
+      headers: { Authorization: this.state.token },
+      body: json,
+    };
+
+    const createRes = await API.post("cmgdapi", "/api/project", requestInfo);
+    //const newProject = createRes.data;
+    const newProject = createRes;
     const projects = this.state.projects;
     projects.push(newProject);
-
+    console.log("initial-143", projects);
     console.log("test", createRes);
     this.setState({
-      samplesInfo : new Map(),
+      samplesInfo: new Map(),
       projects: projects,
     });
   }
 
+  async getUserToken() {
+    const user = await Auth.currentAuthenticatedUser();
+    const token = user.signInUserSession.idToken.jwtToken;
+    console.log("line154", user.signInUserSession);
+
+    this.setState({ token });
+  }
+
   async getUserInfo() {
     const res = await Auth.currentUserInfo();
+    console.log("line161", res);
     const username = res.username;
+    const requestInfo = {
+      headers: { Authorization: this.state.token },
+    };
 
-    let projects = await axios.get(`http://localhost:5001/api/project/${username}`);
-    projects = projects.data;
-    
+    const projects = await API.get(
+      "cmgdapi",
+      `/api/project/${username}`,
+      requestInfo
+    );
+
+    console.log("getUserInfo", projects);
+    // projects = projects.data;
+
     this.setState({
-      projects : projects,
-      username : username
+      projects: projects,
+      username: username,
     });
   }
 
@@ -156,14 +188,18 @@ class HomePage extends Component{
         <hr />
         <form onSubmit={this.initializeProject}>
           <label>
-           SRA Project ID: 
-            <input type="text" value={this.state.projectID} onChange={this.handleChange} />
+            SRA Project ID:
+            <input
+              type="text"
+              value={this.state.projectID}
+              onChange={this.handleChange}
+            />
           </label>
-           <input type="submit" value="Initialize" />
-         </form>
-         <WorkingPage projects = {this.state.projects} />
+          <input type="submit" value="Initialize" />
+        </form>
+        <WorkingPage projects={this.state.projects} />
       </div>
     );
   }
 }
-export default HomePage
+export default HomePage;
