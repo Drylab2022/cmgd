@@ -176,9 +176,8 @@ class HomePage extends Component {
       body: json,
     };
 
-    const createRes = await API.post("cmgdapi", "/api/project", requestInfo);
-    //const newProject = createRes.data;
-    const newProject = createRes;
+    const createRes = await axios.post("http://localhost:5001/api/project", json);
+    const newProject = createRes.data;
     const projects = this.state.projects;
     projects.push(newProject);
     console.log("initial-143", projects);
@@ -204,12 +203,6 @@ class HomePage extends Component {
     const requestInfo = {
       headers: { Authorization: this.state.token },
     };
-
-    const projects = await API.get(
-      "cmgdapi",
-      `/api/project/${username}`,
-      requestInfo
-    );
 
     console.log("getUserInfo", projects);
     // projects = projects.data;
