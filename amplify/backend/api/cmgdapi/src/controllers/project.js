@@ -47,12 +47,6 @@ module.exports = {
       }
     )
       .then((project) => res.status(201).send(project))
-      .catch((error) => {
-        if (error.name === "SequelizeUniqueConstraintError") {
-          res.status(400).json({ message: "projectId must be unique" });
-        } else {
-          res.status(400).send(error);
-        }
-      });
+      .catch((error) => res.status(400).send(error));
   },
 };
