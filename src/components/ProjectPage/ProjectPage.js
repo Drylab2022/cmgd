@@ -98,6 +98,7 @@ class ProjectPage extends Component {
         this.state = {
             samples:[],
             projectId: '',
+            projectPK: '',
             page: 0,
             rowsPerPage: 5
         }
@@ -125,8 +126,10 @@ class ProjectPage extends Component {
         const url = `http://localhost:5001/api/project/${projectId}/samples`;
 
         axios.get(url).then(res => {
-            this.setState({ samples: res.data[0].samples });
-            //console.log(res.data[0].samples)
+            this.setState({
+                samples: res.data[0].samples,
+                projectPK: res.data[0].id
+            });
         }).catch(error => {
             console.log(error);
         });
@@ -146,14 +149,26 @@ class ProjectPage extends Component {
             complete: function(results, file) {
 
                 console.log('parsing complete read', results.data);
+                results.data.map((sample) => {
+                    axios.post("http://localhost:5001/api/samples", {
+                        sampleId: sample.sampleId,
+                        curation: sample.curation,
+                        ProjectId: this.state.projectPK
+                    });
+                });
                 this.setState({samples: results.data});
+
             }.bind(this)
         });
     }
 
     downloadFile(event){
         console.log("download");
-        const csv = Papa.unparse(this.state.samples);
+        const samples = this.state.samples.map(({id, ...rest}) => {
+            return rest;
+        });
+
+        const csv = Papa.unparse(samples);
         console.log(csv);
         const blob = new Blob([csv]);
         this.downloadBlob(blob, `${this.state.projectId}.csv`);

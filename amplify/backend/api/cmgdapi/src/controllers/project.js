@@ -17,7 +17,7 @@ module.exports = {
     const { projectId } = req.params;
     return Project.findAll({
       where: { projectId },
-      attributes: ["projectId"],
+      attributes: ["id", "projectId"],
       include: {
         model: Sample,
         as: "samples",

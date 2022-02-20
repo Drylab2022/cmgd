@@ -8,7 +8,7 @@ models.Project = require("./Project")(sequelize, DataTypes);
 
 models.Project.hasMany(models.Sample, {
   as: "samples",
-  foreignKey: "projectId",
+  foreignKey: "ProjectId",
 });
 models.Sample.belongsTo(models.Project);
 

@@ -37,6 +37,21 @@
     "resourceName": "cmgd",
     "sharedId": "5ec4c90e",
     "serviceName": "Cognito",
-    "useDefault": "manual"
+    "useDefault": "manual",
+    "authRoleArn": {
+      "Fn::GetAtt": [
+        "AuthRole",
+        "Arn"
+      ]
+    },
+    "unauthRoleArn": {
+      "Fn::GetAtt": [
+        "UnauthRole",
+        "Arn"
+      ]
+    },
+    "breakCircularDependency": true,
+    "useEnabledMfas": true,
+    "dependsOn": []
   }
 }

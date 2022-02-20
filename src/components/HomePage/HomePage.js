@@ -17,7 +17,7 @@ class HomePage extends Component{
       projects: [],
       username: '',
       loading: false,
-      open:false, 
+      open:false,
       alertContent: ''
     }
 
@@ -104,8 +104,8 @@ class HomePage extends Component{
 
     //check if input is empty or whitespace
     if(document.getElementById("projectId").value.trim().length === 0 || document.getElementById("projectId").value === null){
-      this.setState({ 
-        alert: true, 
+      this.setState({
+        alert: true,
         alertContent: 'The projectId you entered dose not match with required format. Please enter ProjectId using standard format.'
       })
       return;
@@ -136,8 +136,8 @@ class HomePage extends Component{
       const res = await axios.get(url);
       this.processData(res.data.hits);
     } catch (error) {
-      this.setState({ 
-        alert: true, 
+      this.setState({
+        alert: true,
         alertContent: 'Oops! Something went wrong. Please check you have the correct project id.'
       })
       return;
@@ -149,6 +149,7 @@ class HomePage extends Component{
 
     const json = this.generateJsonObject();
 
+    console.log(json);
     const createRes = await axios.post("http://localhost:5001/api/project", json);
     const newProject = createRes.data;
     const projects = this.state.projects;
@@ -176,41 +177,41 @@ class HomePage extends Component{
   render() {
     const { loading, alert, alertContent } = this.state;
     return (
-      <div className="new">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-        <h4>Start a new project: </h4>
-        <hr />
-        <form name="form" onSubmit={this.initializeProject}>
-          <label>
-           SRA Project ID: 
-            <input id="projectId" type="text" value={this.state.projectID} className="inputText" required="required" onChange={this.handleChange} />
-          </label>
-          <button type="submit" value="Initialize" className="submitbtn" disabled={loading}>
-            { loading && <i class="fa fa-spinner fa-spin" style={{ marginRight: "5px" }}></i>}
-            { loading && <span>loading</span> }
-            { !loading && <span>Initialize</span> }
-          </button>
-          {alert ? 
-          <div>
-            <Dialog
-              open={alert}
-              onClose={() => this.setState({ alert: false })}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description">
-              <DialogTitle id="alert-dialog-title">{"Error"}</DialogTitle>
-              <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                  {alertContent}
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={() => this.setState({ alert: false })}>Close</Button>
-              </DialogActions>
-            </Dialog>
-          </div> : <></>}
-         </form>
-         <WorkingPage projects = {this.state.projects} />
-      </div>
+        <div className="new">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+          <h4>Start a new project: </h4>
+          <hr />
+          <form name="form" onSubmit={this.initializeProject}>
+            <label>
+              SRA Project ID:
+              <input id="projectId" type="text" value={this.state.projectID} className="inputText" required="required" onChange={this.handleChange} />
+            </label>
+            <button type="submit" value="Initialize" className="submitbtn" disabled={loading}>
+              { loading && <i class="fa fa-spinner fa-spin" style={{ marginRight: "5px" }}></i>}
+              { loading && <span>loading</span> }
+              { !loading && <span>Initialize</span> }
+            </button>
+            {alert ?
+                <div>
+                  <Dialog
+                      open={alert}
+                      onClose={() => this.setState({ alert: false })}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description">
+                    <DialogTitle id="alert-dialog-title">{"Error"}</DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-description">
+                        {alertContent}
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={() => this.setState({ alert: false })}>Close</Button>
+                    </DialogActions>
+                  </Dialog>
+                </div> : <></>}
+          </form>
+          <WorkingPage projects = {this.state.projects} />
+        </div>
     );
   }
 }
