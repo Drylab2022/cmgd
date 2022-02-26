@@ -64,6 +64,7 @@ class HomePage extends Component{
           platform: data.experiment.platform,
           totalSpots: this.calculateTotalSpots(data.experiment.library_layout, data.total_spots),
           srrIds: [srrId],
+          curation: data.curation
         });
       } else {
         info.avgLength += data.avg_length;
@@ -84,7 +85,8 @@ class HomePage extends Component{
         numberOfReads: value.totalSpots,
         avgReadLength: value.avgLength,
         ncbiAccession: value.srrIds.join(';'),
-        sequencingPlatform: value.platform
+        sequencingPlatform: value.platform,
+        curation: value.curation
       });
     });
 
@@ -132,7 +134,9 @@ class HomePage extends Component{
 
     //Single
     try {
-      const url = this.generateURL(cursor, projectID);
+      //TODO: when the cor error is fixed by our client, replaced the fake url with the real one
+      // const url = this.generateURL(cursor, projectID);
+      const url = "http://localhost:3001/project";
       const res = await axios.get(url);
       this.processData(res.data.hits);
     } catch (error) {
@@ -149,17 +153,22 @@ class HomePage extends Component{
 
     const json = this.generateJsonObject();
 
-    console.log(json);
-    const createRes = await axios.post("http://localhost:5001/api/project", json);
-    const newProject = createRes.data;
-    const projects = this.state.projects;
-    projects.push(newProject);
+    try{
+      const createRes = await axios.post("http://localhost:5001/api/project", json);
+      const newProject = createRes.data;
+      const projects = this.state.projects;
+      projects.push(newProject);
 
-    console.log("test", createRes);
-    this.setState({
-      samplesInfo : new Map(),
-      projects: projects
-    });
+      this.setState({
+        samplesInfo : new Map(),
+        projects: projects
+      });
+    } catch(error) {
+      this.setState({
+        alert: true,
+        alertContent: `${error.response.data.errors[0].message}`
+      })
+    }
   }
 
   async getUserInfo() {
@@ -187,7 +196,7 @@ class HomePage extends Component{
               <input id="projectId" type="text" value={this.state.projectID} className="inputText" required="required" onChange={this.handleChange} />
             </label>
             <button type="submit" value="Initialize" className="submitbtn" disabled={loading}>
-              { loading && <i class="fa fa-spinner fa-spin" style={{ marginRight: "5px" }}></i>}
+              { loading && <i className="fa fa-spinner fa-spin" style={{ marginRight: "5px" }}></i>}
               { loading && <span>loading</span> }
               { !loading && <span>Initialize</span> }
             </button>

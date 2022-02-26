@@ -19,8 +19,10 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { styled } from '@mui/system';
+import { translateToColumns } from "../../CurationTranslator/CurationTranslator";
 
 import * as Papa from 'papaparse';
+
 
 function TablePaginationActions(props) {
     const theme = useTheme();
@@ -164,12 +166,9 @@ class ProjectPage extends Component {
 
     downloadFile(event){
         console.log("download");
-        const samples = this.state.samples.map(({id, ...rest}) => {
-            return rest;
-        });
+        const samples = translateToColumns(this.state.samples);
 
         const csv = Papa.unparse(samples);
-        console.log(csv);
         const blob = new Blob([csv]);
         this.downloadBlob(blob, `${this.state.projectId}.csv`);
     }
