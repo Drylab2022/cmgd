@@ -19,7 +19,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { styled } from '@mui/system';
-import { translateToColumns } from "../../CurationTranslator/CurationTranslator";
+import { translateToColumns, translateToCurationObject } from "../../CurationTranslator/CurationTranslator";
 
 import * as Papa from 'papaparse';
 
@@ -143,23 +143,22 @@ class ProjectPage extends Component {
         this.props.history.goBack();
     }
 
-    async uploadFile(event){
-
+    uploadFile(event){
+        console.log("upload")
         Papa.parse(event.target.files[0], {
             worker: true, // Don't bog down the main thread if its a big file
             header: true,
-            complete: function(results, file) {
+            complete: function(results) {
+                const samples = translateToCurationObject(results.data);
 
-                console.log('parsing complete read', results.data);
-                results.data.map((sample) => {
+                samples.map((sample, file) => {
                     axios.post("http://localhost:5001/api/samples", {
                         sampleId: sample.sampleId,
                         curation: sample.curation,
                         ProjectId: this.state.projectPK
                     });
                 });
-                this.setState({samples: results.data});
-
+                this.componentDidMount();
             }.bind(this)
         });
     }
