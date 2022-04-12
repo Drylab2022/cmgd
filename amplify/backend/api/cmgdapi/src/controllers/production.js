@@ -6,23 +6,26 @@ const Sample = require("../models").Sample;
 module.exports = {
   async addProduction(req, res) {
     const projectId = req.body.projectId;
-    const samples = await Project.findAll({
-      where: { projectId },
-      attributes: ["projectId", "numberOfSamples", "status", "assignee"],
-      include: {
-        model: Sample,
-        as: "samples",
-        attributes: ["sampleId", "numberOfReads", "avgReadLength", "ncbiAccession", "sequencingPlatform", "curation"],
-      },
-    });
 
-    Object.keys(samples).forEach(function (key) {
+    try {
+      // join all samples with certain project
+      const samples = await Project.findAll({
+        where: { projectId },
+        attributes: ["projectId", "numberOfSamples", "status", "assignee"],
+        include: {
+          model: Sample,
+          as: "samples",
+          attributes: ["sampleId", "numberOfReads", "avgReadLength", "ncbiAccession", "sequencingPlatform", "curation"],
+        },
+      });
+  
+      // insert data into ProjectProd and SampleProd tables
       ProjectProd.create({
-        projectId: samples[key]["projectId"],
-        numberOfSamples: samples[key]["numberOfSamples"],
-        status: samples[key]["status"],
-        assignee: samples[key]["assignee"],
-        sampleProds: samples[key]["samples"]
+        projectId: samples[0]["projectId"],
+        numberOfSamples: samples[0]["numberOfSamples"],
+        status: samples[0]["status"],
+        assignee: samples[0]["assignee"],
+        sampleProds: samples[0]["samples"]
       },
         {
           include: [
@@ -31,8 +34,30 @@ module.exports = {
               as: "sampleProds"
             }
           ]
-        })
-    });
-    res.status(200).send(JSON.stringify(samples));
+      });
+      res.status(200).send(JSON.stringify(samples));
+    } catch (err) {
+      res.status(400).send(err);
+    }
+  },
+
+  /**
+   * query parameters:
+   * https://sequelize.org/docs/v6/core-concepts/model-querying-basics/
+   */
+  async query(req, res) {
+    try {
+      let samples = await ProjectProd.findAll({
+        where: req.body,
+        include: {
+          model: SampleProd,
+          as: "sampleProds"
+        }
+      });
+      res.status(200).send(JSON.stringify(samples));
+    } catch (err) {
+      console.log(err);
+      res.status(400).send(JSON.stringify(err));
+    }
   }
 };

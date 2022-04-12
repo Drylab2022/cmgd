@@ -24,5 +24,6 @@ router.post("/api/samples", sampleController.upSert);
 
 /* Production Router */
 router.post("/api/production/add", productionController.addProduction);
+router.post("/api/production/query", productionController.query);
 
 module.exports = router;
