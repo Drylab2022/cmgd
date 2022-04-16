@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
       },
+      metadata: {
+        type: DataTypes.JSON,
+      },
       numberOfSamples: {
         type: DataTypes.INTEGER,
         allowNull: false,
