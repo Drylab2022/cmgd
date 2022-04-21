@@ -10,6 +10,8 @@ import { useHistory } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import { onError } from "../components/lib/errorLib";
 
+import { Link } from "react-router-dom";
+
 Amplify.configure(awsconfig);
 
 export default function Login() {
@@ -68,6 +70,7 @@ export default function Login() {
         >
           Login
         </LoaderButton>
+        <Link to="/login/reset">Forget password?</Link>
       </Form>
     </div>
   );
