@@ -7,6 +7,7 @@ import { Dialog, Button, DialogActions, DialogContent, DialogContentText, Dialog
 
 const cursorMaximumSize = 999;
 const projectStatus = 'active';
+const metaDataUrlPrefix = 'https://api.omicidx.cancerdatasci.org/sra/studies/'
 
 class HomePage extends Component{
   constructor(props){
@@ -76,7 +77,7 @@ class HomePage extends Component{
     this.setState({sampleInfo: tempMap});
   }
 
-  generateJsonObject() {
+  generateJsonObject(projectMetaData) {
     const samples = new Array();
 
     this.state.samplesInfo.forEach((value, key) => {
@@ -96,13 +97,14 @@ class HomePage extends Component{
       status: projectStatus,
       assignee: this.state.username,
       samples: samples,
+      metadata: projectMetaData
     }
   };
 
   async initializeProject(event){
     event.preventDefault();
     let cursor = '';
-    const projectID = this.state.projectID;
+    const projectID = this.state.projectId;
 
     //check if input is empty or whitespace
     if(document.getElementById("projectId").value.trim().length === 0 || document.getElementById("projectId").value === null){
@@ -133,11 +135,17 @@ class HomePage extends Component{
     // }
 
     //Single
+    let projectMetaData;
+
     try {
-      //TODO: when the cor error is fixed by our client, replaced the fake url with the real one
-      // const url = this.generateURL(cursor, projectID);
-      const url = "http://localhost:3001/project";
+      const url = this.generateURL(cursor, projectID);
+      const metaDataUrl = metaDataUrlPrefix + projectID;
+
+      projectMetaData = await axios.get(metaDataUrl);
+      projectMetaData = projectMetaData.data;
+
       const res = await axios.get(url);
+
       this.processData(res.data.hits);
     } catch (error) {
       this.setState({
@@ -151,7 +159,7 @@ class HomePage extends Component{
       sample.avgLength /= sample.srrIds.length;
     });
 
-    const json = this.generateJsonObject();
+    const json = this.generateJsonObject(projectMetaData);
 
     try{
       const createRes = await axios.post("http://localhost:5001/api/project", json);
@@ -183,6 +191,7 @@ class HomePage extends Component{
       username : username
     });
   }
+
   render() {
     const { loading, alert, alertContent } = this.state;
     return (
