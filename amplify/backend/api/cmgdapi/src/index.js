@@ -1,8 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const cors = require('cors');
+const cors = require("cors");
 const router = express.Router();
 const port = process.env.PORT || 5001;
+if (process.env.ENV === "PROD") {
+  require("dotenv").config({ path: ".env.prod" });
+}
 //const models = require("./models");
 const indexRouter = require("./routes/index");
 
@@ -21,8 +24,8 @@ const app = express();
 app.use(cors());
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json({limit: '25mb'}));
-app.use(express.urlencoded({limit: '25mb'}));
+app.use(express.json({ limit: "25mb" }));
+app.use(express.urlencoded({ limit: "25mb" }));
 
 app.use("/", indexRouter);
 
