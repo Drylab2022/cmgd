@@ -1,5 +1,6 @@
 FROM public.ecr.aws/bitnami/node:14-prod-debian-10
 
+ENV ENV=PROD
 ENV PORT=8080
 EXPOSE 8080
 
