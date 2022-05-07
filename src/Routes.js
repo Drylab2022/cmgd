@@ -8,6 +8,14 @@ import HomePage from "./components/HomePage/HomePage";
 import SamplePage from "./components/SamplePage/SamplePage";
 import ProjectPage from "./components/ProjectPage/ProjectPage";
 
+import AuthenticatedRoute from "./components/containers/AuthenticatedRoute";
+import UnauthenticatedRoute from "./components/containers/UnauthenticatedRoute";
+
+import ResetPassword from "./components/containers/resetPassword";
+import ChangePassword from "./components/containers/changePassword";
+import Settings from "./components/containers/settings";
+import ChangeEmail from "./components/containers/changeEmail";
+
 export default function Routes() {
   return (
     <Switch>
@@ -15,23 +23,38 @@ export default function Routes() {
         <Home />
       </Route>
 
-      <Route exact path="/login">
+      <UnauthenticatedRoute exact path="/login">
         <Login />
-      </Route>
+      </UnauthenticatedRoute>
 
-      <Route exact path="/signup">
+      <UnauthenticatedRoute exact path="/login/reset">
+        <ResetPassword />
+      </UnauthenticatedRoute>
+
+      <AuthenticatedRoute exact path="/settings/password">
+        <ChangePassword />
+      </AuthenticatedRoute>
+
+      <UnauthenticatedRoute exact path="/signup">
         <Signup />
-      </Route>
+      </UnauthenticatedRoute>
 
-      <Route exact path="/home">
+      <AuthenticatedRoute exact path="/settings">
+        <Settings />
+      </AuthenticatedRoute>
+      <AuthenticatedRoute exact path="/settings/email">
+        <ChangeEmail />
+      </AuthenticatedRoute>
+
+      <AuthenticatedRoute exact path="/home">
         <HomePage />
-      </Route>
+      </AuthenticatedRoute>
 
-      <Route exact path="/projects/:projectId" component={ProjectPage}/>
+      <AuthenticatedRoute exact path="/projects/:projectId" component={ProjectPage}/>
 
-      <Route exact path="/sample">
+      <AuthenticatedRoute exact path="/sample">
         <SamplePage />
-      </Route>
+      </AuthenticatedRoute>
 
       <Route>
         <NotFound />
