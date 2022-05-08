@@ -14,10 +14,8 @@ module.exports = {
       });
   },
   listSamples(req, res) {
-    const { projectId } = req.params;
-    return Project.findAll({
-      where: { projectId },
-      attributes: ["id", "projectId"],
+    const id = req.params.id;
+    return Project.findByPk(id, {
       include: {
         model: Sample,
         as: "samples",

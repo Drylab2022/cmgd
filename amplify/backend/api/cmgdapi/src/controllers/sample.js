@@ -5,7 +5,7 @@ module.exports = {
   //find sample by primary key
   getByPk(req, res) {
     const id = req.params.id;
-    Sample.findByPk(id)
+    return Sample.findByPk(id)
       .then((data) => {
         if (data) {
           res.send(data);
