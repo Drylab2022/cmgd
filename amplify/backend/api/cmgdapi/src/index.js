@@ -3,7 +3,9 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const router = express.Router();
 const port = process.env.PORT || 5001;
-
+if (process.env.ENV === "PROD") {
+  require("dotenv").config({ path: ".env.prod" });
+}
 //const models = require("./models");
 const indexRouter = require("./routes/index");
 

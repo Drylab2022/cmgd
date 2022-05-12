@@ -13,4 +13,7 @@ router.use("/api/project", projectRoutes);
 /* Sample Router */
 router.use("/api/samples", sampleRoutes);
 
+//Check Router
+router.post("/api/check", checkController.check);
+
 module.exports = router;

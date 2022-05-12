@@ -34,6 +34,7 @@ module.exports = {
         status: req.body.status,
         assignee: req.body.assignee,
         samples: req.body.samples,
+        metadata: req.body.metadata,
       },
       {
         include: [

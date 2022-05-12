@@ -7,6 +7,7 @@ import { Dialog, Button, DialogActions, DialogContent, DialogContentText, Dialog
 
 const cursorMaximumSize = 999;
 const projectStatus = 'active';
+const metaDataUrlPrefix = 'https://api.omicidx.cancerdatasci.org/sra/studies/'
 
 class HomePage extends Component{
   constructor(props){
@@ -64,6 +65,7 @@ class HomePage extends Component{
           platform: data.experiment.platform,
           totalSpots: this.calculateTotalSpots(data.experiment.library_layout, data.total_spots),
           srrIds: [srrId],
+          curation: data.curation
         });
       } else {
         info.avgLength += data.avg_length;
@@ -75,7 +77,7 @@ class HomePage extends Component{
     this.setState({sampleInfo: tempMap});
   }
 
-  generateJsonObject() {
+  generateJsonObject(projectMetaData) {
     const samples = new Array();
 
     this.state.samplesInfo.forEach((value, key) => {
@@ -84,7 +86,8 @@ class HomePage extends Component{
         numberOfReads: value.totalSpots,
         avgReadLength: value.avgLength,
         ncbiAccession: value.srrIds.join(';'),
-        sequencingPlatform: value.platform
+        sequencingPlatform: value.platform,
+        curation: value.curation
       });
     });
 
@@ -94,13 +97,14 @@ class HomePage extends Component{
       status: projectStatus,
       assignee: this.state.username,
       samples: samples,
+      metadata: projectMetaData
     }
   };
 
   async initializeProject(event){
     event.preventDefault();
     let cursor = '';
-    const projectID = this.state.projectID;
+    const projectID = this.state.projectId;
 
     //check if input is empty or whitespace
     if(document.getElementById("projectId").value.trim().length === 0 || document.getElementById("projectId").value === null){
@@ -131,9 +135,17 @@ class HomePage extends Component{
     // }
 
     //Single
+    let projectMetaData;
+
     try {
       const url = this.generateURL(cursor, projectID);
+      const metaDataUrl = metaDataUrlPrefix + projectID;
+
+      projectMetaData = await axios.get(metaDataUrl);
+      projectMetaData = projectMetaData.data;
+
       const res = await axios.get(url);
+
       this.processData(res.data.hits);
     } catch (error) {
       this.setState({
@@ -147,19 +159,24 @@ class HomePage extends Component{
       sample.avgLength /= sample.srrIds.length;
     });
 
-    const json = this.generateJsonObject();
+    const json = this.generateJsonObject(projectMetaData);
 
-    console.log(json);
-    const createRes = await axios.post("http://localhost:5001/api/project", json);
-    const newProject = createRes.data;
-    const projects = this.state.projects;
-    projects.push(newProject);
+    try{
+      const createRes = await axios.post("http://localhost:5001/api/project", json);
+      const newProject = createRes.data;
+      const projects = this.state.projects;
+      projects.push(newProject);
 
-    console.log("test", createRes);
-    this.setState({
-      samplesInfo : new Map(),
-      projects: projects
-    });
+      this.setState({
+        samplesInfo : new Map(),
+        projects: projects
+      });
+    } catch(error) {
+      this.setState({
+        alert: true,
+        alertContent: `${error.response.data.errors[0].message}`
+      })
+    }
   }
 
   async getUserInfo() {
@@ -174,6 +191,7 @@ class HomePage extends Component{
       username : username
     });
   }
+
   render() {
     const { loading, alert, alertContent } = this.state;
     return (
@@ -187,7 +205,7 @@ class HomePage extends Component{
               <input id="projectId" type="text" value={this.state.projectID} className="inputText" required="required" onChange={this.handleChange} />
             </label>
             <button type="submit" value="Initialize" className="submitbtn" disabled={loading}>
-              { loading && <i class="fa fa-spinner fa-spin" style={{ marginRight: "5px" }}></i>}
+              { loading && <i className="fa fa-spinner fa-spin" style={{ marginRight: "5px" }}></i>}
               { loading && <span>loading</span> }
               { !loading && <span>Initialize</span> }
             </button>
