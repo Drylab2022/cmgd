@@ -1,20 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
-const projectController = require("../controllers/").project;
-const sampleController = require("../controllers/").sample;
-const checkController = require("../controllers").check;
+const projectRoutes = require("./project");
+const sampleRoutes = require("./sample");
 
+router.get("/", (req, res) => {
+  res.send("hello");
+});
 /* Project Router */
-router.get("/api/project/:projectId/samples", projectController.listSamples);
-router.get("/api/project/:assignee", projectController.list);
-router.post("/api/project", projectController.addWithSamples);
-//router.put('/api/classroom/:id', classroomController.update);
-//router.delete('/api/classroom/:id', classroomController.delete);
+router.use("/api/project", projectRoutes);
 
 /* Sample Router */
-router.get("/api/sample/:id", sampleController.getByPk);
-router.post("/api/samples", sampleController.upSert);
+router.use("/api/samples", sampleRoutes);
 
 //Check Router
 router.post("/api/check", checkController.check);

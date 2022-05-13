@@ -5,7 +5,7 @@ module.exports = {
   //find sample by primary key
   getByPk(req, res) {
     const id = req.params.id;
-    Sample.findByPk(id)
+    return Sample.findByPk(id)
       .then((data) => {
         if (data) {
           res.send(data);
@@ -22,13 +22,10 @@ module.exports = {
       });
   },
   upSert(req, res) {
-    return Sample.upsert({
-      //id: req.body.id,
-      sampleId: req.body.sampleId,
-      curation: req.body.curation,
-      ProjectId: req.body.ProjectId,
+    return Sample.bulkCreate(req.body.samples, {
+      updateOnDuplicate: Object.keys(Sample.rawAttributes),
     })
-      .then((sample) => res.status(200).send(sample))
+      .then((samples) => res.status(200).send(samples))
       .catch((error) => res.status(400).send(error));
   },
 };

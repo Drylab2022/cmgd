@@ -21,6 +21,26 @@ sequelize.sync({ force: true });
 
 const app = express();
 
+// Set up swagger-jsdoc
+const swaggerJsdoc = require("swagger-jsdoc");
+
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Metagenomic Data Curation API",
+      version: "1.0.0",
+    },
+  },
+  apis: ["./routes/*.js"], // files containing annotations as above
+};
+
+const swaggerSpec = swaggerJsdoc(options);
+
+// Set up swagger-ui-express
+const swaggerUi = require("swagger-ui-express");
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 app.use(cors());
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
