@@ -17,7 +17,7 @@ sequelize
   .authenticate()
   .then(() => console.log("connected"))
   .catch((err) => console.log("Err" + err));
-// sequelize.sync({ force: true });
+sequelize.sync({ force: true });
 
 const app = express();
 

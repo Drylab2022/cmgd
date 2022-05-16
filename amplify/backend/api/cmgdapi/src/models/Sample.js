@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       sampleId: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        //unique: true,
       },
       numberOfReads: {
         type: DataTypes.INTEGER,
@@ -39,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       timestamps: true,
+      indexes: [{ unique: true, fields: ["sampleId", "ProjectId"] }],
     }
   );
   return Sample;
