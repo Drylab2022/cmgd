@@ -1,5 +1,8 @@
 .project{
-    float: left;
+  display: inline-flex;
+}
+.project1{
+  width: 40px auto;
 }
 .projectbtn{
     height: 30px;
@@ -20,7 +23,9 @@
     border-color: rgba(0, 0, 0, 0.04);
     transition: all .3s ease-in-out;
   }
-  
+.projectAbs{
+  margin-bottom: 20px;
+}
 .checkbtn{
     height: 30px;
     padding: 4px 40px;
