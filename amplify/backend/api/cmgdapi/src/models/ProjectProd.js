@@ -18,12 +18,16 @@ module.exports = (sequelize, DataTypes) => {
       assignee: {
         type: DataTypes.STRING,
         allowNull: false,
-      }
+      },
+      draftId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
     {
       timestamps: true,
       updatedAt: false,
-      createdAt: "time"
+      createdAt: "projectTime"
     }
   );
   return ProjectProd;

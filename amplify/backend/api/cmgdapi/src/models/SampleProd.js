@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       timestamps: true,
       updatedAt: false,
-      createdAt: "time"
+      createdAt: "sampleTime"
     }
   );
   return SampleProd;

@@ -2,6 +2,7 @@ const ProjectProd = require("../models").ProjectProd;
 const SampleProd = require("../models").SampleProd;
 const Project = require("../models").Project;
 const Sample = require("../models").Sample;
+const Sequelize = require("sequelize")
 
 module.exports = {
   /**
@@ -9,7 +10,6 @@ module.exports = {
    */
   async addProduction(req, res) {
     let id = req.body.id;
-    console.log(id);
 
     try {
       // join all samples with certain project
@@ -35,7 +35,8 @@ module.exports = {
         numberOfSamples: samples["numberOfSamples"],
         status: samples["status"],
         assignee: samples["assignee"],
-        sampleProds: samples["samples"]
+        sampleProds: samples["samples"],
+        draftId: id
       },
         {
           include: [
@@ -53,12 +54,38 @@ module.exports = {
   },
 
   /**
-   * Search data int production_sample table
+   * - Search data int production_sample table
+   * - Sequelize function equals to SQL below:
+   *   SELECT Distinct on ("sampleId", "draftId") *
+   *   FROM "SampleProd" AS "SampleProd" LEFT OUTER JOIN "ProjectProd" AS "ProjectProd" ON
+   *   "SampleProd"."ProjectProdId" = "ProjectProd"."id"
+   *   Order By "sampleId", "draftId", "sampleTime" DESC
    */
   async search(req, res) {
-    let where = {curation: req.body}
+    let where = req.body;
     try {
-      let samples = await SampleProd.findAll({where: where});
+      let samples = await SampleProd.findAll({
+        where: where,
+        attributes: [
+          Sequelize.literal('DISTINCT ON("sampleId", "draftId") *'),
+          "id",
+          "sampleId",
+          "curation",
+          "sampleTime"
+        ],
+        include: {
+          model: ProjectProd,
+          attributes: [
+            "draftId"
+          ]
+        },
+        order: [
+          "sampleId",
+          [ProjectProd, 'draftId'],
+          ['sampleTime', 'DESC']
+        ]
+      });
+
       res.status(200, {'Content-Type': 'application/json'}).send(samples);
     } catch (err) {
       console.log(err);
