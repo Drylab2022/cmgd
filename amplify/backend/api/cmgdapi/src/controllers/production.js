@@ -48,7 +48,6 @@ module.exports = {
       });
       res.status(200, {'Content-Type': 'application/json'}).send();
     } catch (err) {
-      // console.log(err);
       res.status(400, {'Content-Type': 'application/json'}).send({error: err.message});
     }
   },
@@ -88,7 +87,6 @@ module.exports = {
 
       res.status(200, {'Content-Type': 'application/json'}).send(samples);
     } catch (err) {
-      // console.log(err);
       res.status(400, {'Content-Type': 'application/json'}).send({error: err.message});
     }
   }
