@@ -1,8 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
-  const Sample = sequelize.define(
-    "Sample",
+  const SampleProd = sequelize.define(
+    "SampleProd",
     {
-      // Model attributes are defined here
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -11,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
       sampleId: {
         type: DataTypes.STRING,
         allowNull: false,
-        //unique: true,
       },
       numberOfReads: {
         type: DataTypes.INTEGER,
@@ -28,19 +26,12 @@ module.exports = (sequelize, DataTypes) => {
       curation: {
         type: DataTypes.JSON,
       },
-      // projectId: {
-      //   type: DataTypes.INTEGER,
-      //   // // This links the projectId column to the id column in the Project table
-      //   // references: {
-      //   //   model: "Project",
-      //   //   key: "id",
-      //   // },
-      // },
     },
     {
       timestamps: true,
-      indexes: [{ unique: true, fields: ["sampleId", "ProjectId"] }],
+      updatedAt: false,
+      createdAt: "sampleTime"
     }
   );
-  return Sample;
+  return SampleProd;
 };
