@@ -206,20 +206,24 @@ class ProjectPage extends Component {
         return (
             <div className="new">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-                <h4 className='project'>ProjectID:  { this.props.match.params.projectId }</h4>
+                <div className="project1">
+                    <h4 className='project'>ProjectID:  { this.props.match.params.projectId }</h4>
 
-                <button type="submit" value="Initialize" className="projectbtn">
-                    <span>Reset</span>
-                </button>
+                    <button type="submit" value="Initialize" className="projectbtn">
+                        <span>Reset</span>
+                    </button>
 
-                <button type="submit" className="projectbtn" onClick={this.downloadFile}>
-                    <span>Download</span>
-                </button>
+                    <button type="submit" className="projectbtn" onClick={this.downloadFile}>
+                        <span>Download</span>
+                    </button>
 
-                <label className="projectbtn">
-                    <input type="file" accept={".csv"} onChange={this.uploadFile}/>
-                    Upload
-                </label>
+                    <label className="projectbtn">
+                        <input type="file" accept={".csv"} onChange={this.uploadFile}/>
+                        Upload
+                    </label>
+                </div>
+
+                <label className='projectAbs'>Project abstract: {this.props.match.params.projectId.abstract}</label>
                 
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
