@@ -18,8 +18,7 @@ export default function ResetPassword() {
     code: "",
     email: "",
     password: "",
-    confirmPassword: "",
-    username: ""
+    confirmPassword: ""
   });
   const [codeSent, setCodeSent] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
@@ -27,7 +26,7 @@ export default function ResetPassword() {
   const [isSendingCode, setIsSendingCode] = useState(false);
 
   function validateCodeForm() {
-    return fields.username.length > 0;
+    return fields.email.length > 0;
   }
 
   function validateResetForm() {
@@ -44,9 +43,7 @@ export default function ResetPassword() {
     setIsSendingCode(true);
 
     try {
-      await Auth.forgotPassword(fields.username)
-                .then(data => console.log(data))
-                .catch(err => console.log(err));
+      await Auth.forgotPassword(fields.email);
       setCodeSent(true);
     } catch (error) {
       onError(error);
@@ -75,12 +72,12 @@ export default function ResetPassword() {
   function renderRequestCodeForm() {
     return (
       <form onSubmit={handleSendCodeClick}>
-        <FormGroup bsSize="large" controlId="username">
-          <FormLabel>Please enter your username</FormLabel>
+        <FormGroup bsSize="large" controlId="email">
+          <FormLabel>Please enter your email</FormLabel>
           <FormControl
             autoFocus
-            type="input"
-            value={fields.username}
+            type="email"
+            value={fields.email}
             onChange={handleFieldChange}
           />
         </FormGroup>
@@ -109,7 +106,7 @@ export default function ResetPassword() {
             onChange={handleFieldChange}
           />
           <FormText>
-            Please check your email for the confirmation code.
+            Please check your email ({fields.email}) for the confirmation code.
           </FormText>
         </FormGroup>
         <hr />

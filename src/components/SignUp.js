@@ -15,7 +15,6 @@ Amplify.configure(awsconfig);
 
 export default function Signup() {
   const [fields, handleFieldChange] = useFormFields({
-    username: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -28,7 +27,6 @@ export default function Signup() {
 
   function validateForm() {
     return (
-      fields.username.length > 0 &&
       fields.email.length > 0 &&
       fields.password.length > 0 &&
       fields.password === fields.confirmPassword
@@ -45,10 +43,10 @@ export default function Signup() {
     setIsLoading(true);
     try {
         const newUser = await Auth.signUp({
-          username: fields.username,
+          username: fields.email,
           password: fields.password,
-          attributes: {
-            email: fields.email, 
+          attributes:{
+            email: fields.email,
           }
         });
         setIsLoading(false);
@@ -64,8 +62,8 @@ export default function Signup() {
 
     setIsLoading(true);
     try {
-        await Auth.confirmSignUp(fields.username, fields.confirmationCode);
-        await Auth.signIn(fields.username, fields.password);
+        await Auth.confirmSignUp(fields.email, fields.confirmationCode);
+        await Auth.signIn(fields.email, fields.password);
     
         userHasAuthenticated(true);
         history.push("/");
@@ -104,18 +102,7 @@ export default function Signup() {
   function renderForm() {
     return (
       <Form onSubmit={handleSubmit}>
-
-        <Form.Group controlId="username" size="lg">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            autoFocus
-            type="input"
-            value={fields.username}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-
-        <Form.Group controlId="email" size="lg">
+        <Form.Group controlId="email" bsSize="large">
           <Form.Label>Email</Form.Label>
           <Form.Control
             autoFocus

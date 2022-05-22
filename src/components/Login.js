@@ -19,12 +19,12 @@ export default function Login() {
   const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
-    username: "",
+    email: "",
     password: ""
   });
   
   function validateForm() {
-    return fields.username.length > 0 && fields.password.length > 0;
+    return fields.email.length > 0 && fields.password.length > 0;
   }
 
   async function handleSubmit(event) {
@@ -32,7 +32,7 @@ export default function Login() {
     setIsLoading(true);
   
     try {
-      await Auth.signIn(fields.username, fields.password);
+      await Auth.signIn(fields.email, fields.password);
       userHasAuthenticated(true);
       history.push("/home");
     } catch (e) {
@@ -44,12 +44,12 @@ export default function Login() {
   return (
     <div className="Login">
       <Form onSubmit={handleSubmit}>
-        <Form.Group size="lg" controlId="username">
-          <Form.Label>Username</Form.Label>
+        <Form.Group size="lg" controlId="email">
+          <Form.Label>Email</Form.Label>
           <Form.Control
             autoFocus
-            type="input"
-            value={fields.username}
+            type="email"
+            value={fields.email}
             onChange={handleFieldChange}
           />
         </Form.Group>
