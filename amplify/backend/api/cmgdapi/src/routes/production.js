@@ -47,7 +47,11 @@ router.post("/add", productionController.addProduction);
  *               and:
  *                 type: string
  *                 description: operation statement
- *                 example: [{"test": {"gt": 0}},{"test": {"lt": 3}}]
+ *                 example: [{"curation.test": {"gt": 0}},{"curation.test": {"lt": 3}}]
+ *               sampleTime:
+ *                 type: string
+ *                 description: retrieve samples before the dedicated time
+ *                 example: {"lt": "2022-05-23"}
  *             required:
  *               - operations
  *     responses:

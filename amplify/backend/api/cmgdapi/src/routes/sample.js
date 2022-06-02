@@ -8,6 +8,9 @@ const sampleController = require("../controllers/").sample;
  *     tags:
  *       - samples
  *     summary: Get information about a sample
+ *     security:
+ *      - Oauth2:
+ *        - Reviewer
  *     parameters:
  *       - name: sampleId
  *         in: path

@@ -31,6 +31,28 @@ const options = {
       title: "Metagenomic Data Curation API",
       version: "1.0.0",
     },
+    components: {
+      securitySchemes: {
+        // cmgdapiAuthorizer: {
+        //   type: "oauth2",
+        //   description: "For more information, see https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-userpools-server-contract-reference.html",
+        //   flows: {
+        //     authorizationCode: {
+        //       authorizationUrl: "https://cmgdtest.auth.us-east-1.amazoncognito.com/oauth2/authorize",
+        //       tokenUrl: "https://cmgdtest.auth.us-east-1.amazoncognito.com/oauth2/token",
+        //       scopes: {
+        //         Reviewer: "reviewer",
+        //         Curator: "curator"
+        //       }
+        //     }
+        //   }
+        // },
+        Oauth2: {
+          type: "http",
+          scheme: "bearer"
+        }
+      }
+    }
   },
   apis: ["./routes/*.js"], // files containing annotations as above
 };
