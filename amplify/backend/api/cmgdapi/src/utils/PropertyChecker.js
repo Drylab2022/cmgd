@@ -166,8 +166,6 @@ module.exports = {
     const uniquePropertiesMap = new Map();
     const properties = new Set();
 
-    console.log(properties);
-
     const errorsPool = [];
     const warningsPool = [];
 
