@@ -31,14 +31,16 @@ module.exports = {
         });
         res
           .status(200, { "Content-Type": "application/json" })
-          .send(checkResult);
+          .send({ checkResult: checkResult });
       } catch (err) {
         res
           .status(400, { "Content-Type": "application/json" })
           .send({ error: err.message });
       }
     } else {
-      res.status(400, { "Content-Type": "application/json" }).send(checkResult);
+      res
+        .status(400, { "Content-Type": "application/json" })
+        .send({ checkResult: checkResult });
     }
   },
 };

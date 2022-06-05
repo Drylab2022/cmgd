@@ -15,6 +15,7 @@ module.exports = {
   },
   listSamples(req, res) {
     const id = req.params.id;
+
     return Project.findByPk(id, {
       include: {
         model: Sample,
@@ -23,6 +24,7 @@ module.exports = {
     })
       .then((project) => res.status(200).send(project))
       .catch((error) => {
+        console.log(error);
         res.status(400).send(error);
       });
   },
