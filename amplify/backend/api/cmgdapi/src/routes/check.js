@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const checkController = require("../controllers").check;
 
-router.get("/", checkController.check);
+router.post("/", checkController.check);
 
 module.exports = router;

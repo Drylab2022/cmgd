@@ -2,12 +2,9 @@ const PropertyChecker = require("../utils/PropertyChecker");
 
 module.exports = {
     async check(req, res) {
-        const checkResult = await PropertyChecker.checkSingleProperties(req.body.curation);
+        const checkResult = await PropertyChecker.check(req.body);
+        const statusCode = checkResult.length === 0 ? 200 : 400;
 
-        if(checkResult) {
-            res.status(200).send("Validation succeed");
-        } else {
-            res.status(400).send("Validation fail");
-        }
+        res.status(statusCode).send(checkResult);
     }
 };
