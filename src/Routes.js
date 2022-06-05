@@ -50,7 +50,7 @@ export default function Routes() {
         <HomePage />
       </AuthenticatedRoute>
 
-      <AuthenticatedRoute exact path="/projects/:projectId" component={ProjectPage}/>
+      <AuthenticatedRoute exact path="/project/:id" component={ProjectPage} />
 
       <AuthenticatedRoute exact path="/sample">
         <SamplePage />
