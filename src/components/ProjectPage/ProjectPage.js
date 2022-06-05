@@ -156,20 +156,23 @@ class ProjectPage extends Component {
   }
 
   uploadFile(event) {
-    console.log("upload");
     Papa.parse(event.target.files[0], {
       worker: true, // Don't bog down the main thread if its a big file
       header: true,
-      complete: function (results) {
+      complete: async function (results) {
         const samples = translateToCurationObject(results.data);
-
-        samples.map((sample, file) => {
-          axios.post("http://localhost:5001/api/samples", {
-            sampleId: sample.sampleId,
-            curation: sample.curation,
-            ProjectId: this.state.projectPK,
+        await axios
+          .post("http://localhost:5001/api/samples", {
+            samples: samples,
+          })
+          .then((result) => {
+            //TODO:Need to display the warning if exists
+            console.log(result.data);
+          })
+          .catch((e) => {
+            //TODO:Need to display the warning and error if exist
+            console.log(e.response.data.checkResult);
           });
-        });
         this.componentDidMount();
       }.bind(this),
     });
@@ -268,11 +271,17 @@ class ProjectPage extends Component {
                   <TableCell component="th" scope="row">
                     {sample.sampleId}
                   </TableCell>
-                  <TableCell align="right">{sample.numberOfReads}</TableCell>
-                  <TableCell align="right">{sample.avgReadLength}</TableCell>
-                  <TableCell align="right">{sample.ncbiAccession}</TableCell>
                   <TableCell align="right">
-                    {sample.sequencingPlatform}
+                    {sample.curation.numberOfReads}
+                  </TableCell>
+                  <TableCell align="right">
+                    {sample.curation.avgReadLength}
+                  </TableCell>
+                  <TableCell align="right">
+                    {sample.curation.ncbiAccession}
+                  </TableCell>
+                  <TableCell align="right">
+                    {sample.curation.sequencingPlatform}
                   </TableCell>
                 </TableRow>
               ))}
