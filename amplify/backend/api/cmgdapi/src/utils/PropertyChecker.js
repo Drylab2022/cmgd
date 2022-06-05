@@ -66,20 +66,21 @@ function checkRegexAndAdditionalProperties(
   sample,
   propertyToRegex,
   multipleValuesProperties,
-  errorAndWarningPool,
+  errorsPool,
+  warningsPool,
   properties
 ) {
   const curation = sample.curation;
 
   for (const property in curation) {
-    if (checkUnknownProperties(property, properties, errorAndWarningPool)) {
+    if (checkUnknownProperties(property, properties, warningsPool)) {
       continue;
     }
 
     const values = String(curation[property]).split(";");
 
     if (values.length > 1 && !multipleValuesProperties.has(property)) {
-      errorAndWarningPool.push(
+      errorsPool.push(
         `error: don't allow multiple values, sample: ${sample.sampleId}, property: ${property}`
       );
       continue;
@@ -89,7 +90,7 @@ function checkRegexAndAdditionalProperties(
 
     for (const value of values) {
       if (!regex || !regex.test(value)) {
-        errorAndWarningPool.push(
+        errorsPool.push(
           `error: wrong format: sample: ${sample.sampleId}, property: ${property}`
         );
         break;
@@ -98,11 +99,11 @@ function checkRegexAndAdditionalProperties(
   }
 }
 
-function checkRequiredness(sample, requiredProperties, errorAndWarningPool) {
+function checkRequiredness(sample, requiredProperties, errorsPool) {
   const curation = sample.curation;
   requiredProperties.forEach((property) => {
     if (!(property in curation)) {
-      errorAndWarningPool.push(
+      errorsPool.push(
         `error: ${property} is required in sample: ${sample.sampleId}`
       );
       return false;
@@ -116,7 +117,7 @@ function checkUniqueness(
   sample,
   uniqueProperties,
   uniquePropertiesMap,
-  errorAndWarningPool
+  errorsPool
 ) {
   const curation = sample.curation;
 
@@ -130,7 +131,7 @@ function checkUniqueness(
         const propertyValueSet = uniquePropertiesMap.get(property);
 
         if (propertyValueSet.has(propertyValue)) {
-          errorAndWarningPool.push(
+          errorsPool.push(
             `error: duplicated property: ${property} = ${propertyValue}, property must be unique`
           );
         } else {
@@ -141,9 +142,9 @@ function checkUniqueness(
   }
 }
 
-function checkUnknownProperties(property, properties, errorAndWarningPool) {
+function checkUnknownProperties(property, properties, warningsPool) {
   if (!properties.has(property)) {
-    errorAndWarningPool.push(`warning: unknown property ${property}`);
+    warningsPool.push(`warning: unknown property ${property}`);
     return true;
   }
 
@@ -165,7 +166,10 @@ module.exports = {
     const uniquePropertiesMap = new Map();
     const properties = new Set();
 
-    const errorAndWarningPool = [];
+    console.log(properties);
+
+    const errorsPool = [];
+    const warningsPool = [];
 
     await initializeTemplate(
       uniqueProperties,
@@ -180,18 +184,22 @@ module.exports = {
         sample,
         propertyToRegex,
         multipleValuesProperties,
-        errorAndWarningPool,
+        errorsPool,
+        warningsPool,
         properties
       );
-      checkRequiredness(sample, requiredProperties, errorAndWarningPool);
+      checkRequiredness(sample, requiredProperties, errorsPool);
       checkUniqueness(
         sample,
         uniqueProperties,
         uniquePropertiesMap,
-        errorAndWarningPool
+        errorsPool
       );
     });
 
-    return errorAndWarningPool;
+    return {
+      errorsPool: errorsPool,
+      warningsPool: warningsPool,
+    };
   },
 };
