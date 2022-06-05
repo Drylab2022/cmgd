@@ -1,5 +1,6 @@
 const Project = require("../models").Project;
 const Sample = require("../models").Sample;
+const PropertyChecker = require("../utils/PropertyChecker");
 
 module.exports = {
   //find sample by primary key
@@ -21,11 +22,23 @@ module.exports = {
         });
       });
   },
-  upSert(req, res) {
-    return Sample.bulkCreate(req.body.samples, {
-      updateOnDuplicate: Object.keys(Sample.rawAttributes),
-    })
-      .then((samples) => res.status(200).send(samples))
-      .catch((error) => res.status(400).send(error));
+  async upSert(req, res) {
+    const checkResult = await PropertyChecker.check(req.body.samples);
+    if (checkResult.errorsPool.length === 0) {
+      try {
+        const samples = await Sample.bulkCreate(req.body.samples, {
+          updateOnDuplicate: Object.keys(Sample.rawAttributes),
+        });
+        res
+          .status(200, { "Content-Type": "application/json" })
+          .send(checkResult);
+      } catch (err) {
+        res
+          .status(400, { "Content-Type": "application/json" })
+          .send({ error: err.message });
+      }
+    } else {
+      res.status(400, { "Content-Type": "application/json" }).send(checkResult);
+    }
   },
 };
