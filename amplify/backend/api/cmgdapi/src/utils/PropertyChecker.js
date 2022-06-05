@@ -23,6 +23,7 @@ async function initializeTemplate(uniqueProperties, requiredProperties, multiple
 
     for(const row of csvRows) {
         const propertyName = row[columnNameIndex];
+        const multipleValue = row[multipleValuesIndex];
 
         if(row[uniquenessIndex] === "unique") {
             uniqueProperties.add(propertyName);
@@ -32,14 +33,20 @@ async function initializeTemplate(uniqueProperties, requiredProperties, multiple
             requiredProperties.add(propertyName);
         }
 
-        if(row[multipleValuesIndex] === "TRUE") {
+        if(multipleValue === "TRUE") {
             multipleValuesProperties.add(propertyName);
         }
 
         properties.add(propertyName);
 
-        propertyToRegex.set(propertyName, RegExp(row[allowedValuesIndex]), 'm');
+        propertyToRegex.set(propertyName, RegExp(regexGenerator(row[allowedValuesIndex], multipleValue)));
     }
+}
+
+function regexGenerator(regex) {
+    const generateRegex = `^${regex.replace('|', '$|^')}$`
+
+    return generateRegex;
 }
 
 /**
@@ -49,8 +56,11 @@ function checkRegexAndAdditionalProperties(sample, propertyToRegex, multipleValu
     const curation = sample.curation;
 
     for(const property in curation) {
-        checkAdditionalProperties(property, properties, errorAndWarningPool);
-        const values = String(curation[property]).split("|");
+        if(checkUnknownProperties(property, properties, errorAndWarningPool)) {
+            continue;
+        }
+
+        const values = String(curation[property]).split(";");
 
         if(values.length > 1 && !multipleValuesProperties.has(property)) {
             errorAndWarningPool.push(`error: don't allow multiple values, sample: ${sample.sampleId}, property: ${property}`);
@@ -102,10 +112,13 @@ function checkUniqueness(sample, uniqueProperties, uniquePropertiesMap, errorAnd
     }
 }
 
-function checkAdditionalProperties(property, properties, errorAndWarningPool) {
+function checkUnknownProperties(property, properties, errorAndWarningPool) {
     if(!properties.has(property)) {
         errorAndWarningPool.push(`warning: unknown property ${property}`);
+        return true;
     }
+
+    return false;
 }
 
 module.exports = {
