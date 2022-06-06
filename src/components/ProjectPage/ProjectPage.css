@@ -62,3 +62,11 @@
 input[type="file"] {
     display: none;
 }
+.errorHeader{
+  color:#ff5630;
+  font-weight: bold;
+}
+.warningHeader{
+  color: #ff991f;
+  font-weight: bold;
+}

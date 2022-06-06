@@ -24,7 +24,6 @@ module.exports = {
     })
       .then((project) => res.status(200).send(project))
       .catch((error) => {
-        console.log(error);
         res.status(400).send(error);
       });
   },
