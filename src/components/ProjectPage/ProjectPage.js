@@ -24,7 +24,21 @@ import {
   translateToCurationObject,
 } from "../../CurationTranslator/CurationTranslator";
 
+import {
+    Dialog,
+    Button,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    ListItemButton,
+    ListItemText,
+    List
+  } from "@mui/material";
+
 import * as Papa from "papaparse";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { Collapse, ListGroupItem } from "react-bootstrap";
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -113,6 +127,11 @@ class ProjectPage extends Component {
       projectPK: "",
       page: 0,
       rowsPerPage: 5,
+      errors: [],
+      warnings: [],  
+      alertContent: "",
+      openE: false,
+      openW: false,
     };
     this.handleChangePage = this.handleChangePage.bind(this);
     this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
@@ -167,11 +186,22 @@ class ProjectPage extends Component {
           })
           .then((result) => {
             //TODO:Need to display the warning if exists
-            console.log(result.data);
+            console.log(result.data.checkResult);
+            this.setState({
+                warnings: result.data.checkResult.warningsPool,
+                alert: true,
+                alertContent: "Upload Complete!"
+            });
           })
           .catch((e) => {
             //TODO:Need to display the warning and error if exist
             console.log(e.response.data.checkResult);
+            this.setState({
+                errors: e.response.data.checkResult.errorsPool,
+                warnings: e.response.data.checkResult.warningsPool,
+                alert: true,
+                alertContent: "Upload Failed!"
+            });
           });
         this.componentDidMount();
       }.bind(this),
@@ -216,7 +246,7 @@ class ProjectPage extends Component {
   }
 
   render() {
-    const { rowsPerPage, page } = this.state;
+    const { rowsPerPage, page, alert, alertContent, errors, warnings, openE, openW } = this.state;
     const emptyRows =
       page > 0
         ? Math.max(0, (1 + page) * rowsPerPage - this.state.samples.length)
@@ -333,6 +363,75 @@ class ProjectPage extends Component {
 
           <hr />
           <h4>Check Project: </h4>
+            {alert ? (
+                <div>
+                <Dialog
+                    open={alert}
+                    onClose={() => this.setState({ alert: false })}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"Error"}</DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-description">
+                          {alertContent}
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={() => this.setState({ alert: false })}>
+                          Close
+                      </Button>
+                    </DialogActions>
+                </Dialog>
+                </div>
+            ) : (
+                <></>
+            )}
+
+          <div className="errorUpload">
+            {this.state.errors.length ? (<div>
+              <ListItemButton onClick={() => this.setState({ openE: !this.state.openE })}>
+                <ListItemText>
+                  <span className="errorHeader">Error</span>
+                </ListItemText>
+                {openE ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+              <Collapse in={openE} timeout="auto" unmountOnExit>
+                <TableContainer   sx={{ maxHeight: 440 }}>
+                  <List component="div" disabledpadding="true">
+                    {errors.map((error) => (
+                      <ListItemButton sx={{ pl : 4 }} key={error.id}>
+                          <ListItemText>{error}</ListItemText>
+                      </ListItemButton>
+                    ))}
+                  </List>
+                </TableContainer>
+              </Collapse>
+            </div>) : null}
+          </div>
+
+          <div className="warningUpload">
+            {this.state.warnings.length ? (<div>
+              <ListItemButton onClick={() => this.setState({ openW: !this.state.openW })}>
+                <ListItemText>
+                  <span className="warningHeader">Warnings</span>
+                </ListItemText>
+                {openW ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+
+              <Collapse in={openW} timeout="auto" unmountOnExit>
+                <TableContainer   sx={{ maxHeight: 440 }}>
+                  <List component="div" disabledpadding="true">
+                    {warnings.map((warning) => (
+                      <ListItemButton sx={{ pl : 4 }} key={warning.id}>
+                        <ListItemText>{warning}</ListItemText>
+                      </ListItemButton>
+                    ))}
+                  </List>
+                </TableContainer>
+              </Collapse>
+            </div>) : null}
+          </div>
         </div>
       </div>
     );
