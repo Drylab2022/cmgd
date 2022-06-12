@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./HomePage.css";
 import axios from "axios";
-import axiosInternal from "../../axiosConfig";
+import axiosConfig from "../../axiosConfig";
 import WorkingPage from "./WorkingPage";
 import { Auth } from "aws-amplify";
 import {
@@ -13,6 +13,10 @@ import {
   DialogTitle,
 } from "@mui/material";
 
+const idToken =
+  "eyJraWQiOiJQREU5M0lkNWNqcmJKM2lEaFwvdEhURTI1YmQ2NDZJUGhzTjFVN2dRY2NJYz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIwYTA2NGQzNS0zNjVmLTRiY2YtOWJlYS1kOGVlNTJjMzc1YjEiLCJjb2duaXRvOmdyb3VwcyI6WyJDdXJhdG9yIiwiUmV2aWV3ZXIiXSwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV93ZXpIRXJmOHMiLCJjb2duaXRvOnVzZXJuYW1lIjoid2FucXVhbjg5Iiwib3JpZ2luX2p0aSI6IjgyYmViYTIxLTExMjQtNGQ1OC05ZGJiLWJlMWIyZmNhNzA2MSIsImF1ZCI6IjZmYWhyMzhpZ2JhMnYzaGl2MDI2NHNnMmUwIiwiZXZlbnRfaWQiOiJhM2M0YjMyZS03ZDAyLTRlYTQtYjJiMy1kZmE3YmQ2YTk1MGIiLCJ0b2tlbl91c2UiOiJpZCIsInNjb3BlIjoiQ3VyYXRvci02ZmFocjM4aWdiYTJ2M2hpdjAyNjRzZzJlMCBSZXZpZXdlci02ZmFocjM4aWdiYTJ2M2hpdjAyNjRzZzJlMCIsImF1dGhfdGltZSI6MTY1NTA2NTIwMywibmFtZSI6IlF1YW4iLCJleHAiOjE2NTUwNjg4MDMsImlhdCI6MTY1NTA2NTIwMywianRpIjoiYTUxMjI4ZjYtMzM0Mi00OGY4LWI0ZGQtYjIzZmRkZGZmYzc1IiwiZW1haWwiOiJ3YW5xdWFuODlAaG90bWFpbC5jb20ifQ.IgDgaamq8pvm_y2SAau8C_froJRTGu2eCr7QVGQiztQht7ec4AQ4bq3jGx4qKo78DvuPTu9iBOh5zulbUpx8R7e78uR9H_PdDfmsaSPU44xrhiynhCzlSszrdqfr1R9amVtxEbWf-i6VFOTuDLcsjsVeW1iz2RlfoSWbY-Ten_8Nb2H2Z5IrOemrcV3PSBL-EX5Qz-VbiLClFnPciVwQVmUn9R-A7Aac9Ib2mfmDolEmmZQpY5yJEXgaNz0cVGRYofxi_RGH7_j96eFdHuu68tfL0ZawsBiu5DXOLYDlSHP2O_x-26Hcry1zmbDjZ_tdAH0_6yu4md02WJo7cXMLoQ";
+
+const axiosInternal = axiosConfig(idToken);
 const cursorMaximumSize = 999;
 const projectStatus = "active";
 const metaDataUrlPrefix = "https://api.omicidx.cancerdatasci.org/sra/studies/";
