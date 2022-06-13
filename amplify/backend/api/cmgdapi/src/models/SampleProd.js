@@ -11,18 +11,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      numberOfReads: {
-        type: DataTypes.INTEGER,
-      },
-      avgReadLength: {
-        type: DataTypes.DOUBLE,
-      },
-      ncbiAccession: {
-        type: DataTypes.STRING,
-      },
-      sequencingPlatform: {
-        type: DataTypes.STRING,
-      },
       curation: {
         type: DataTypes.JSON,
       },

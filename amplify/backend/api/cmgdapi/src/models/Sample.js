@@ -13,29 +13,9 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         //unique: true,
       },
-      numberOfReads: {
-        type: DataTypes.INTEGER,
-      },
-      avgReadLength: {
-        type: DataTypes.DOUBLE,
-      },
-      ncbiAccession: {
-        type: DataTypes.STRING,
-      },
-      sequencingPlatform: {
-        type: DataTypes.STRING,
-      },
       curation: {
         type: DataTypes.JSON,
       },
-      // projectId: {
-      //   type: DataTypes.INTEGER,
-      //   // // This links the projectId column to the id column in the Project table
-      //   // references: {
-      //   //   model: "Project",
-      //   //   key: "id",
-      //   // },
-      // },
     },
     {
       timestamps: true,

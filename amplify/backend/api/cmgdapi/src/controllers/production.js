@@ -18,7 +18,7 @@ module.exports = {
         include: [{
           model: Sample,
           as: "samples",
-          attributes: ["sampleId", "numberOfReads", "avgReadLength", "ncbiAccession", "sequencingPlatform", "curation"],
+          attributes: ["sampleId", "curation"],
         }]
       });
 
@@ -53,15 +53,24 @@ module.exports = {
   },
 
   /**
-   * - Search data int production_sample table
-   * - Sequelize function equals to SQL below:
-   *   SELECT Distinct on ("sampleId", "draftId") *
-   *   FROM "SampleProd" AS "SampleProd" LEFT OUTER JOIN "ProjectProd" AS "ProjectProd" ON
-   *   "SampleProd"."ProjectProdId" = "ProjectProd"."id"
-   *   Order By "sampleId", "draftId", "sampleTime" DESC
+   * 1. Search data int production_sample table
+   * 2. Sequelize function equals to SQL below:
+   *    SELECT Distinct on ("sampleId", "draftId") *
+   *    FROM "SampleProd" AS "SampleProd" LEFT OUTER JOIN "ProjectProd" AS "ProjectProd" ON
+   *    "SampleProd"."ProjectProdId" = "ProjectProd"."id"
+   *    Order By "sampleId", "draftId", "sampleTime" DESC
    */
   async search(req, res) {
-    let where = req.body;
+    let page = req.body.page; // current page number (index from 0)
+    let count = req.body.count; // row number each page
+    let where = {}; // filter conditions
+    if (req.body.filter != null) {
+      where["curation"] = req.body.filter;
+    }
+    if (req.body.timestamp != null) {
+      where["sampleTime"] = req.body.timestamp;
+    }
+
     try {
       let samples = await SampleProd.findAll({
         where: where,
@@ -82,7 +91,9 @@ module.exports = {
           "sampleId",
           [ProjectProd, 'draftId'],
           ['sampleTime', 'DESC']
-        ]
+        ],
+        limit: count,
+        offset: page * count
       });
 
       res.status(200, {'Content-Type': 'application/json'}).send(samples);
