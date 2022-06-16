@@ -2,7 +2,7 @@ const ProjectProd = require("../models").ProjectProd;
 const SampleProd = require("../models").SampleProd;
 const Project = require("../models").Project;
 const Sample = require("../models").Sample;
-const Sequelize = require("sequelize")
+const Sequelize = require("sequelize");
 const sequelize = require("../config/database");
 
 module.exports = {
@@ -65,6 +65,7 @@ module.exports = {
     let page = req.body.page; // current page number (index from 0)
     let count = req.body.count; // row number each page
     let where = {}; // filter conditions
+
     if (req.body.filter != null) {
       where["curation"] = req.body.filter;
     }
@@ -97,7 +98,80 @@ module.exports = {
         offset: page * count
       });
 
-      res.status(200, {'Content-Type': 'application/json'}).send(samples);
+      // if the request body contains ccfilter parameter, query db again getting all data to make statistics
+      const results = {results : samples};
+      if (req.body.cascading_filter != null) {
+        samples = await SampleProd.findAll({
+          where: where,
+          attributes: [
+            Sequelize.literal('DISTINCT ON("sampleId", "draftId") *'),
+            "curation",
+          ],
+          include: {
+            model: ProjectProd,
+            attributes: [
+              "draftId"
+            ]
+          },
+          order: [
+            "sampleId",
+            [ProjectProd, 'draftId'],
+            ['sampleTime', 'DESC']
+          ],
+          raw: true
+        });
+        
+        let ccFilter = req.body.cascading_filter; // request body parameter
+        let ccRes = []; // return variable
+        let stat = {}; // key: field, val: arr[] -> values of this field
+        let valCount = {}; // key: value, val: number of this value
+
+        for (let i in ccFilter) {
+          stat[ccFilter[i]] = [];
+        }
+
+        // traverse samples to calculate
+        for (let i in samples) {
+          for (let field in stat) {
+            if (field in samples[i]["curation"]) {
+              let value = samples[i]["curation"][field];
+              
+              // skip NA value
+              if (value == 'NA') {
+                continue;
+              }
+
+              // -1 means related key's array already have this field (deduplication)
+              if (stat[field].indexOf(value) == -1) {
+                stat[field].push(value);
+              }
+
+              valCount[value] = value in valCount ? valCount[value] + 1 : 0;
+            }
+          }
+        }
+        
+        // construct result format
+        for (let field in stat) {
+          let record = {
+            field: field,
+            values: []
+          }
+
+          for (let val in stat[field]) {
+            record["values"].push({
+              name: stat[field][val],
+              count: valCount[stat[field][val]]
+            })
+          }
+
+          ccRes.push(record);
+        }
+
+        results["cascading_filter"] = ccRes;
+      }
+
+      res.status(200, {'Content-Type': 'application/json'}).send(results);
     } catch (err) {
       res.status(400, {'Content-Type': 'application/json'}).send({error: err.message});
     }
