@@ -3,6 +3,7 @@ const SampleProd = require("../models").SampleProd;
 const Project = require("../models").Project;
 const Sample = require("../models").Sample;
 const Sequelize = require("sequelize")
+const sequelize = require("../config/database");
 
 module.exports = {
   /**
@@ -97,6 +98,42 @@ module.exports = {
       });
 
       res.status(200, {'Content-Type': 'application/json'}).send(samples);
+    } catch (err) {
+      res.status(400, {'Content-Type': 'application/json'}).send({error: err.message});
+    }
+  },
+
+  /**
+   * Get all fields in curation column -> json type
+   */
+  async getAllFields(req, res) {
+    try {
+      let sql = "SELECT DISTINCT json_object_keys(curation) FROM \"SampleProd\"";
+      let query = await sequelize.query(sql, {type: Sequelize.QueryTypes.SELECT});
+
+      const fields = [];
+      for (let i in query) {
+        fields.push(query[i]["json_object_keys"])
+      }
+
+      res.status(200, {'Content-Type': 'application/json'}).send(fields);
+    } catch (err) {
+      res.status(400, {'Content-Type': 'application/json'}).send({error: err.message});
+    }
+  },
+
+  /**
+   * Get number of existed value in a certain json field
+   */
+   async countValue(req, res) {
+    try {
+      let sql = "SELECT entry.value AS name, COUNT(*) AS count FROM \"SampleProd\", json_each_text(\"SampleProd\".curation) AS entry WHERE entry.key = $field GROUP BY entry.value ORDER BY count DESC"
+      let query = await sequelize.query(sql, { 
+        type: Sequelize.QueryTypes.SELECT,
+        bind: {field : req.params.field}
+      });
+
+      res.status(200, {'Content-Type': 'application/json'}).send(query);
     } catch (err) {
       res.status(400, {'Content-Type': 'application/json'}).send({error: err.message});
     }

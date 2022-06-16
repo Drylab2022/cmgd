@@ -71,4 +71,8 @@ router.post("/add", productionController.addProduction);
 
 router.post("/search", productionController.search);
 
+router.get("/fields", productionController.getAllFields);
+
+router.get("/fields/:field", productionController.countValue);
+
 module.exports = router;
