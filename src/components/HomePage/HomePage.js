@@ -1,26 +1,37 @@
 import React, { Component } from "react";
-import "./HomePage.css"
+import "./HomePage.css";
 import axios from "axios";
 import WorkingPage from "./WorkingPage";
-import { Auth } from 'aws-amplify';
-import { Dialog, Button, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { Auth } from "aws-amplify";
+import {
+  Dialog,
+  Button,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
+
+import ModalCustom from "../ModalCustom";
 
 const cursorMaximumSize = 999;
-const projectStatus = 'active';
-const metaDataUrlPrefix = 'https://api.omicidx.cancerdatasci.org/sra/studies/'
+const projectStatus = "active";
+const metaDataUrlPrefix = "https://api.omicidx.cancerdatasci.org/sra/studies/";
 
-class HomePage extends Component{
-  constructor(props){
-    super(props)
-    this.state={
-      projectId: '',
+class HomePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      projectId: "",
       samplesInfo: new Map(),
       projects: [],
-      username: '',
+      username: "",
       loading: false,
-      open:false,
-      alertContent: ''
-    }
+      open: false,
+      alertContent: "",
+      showModal: false,
+      modalContent: "",
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.initializeProject = this.initializeProject.bind(this);
@@ -41,14 +52,16 @@ class HomePage extends Component{
 
   generateURL(cursor) {
     const params = new URLSearchParams();
-    params.set('size', cursorMaximumSize);
-    params.set('cursor', cursor);
-    return `https://api.omicidx.cancerdatasci.org/sra/studies/${this.state.projectId}/runs?include_fields=accession&include_fields=sample_accession&include_fields=experiment.platform&include_fields=experiment.library_layout&include_fields=total_spots&include_fields=avg_length&${params.toString()}`;
+    params.set("size", cursorMaximumSize);
+    params.set("cursor", cursor);
+    return `https://api.omicidx.cancerdatasci.org/sra/studies/${
+      this.state.projectId
+    }/runs?include_fields=accession&include_fields=sample_accession&include_fields=experiment.platform&include_fields=experiment.library_layout&include_fields=total_spots&include_fields=avg_length&${params.toString()}`;
   }
 
   calculateTotalSpots(layout, totalSpots) {
     totalSpots = parseInt(totalSpots);
-    return layout === 'PAIRED' ? totalSpots * 2 : totalSpots;
+    return layout === "PAIRED" ? totalSpots * 2 : totalSpots;
   }
 
   processData(datas) {
@@ -59,22 +72,28 @@ class HomePage extends Component{
       const srrId = data.accession;
       const info = tempMap.get(sampleId);
 
-      if(!info) {
+      if (!info) {
         tempMap.set(sampleId, {
           avgLength: data.avg_length,
           platform: data.experiment.platform,
-          totalSpots: this.calculateTotalSpots(data.experiment.library_layout, data.total_spots),
+          totalSpots: this.calculateTotalSpots(
+            data.experiment.library_layout,
+            data.total_spots
+          ),
           srrIds: [srrId],
-          curation: data.curation
+          curation: data.curation,
         });
       } else {
         info.avgLength += data.avg_length;
-        info.totalSpots += this.calculateTotalSpots(data.experiment.library_layout, data.total_spots);
+        info.totalSpots += this.calculateTotalSpots(
+          data.experiment.library_layout,
+          data.total_spots
+        );
         info.srrIds.push(srrId);
       }
     });
 
-    this.setState({sampleInfo: tempMap});
+    this.setState({ sampleInfo: tempMap });
   }
 
   generateJsonObject(projectMetaData) {
@@ -85,9 +104,9 @@ class HomePage extends Component{
         sampleId: key,
         numberOfReads: value.totalSpots,
         avgReadLength: value.avgLength,
-        ncbiAccession: value.srrIds.join(';'),
+        ncbiAccession: value.srrIds.join(";"),
         sequencingPlatform: value.platform,
-        curation: value.curation
+        curation: value.curation,
       });
     });
 
@@ -97,30 +116,39 @@ class HomePage extends Component{
       status: projectStatus,
       assignee: this.state.username,
       samples: samples,
-      metadata: projectMetaData
-    }
-  };
+      metadata: projectMetaData,
+    };
+  }
 
-  async initializeProject(event){
+  async initializeProject(event) {
     event.preventDefault();
-    let cursor = '';
+
+    this.setState({ showModal: true });
+
+    let cursor = "";
     const projectID = this.state.projectId;
 
     //check if input is empty or whitespace
-    if(document.getElementById("projectId").value.trim().length === 0 || document.getElementById("projectId").value === null){
+    if (
+      document.getElementById("projectId").value.trim().length === 0 ||
+      document.getElementById("projectId").value === null
+    ) {
       this.setState({
         alert: true,
-        alertContent: 'The projectId you entered dose not match with required format. Please enter ProjectId using standard format.'
-      })
+        alertContent:
+          "The projectId you entered dose not match with required format. Please enter ProjectId using standard format.",
+      });
       return;
     }
 
-    //display loading on button on submit
-    this.setState({ loading: true });
+    // display loading on button on submit
+    // this.setState({ loading: true });
 
-    setTimeout(() => {
-      this.setState({ loading: false });
-    }, 2000)
+    // setTimeout(() => {
+    //   this.setState({ loading: false });
+    // }, 2000);
+
+    console.log("Start set timeout.");
 
     //Todo: Currently we only call the external api once due to the unfixed CORS error,
     // after we figure out how to solve it, we will uncomment the loop to call the api
@@ -141,17 +169,26 @@ class HomePage extends Component{
       const url = this.generateURL(cursor, projectID);
       const metaDataUrl = metaDataUrlPrefix + projectID;
 
+      console.log("projectMetaData start");
+
       projectMetaData = await axios.get(metaDataUrl);
       projectMetaData = projectMetaData.data;
 
+      console.log(`projectMetaData end, it's ${projectMetaData}`);
+
+      console.log("res start");
+
       const res = await axios.get(url);
+
+      console.log(`res end, it's ${res}`);
 
       this.processData(res.data.hits);
     } catch (error) {
       this.setState({
         alert: true,
-        alertContent: 'Oops! Something went wrong. Please check you have the correct project id.'
-      })
+        alertContent:
+          "Oops! Something went wrong. Please check you have the correct project id.",
+      });
       return;
     }
 
@@ -161,21 +198,30 @@ class HomePage extends Component{
 
     const json = this.generateJsonObject(projectMetaData);
 
-    try{
-      const createRes = await axios.post("http://localhost:5001/api/project", json);
+    try {
+      console.log("createRes start");
+
+      const createRes = await axios.post(
+        "http://localhost:5001/api/project",
+        json
+      );
+
+      this.setState({ showModal: false });
+
+      console.log("createRes end");
       const newProject = createRes.data;
       const projects = this.state.projects;
       projects.push(newProject);
 
       this.setState({
-        samplesInfo : new Map(),
-        projects: projects
+        samplesInfo: new Map(),
+        projects: projects,
       });
-    } catch(error) {
+    } catch (error) {
       this.setState({
         alert: true,
-        alertContent: `${error.response.data.errors[0].message}`
-      })
+        alertContent: `${error.response.data.errors[0].message}`,
+      });
     }
   }
 
@@ -183,54 +229,86 @@ class HomePage extends Component{
     const res = await Auth.currentUserInfo();
     const username = res.username;
 
-    let projects = await axios.get(`http://localhost:5001/api/project/${username}`);
+    let projects = await axios.get(
+      `http://localhost:5001/api/project/${username}`
+    );
     projects = projects.data;
 
     this.setState({
-      projects : projects,
-      username : username
+      projects: projects,
+      username: username,
     });
   }
 
   render() {
     const { loading, alert, alertContent } = this.state;
     return (
-        <div className="new">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-          <h4>Start a new project: </h4>
-          <hr />
-          <form name="form" onSubmit={this.initializeProject}>
-            <label>
-              SRA Project ID:
-              <input id="projectId" type="text" value={this.state.projectID} className="inputText" required="required" onChange={this.handleChange} />
-            </label>
-            <button type="submit" value="Initialize" className="submitbtn" disabled={loading}>
-              { loading && <i className="fa fa-spinner fa-spin" style={{ marginRight: "5px" }}></i>}
-              { loading && <span>loading</span> }
-              { !loading && <span>Initialize</span> }
-            </button>
-            {alert ?
-                <div>
-                  <Dialog
-                      open={alert}
-                      onClose={() => this.setState({ alert: false })}
-                      aria-labelledby="alert-dialog-title"
-                      aria-describedby="alert-dialog-description">
-                    <DialogTitle id="alert-dialog-title">{"Error"}</DialogTitle>
-                    <DialogContent>
-                      <DialogContentText id="alert-dialog-description">
-                        {alertContent}
-                      </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                      <Button onClick={() => this.setState({ alert: false })}>Close</Button>
-                    </DialogActions>
-                  </Dialog>
-                </div> : <></>}
-          </form>
-          <WorkingPage projects = {this.state.projects} />
-        </div>
+      <div className="new">
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <h4>Start a new project: </h4>
+        <hr />
+        <form name="form" onSubmit={this.initializeProject}>
+          <label>
+            SRA Project ID:
+            <input
+              id="projectId"
+              type="text"
+              value={this.state.projectID}
+              className="inputText"
+              required="required"
+              onChange={this.handleChange}
+            />
+          </label>
+          <button
+            type="submit"
+            value="Initialize"
+            className="submitbtn"
+            disabled={loading}
+          >
+            {loading && (
+              <i
+                className="fa fa-spinner fa-spin"
+                style={{ marginRight: "5px" }}
+              ></i>
+            )}
+            {loading && <span>loading</span>}
+            {!loading && <span>Initialize</span>}
+          </button>
+          {alert ? (
+            <div>
+              <Dialog
+                open={alert}
+                onClose={() => this.setState({ alert: false })}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">{"Error"}</DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    {alertContent}
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={() => this.setState({ alert: false })}>
+                    Close
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </div>
+          ) : (
+            <></>
+          )}
+        </form>
+        <WorkingPage projects={this.state.projects} />
+        <ModalCustom
+          status={this.state.showModal}
+          content={this.state.modalContent}
+        />
+      </div>
     );
   }
 }
-export default HomePage
+export default HomePage;
