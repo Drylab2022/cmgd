@@ -187,7 +187,11 @@ module.exports = {
 
       const fields = [];
       for (let i in query) {
-        fields.push(query[i]["json_object_keys"])
+        let value = query[i]["json_object_keys"];
+        if (value == "createdAt" || value == "updatedAt") {
+          continue;
+        }
+        fields.push(value);
       }
 
       res.status(200, {'Content-Type': 'application/json'}).send(fields);
@@ -207,7 +211,16 @@ module.exports = {
         bind: {field : req.params.field}
       });
 
-      res.status(200, {'Content-Type': 'application/json'}).send(query);
+      // remove name "NA"
+      let result = [];
+      for (let i in query) {
+        if (query[i]["name"] == "NA") {
+          continue;
+        }
+        result.push(query[i]);
+      };
+
+      res.status(200, {'Content-Type': 'application/json'}).send(result);
     } catch (err) {
       res.status(400, {'Content-Type': 'application/json'}).send({error: err.message});
     }
