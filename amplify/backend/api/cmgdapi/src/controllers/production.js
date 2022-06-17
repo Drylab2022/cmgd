@@ -74,7 +74,7 @@ module.exports = {
     }
 
     try {
-      let samples = await SampleProd.findAll({
+      let samples = await SampleProd.findAndCountAll({
         where: where,
         attributes: [
           Sequelize.literal('DISTINCT ON("sampleId", "draftId") *'),
@@ -99,7 +99,10 @@ module.exports = {
       });
 
       // if the request body contains ccfilter parameter, query db again getting all data to make statistics
-      const results = {results : samples};
+      const results = {
+        results: samples.rows,
+        total_number: samples.count
+      };
       if (req.body.cascading_filter != null) {
         samples = await SampleProd.findAll({
           where: where,
