@@ -73,7 +73,14 @@ function checkRegexAndAdditionalProperties(
   const curation = sample.curation;
 
   for (const property in curation) {
-    if (checkUnknownProperties(property, properties, warningsPool)) {
+    if (
+      checkUnknownProperties(
+        property,
+        properties,
+        warningsPool,
+        sample.sampleId
+      )
+    ) {
       continue;
     }
 
@@ -122,29 +129,33 @@ function checkUniqueness(
   const curation = sample.curation;
 
   for (const property in curation) {
-    const propertyValue = curation[property];
+    const propertyValues = String(curation[property]).split(";");
 
     if (uniqueProperties.has(property)) {
-      if (!uniquePropertiesMap.has(property)) {
-        uniquePropertiesMap.set(property, new Set([propertyValue]));
-      } else {
-        const propertyValueSet = uniquePropertiesMap.get(property);
-
-        if (propertyValueSet.has(propertyValue)) {
-          errorsPool.push(
-            `error: duplicated property: ${property} = ${propertyValue}, property must be unique`
-          );
+      propertyValues.forEach((propertyValue) => {
+        if (!uniquePropertiesMap.has(property)) {
+          uniquePropertiesMap.set(property, new Set([propertyValue]));
         } else {
-          propertyValueSet.add(propertyValue);
+          const propertyValueSet = uniquePropertiesMap.get(property);
+
+          if (propertyValueSet.has(propertyValue)) {
+            errorsPool.push(
+              `error: duplicated property: ${property} = ${propertyValue}, property must be unique`
+            );
+          } else {
+            propertyValueSet.add(propertyValue);
+          }
         }
-      }
+      });
     }
   }
 }
 
-function checkUnknownProperties(property, properties, warningsPool) {
+function checkUnknownProperties(property, properties, warningsPool, sampleId) {
   if (!properties.has(property)) {
-    warningsPool.push(`warning: unknown property ${property}`);
+    warningsPool.push(
+      `warning: sample: ${sampleId} contains unknown property ${property}`
+    );
     return true;
   }
 

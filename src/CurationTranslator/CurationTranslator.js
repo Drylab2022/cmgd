@@ -12,6 +12,7 @@ export function translateToColumns(samples) {
 export function translateToCurationObject(uploadData) {
   return uploadData.map(({ ProjectId, sampleId, ...curation }) => {
     return {
+      ProjectId,
       sampleId,
       curation: { ...curation },
     };
