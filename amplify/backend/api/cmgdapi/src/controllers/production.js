@@ -16,40 +16,47 @@ module.exports = {
       // join all samples with certain project
       const samples = await Project.findByPk(id, {
         attributes: ["projectId", "numberOfSamples", "status", "assignee"],
-        include: [{
-          model: Sample,
-          as: "samples",
-          attributes: ["sampleId", "curation"],
-        }]
+        include: [
+          {
+            model: Sample,
+            as: "samples",
+            attributes: ["sampleId", "curation"],
+          },
+        ],
       });
 
       // not find this project in project table
       if (samples == null) {
-        res.status(404, {'Content-Type': 'application/json'})
-           .send({error: "'id' not found in Project table"});
+        res
+          .status(404, { "Content-Type": "application/json" })
+          .send({ error: "'id' not found in Project table" });
         return;
       }
-  
+
       // insert data into ProjectProd and SampleProd tables
-      ProjectProd.create({
-        projectId: samples["projectId"],
-        numberOfSamples: samples["numberOfSamples"],
-        status: samples["status"],
-        assignee: samples["assignee"],
-        sampleProds: samples["samples"],
-        draftId: id
-      },
+      ProjectProd.create(
+        {
+          projectId: samples["projectId"],
+          numberOfSamples: samples["numberOfSamples"],
+          status: samples["status"],
+          assignee: samples["assignee"],
+          sampleProds: samples["samples"],
+          draftId: id,
+        },
         {
           include: [
             {
               model: SampleProd,
-              as: "sampleProds"
-            }
-          ]
-      });
-      res.status(200, {'Content-Type': 'application/json'}).send();
+              as: "sampleProds",
+            },
+          ],
+        }
+      );
+      res.status(200, { "Content-Type": "application/json" }).send();
     } catch (err) {
-      res.status(400, {'Content-Type': 'application/json'}).send({error: err.message});
+      res
+        .status(400, { "Content-Type": "application/json" })
+        .send({ error: err.message });
     }
   },
 
@@ -81,27 +88,21 @@ module.exports = {
           "id",
           "sampleId",
           "curation",
-          "sampleTime"
+          "sampleTime",
         ],
         include: {
           model: ProjectProd,
-          attributes: [
-            "draftId"
-          ]
+          attributes: ["draftId"],
         },
-        order: [
-          "sampleId",
-          [ProjectProd, 'draftId'],
-          ['sampleTime', 'DESC']
-        ],
+        order: ["sampleId", [ProjectProd, "draftId"], ["sampleTime", "DESC"]],
         limit: count,
-        offset: page * count
+        offset: page * count,
       });
 
       // if the request body contains ccfilter parameter, query db again getting all data to make statistics
       const results = {
         results: samples.rows,
-        total_number: samples.count
+        total_number: samples.count,
       };
       if (req.body.cascading_filter != null) {
         samples = await SampleProd.findAll({
@@ -112,25 +113,18 @@ module.exports = {
           ],
           include: {
             model: ProjectProd,
-            attributes: [
-              "draftId"
-            ]
+            attributes: ["draftId"],
           },
-          order: [
-            "sampleId",
-            [ProjectProd, 'draftId'],
-            ['sampleTime', 'DESC']
-          ],
-          raw: true
+          order: ["sampleId", [ProjectProd, "draftId"], ["sampleTime", "DESC"]],
+          raw: true,
         });
-        
+
         let ccFilter = req.body.cascading_filter; // request body parameter
         let ccRes = []; // return variable
         let stat = {}; // key: field, val: arr[] -> values of this field
-        let valCount = {}; // key: value, val: number of this value
 
         for (let i in ccFilter) {
-          stat[ccFilter[i]] = [];
+          stat[ccFilter[i]] = {};
         }
 
         // traverse samples to calculate
@@ -138,45 +132,41 @@ module.exports = {
           for (let field in stat) {
             if (field in samples[i]["curation"]) {
               let value = samples[i]["curation"][field];
-              
+
               // skip NA value
-              if (value == 'NA') {
+              if (value == "NA") {
                 continue;
               }
 
-              // -1 means related key's array already have this field (deduplication)
-              if (stat[field].indexOf(value) == -1) {
-                stat[field].push(value);
+              // Check whether stat["filter"] has key, e.g. stat[gender] has "male"?
+              if (stat[field].hasOwnProperty(value)) {
+                stat[field][value] += 1;
+              } else {
+                stat[field][value] = 1;
               }
-
-              valCount[value] = value in valCount ? valCount[value] + 1 : 0;
             }
           }
         }
-        
-        // construct result format
+
         for (let field in stat) {
           let record = {
             field: field,
-            values: []
-          }
+            values: [],
+          };
 
-          for (let val in stat[field]) {
-            record["values"].push({
-              name: stat[field][val],
-              count: valCount[stat[field][val]]
-            })
-          }
+          Object.entries(stat[field]).map((key) => {
+            record["values"].push({ name: key[0], count: key[1] });
+          });
 
           ccRes.push(record);
         }
-
         results["cascading_filter"] = ccRes;
       }
-
-      res.status(200, {'Content-Type': 'application/json'}).send(results);
+      res.status(200, { "Content-Type": "application/json" }).send(results);
     } catch (err) {
-      res.status(400, {'Content-Type': 'application/json'}).send({error: err.message});
+      res
+        .status(400, { "Content-Type": "application/json" })
+        .send({ error: err.message });
     }
   },
 
@@ -185,33 +175,31 @@ module.exports = {
    */
   async getAllFields(req, res) {
     try {
-      let sql = "SELECT DISTINCT json_object_keys(curation) FROM \"SampleProd\"";
-      let query = await sequelize.query(sql, {type: Sequelize.QueryTypes.SELECT});
+      let sql = 'SELECT DISTINCT json_object_keys(curation) FROM "SampleProd"';
+      let query = await sequelize.query(sql, {
+        type: Sequelize.QueryTypes.SELECT,
+      });
 
-      const fields = [];
-      for (let i in query) {
-        let value = query[i]["json_object_keys"];
-        if (value == "createdAt" || value == "updatedAt") {
-          continue;
-        }
-        fields.push(value);
-      }
+      const fields = query.map(({ json_object_keys }) => json_object_keys);
 
-      res.status(200, {'Content-Type': 'application/json'}).send(fields);
+      res.status(200, { "Content-Type": "application/json" }).send(fields);
     } catch (err) {
-      res.status(400, {'Content-Type': 'application/json'}).send({error: err.message});
+      res
+        .status(400, { "Content-Type": "application/json" })
+        .send({ error: err.message });
     }
   },
 
   /**
    * Get number of existed value in a certain json field
    */
-   async countValue(req, res) {
+  async countValue(req, res) {
     try {
-      let sql = "SELECT entry.value AS name, COUNT(*) AS count FROM \"SampleProd\", json_each_text(\"SampleProd\".curation) AS entry WHERE entry.key = $field GROUP BY entry.value ORDER BY count DESC"
-      let query = await sequelize.query(sql, { 
+      let sql =
+        'SELECT entry.value AS name, COUNT(*) AS count FROM "SampleProd", json_each_text("SampleProd".curation) AS entry WHERE entry.key = $field GROUP BY entry.value ORDER BY count DESC';
+      let query = await sequelize.query(sql, {
         type: Sequelize.QueryTypes.SELECT,
-        bind: {field : req.params.field}
+        bind: { field: req.params.field },
       });
 
       // remove name "NA"
@@ -221,11 +209,13 @@ module.exports = {
           continue;
         }
         result.push(query[i]);
-      };
+      }
 
-      res.status(200, {'Content-Type': 'application/json'}).send(result);
+      res.status(200, { "Content-Type": "application/json" }).send(result);
     } catch (err) {
-      res.status(400, {'Content-Type': 'application/json'}).send({error: err.message});
+      res
+        .status(400, { "Content-Type": "application/json" })
+        .send({ error: err.message });
     }
-  }
+  },
 };
