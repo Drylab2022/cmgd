@@ -1,1150 +1,1150 @@
 {
-  "project": {
-    "hits": [
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "189639",
-        "avg_length": "146.176741071",
-        "sample_accession": "SRS4893193",
-        "accession": "SRR9217383",
-        "curation": {
-          "test1": 1,
-          "test2": 2
-        }
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "2031595",
-        "avg_length": "172.095760228",
-        "sample_accession": "SRS4893192",
-        "accession": "SRR9217384",
-        "curation": {
-          "test1": 2,
-          "test2": 3
-        }
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "427209",
-        "avg_length": "170.64703459",
-        "sample_accession": "SRS4893191",
-        "accession": "SRR9217385"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "118734",
-        "avg_length": "165.844349554",
-        "sample_accession": "SRS4893190",
-        "accession": "SRR9217386"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "256465",
-        "avg_length": "156.632862184",
-        "sample_accession": "SRS4893188",
-        "accession": "SRR9217387"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "4168149",
-        "avg_length": "180.821130195",
-        "sample_accession": "SRS4893189",
-        "accession": "SRR9217388"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "14736484",
-        "avg_length": "191.745782915",
-        "sample_accession": "SRS4893187",
-        "accession": "SRR9217389"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "76969",
-        "avg_length": "142.146279671",
-        "sample_accession": "SRS4893185",
-        "accession": "SRR9217390"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "23067999",
-        "avg_length": "187.664086729",
-        "sample_accession": "SRS4893186",
-        "accession": "SRR9217391"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "20281275",
-        "avg_length": "185.060389892",
-        "sample_accession": "SRS4893184",
-        "accession": "SRR9217392"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "21440507",
-        "avg_length": "189.545861579",
-        "sample_accession": "SRS4893183",
-        "accession": "SRR9217393"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "3898038",
-        "avg_length": "184.699055525",
-        "sample_accession": "SRS4893182",
-        "accession": "SRR9217394"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "163175",
-        "avg_length": "145.76959093",
-        "sample_accession": "SRS4893181",
-        "accession": "SRR9217395"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "5997864",
-        "avg_length": "187.424011782",
-        "sample_accession": "SRS4893180",
-        "accession": "SRR9217396"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "762248",
-        "avg_length": "176.673126069",
-        "sample_accession": "SRS4893179",
-        "accession": "SRR9217397"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "914090",
-        "avg_length": "175.533766916",
-        "sample_accession": "SRS4893178",
-        "accession": "SRR9217398"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "13918761",
-        "avg_length": "188.597877354",
-        "sample_accession": "SRS4893177",
-        "accession": "SRR9217399"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "15183616",
-        "avg_length": "190.704839282",
-        "sample_accession": "SRS4893176",
-        "accession": "SRR9217400"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "7972148",
-        "avg_length": "186.76747534",
-        "sample_accession": "SRS4893175",
-        "accession": "SRR9217401"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "9454914",
-        "avg_length": "186.448519151",
-        "sample_accession": "SRS4893174",
-        "accession": "SRR9217402"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "4374294",
-        "avg_length": "190.741372665",
-        "sample_accession": "SRS4893173",
-        "accession": "SRR9217403"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "6252940",
-        "avg_length": "191.457412033",
-        "sample_accession": "SRS4893172",
-        "accession": "SRR9217404"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "428668",
-        "avg_length": "177.577920442",
-        "sample_accession": "SRS4893171",
-        "accession": "SRR9217405"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "27405714",
-        "avg_length": "190.450345428",
-        "sample_accession": "SRS4893170",
-        "accession": "SRR9217406"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "167127",
-        "avg_length": "155.405793199",
-        "sample_accession": "SRS4893169",
-        "accession": "SRR9217407"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "13152020",
-        "avg_length": "185.813825937",
-        "sample_accession": "SRS4893168",
-        "accession": "SRR9217408"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "180802",
-        "avg_length": "171.281661707",
-        "sample_accession": "SRS4893167",
-        "accession": "SRR9217409"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "492625",
-        "avg_length": "185.692094392",
-        "sample_accession": "SRS4893166",
-        "accession": "SRR9217410"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "90163",
-        "avg_length": "131.605680823",
-        "sample_accession": "SRS4893165",
-        "accession": "SRR9217411"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "311874",
-        "avg_length": "148.085579433",
-        "sample_accession": "SRS4893164",
-        "accession": "SRR9217412"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "886329",
-        "avg_length": "181.830224443",
-        "sample_accession": "SRS4893163",
-        "accession": "SRR9217413"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "22285405",
-        "avg_length": "189.928317165",
-        "sample_accession": "SRS4893161",
-        "accession": "SRR9217414"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "14116820",
-        "avg_length": "190.059279002",
-        "sample_accession": "SRS4893162",
-        "accession": "SRR9217415"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "2998886",
-        "avg_length": "183.00419089",
-        "sample_accession": "SRS4893160",
-        "accession": "SRR9217416"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "498613",
-        "avg_length": "183.829398752",
-        "sample_accession": "SRS4893159",
-        "accession": "SRR9217417"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "114177",
-        "avg_length": "172.611857029",
-        "sample_accession": "SRS4893158",
-        "accession": "SRR9217418"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "18787189",
-        "avg_length": "188.953889589",
-        "sample_accession": "SRS4893157",
-        "accession": "SRR9217419"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "889242",
-        "avg_length": "188.111173336",
-        "sample_accession": "SRS4893156",
-        "accession": "SRR9217420"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "255561",
-        "avg_length": "139.388599982",
-        "sample_accession": "SRS4893155",
-        "accession": "SRR9217421"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "16917337",
-        "avg_length": "183.45549734",
-        "sample_accession": "SRS4893153",
-        "accession": "SRR9217422"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "12383939",
-        "avg_length": "190.572081387",
-        "sample_accession": "SRS4893154",
-        "accession": "SRR9217423"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "351018",
-        "avg_length": "152.472084053",
-        "sample_accession": "SRS4893152",
-        "accession": "SRR9217424"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "566835",
-        "avg_length": "186.227403036",
-        "sample_accession": "SRS4893151",
-        "accession": "SRR9217425"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "419903",
-        "avg_length": "176.770644649",
-        "sample_accession": "SRS4893150",
-        "accession": "SRR9217426"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "79737",
-        "avg_length": "171.251238446",
-        "sample_accession": "SRS4893149",
-        "accession": "SRR9217427"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "31513686",
-        "avg_length": "191.219367642",
-        "sample_accession": "SRS4893147",
-        "accession": "SRR9217428"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "158376",
-        "avg_length": "143.400471031",
-        "sample_accession": "SRS4893148",
-        "accession": "SRR9217429"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "2236140",
-        "avg_length": "190.101820995",
-        "sample_accession": "SRS4893146",
-        "accession": "SRR9217430"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "1887506",
-        "avg_length": "183.907119236",
-        "sample_accession": "SRS4893145",
-        "accession": "SRR9217431"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "432897",
-        "avg_length": "181.817825025",
-        "sample_accession": "SRS4893144",
-        "accession": "SRR9217432"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "7032462",
-        "avg_length": "186.378894475",
-        "sample_accession": "SRS4893142",
-        "accession": "SRR9217433"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "1409502",
-        "avg_length": "181.359320526",
-        "sample_accession": "SRS4893143",
-        "accession": "SRR9217434"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "10529073",
-        "avg_length": "188.763192923",
-        "sample_accession": "SRS4893141",
-        "accession": "SRR9217435"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "399124",
-        "avg_length": "167.811494673",
-        "sample_accession": "SRS4893140",
-        "accession": "SRR9217436"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "1732559",
-        "avg_length": "188.181697708",
-        "sample_accession": "SRS4893139",
-        "accession": "SRR9217437"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "3409628",
-        "avg_length": "188.999460645",
-        "sample_accession": "SRS4893138",
-        "accession": "SRR9217438"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "875732",
-        "avg_length": "187.829935414",
-        "sample_accession": "SRS4893137",
-        "accession": "SRR9217439"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "766634",
-        "avg_length": "182.037150713",
-        "sample_accession": "SRS4893136",
-        "accession": "SRR9217440"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "1390645",
-        "avg_length": "185.803450917",
-        "sample_accession": "SRS4893135",
-        "accession": "SRR9217441"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "545940",
-        "avg_length": "173.81868154",
-        "sample_accession": "SRS4893134",
-        "accession": "SRR9217442"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "165995",
-        "avg_length": "137.820554836",
-        "sample_accession": "SRS4893133",
-        "accession": "SRR9217443"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "665655",
-        "avg_length": "183.806027146",
-        "sample_accession": "SRS4893132",
-        "accession": "SRR9217444"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "112242",
-        "avg_length": "140.295700362",
-        "sample_accession": "SRS4893131",
-        "accession": "SRR9217445"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "1250219",
-        "avg_length": "181.555661048",
-        "sample_accession": "SRS4893129",
-        "accession": "SRR9217446"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "59535",
-        "avg_length": "168.539380197",
-        "sample_accession": "SRS4893130",
-        "accession": "SRR9217447"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "260823",
-        "avg_length": "181.063004413",
-        "sample_accession": "SRS4893128",
-        "accession": "SRR9217448"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "10740151",
-        "avg_length": "187.077062697",
-        "sample_accession": "SRS4893127",
-        "accession": "SRR9217449"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "2255948",
-        "avg_length": "186.998953433",
-        "sample_accession": "SRS4893126",
-        "accession": "SRR9217450"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "19045128",
-        "avg_length": "187.112973092",
-        "sample_accession": "SRS4893125",
-        "accession": "SRR9217451"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "23171587",
-        "avg_length": "188.370391894",
-        "sample_accession": "SRS4893124",
-        "accession": "SRR9217452"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "15740039",
-        "avg_length": "187.043190554",
-        "sample_accession": "SRS4893123",
-        "accession": "SRR9217453"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "9896875",
-        "avg_length": "186.539902343",
-        "sample_accession": "SRS4893121",
-        "accession": "SRR9217454"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "296484",
-        "avg_length": "178.403775583",
-        "sample_accession": "SRS4893122",
-        "accession": "SRR9217455"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "1443829",
-        "avg_length": "189.37898463",
-        "sample_accession": "SRS4893120",
-        "accession": "SRR9217456"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "21590299",
-        "avg_length": "186.506968245",
-        "sample_accession": "SRS4893119",
-        "accession": "SRR9217457"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "258523",
-        "avg_length": "160.861540366",
-        "sample_accession": "SRS4893118",
-        "accession": "SRR9217458"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "2265804",
-        "avg_length": "181.060156571",
-        "sample_accession": "SRS4893116",
-        "accession": "SRR9217459"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "1046499",
-        "avg_length": "176.871884254",
-        "sample_accession": "SRS4893117",
-        "accession": "SRR9217460"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "2387281",
-        "avg_length": "188.715068733",
-        "sample_accession": "SRS4893115",
-        "accession": "SRR9217461"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "4621575",
-        "avg_length": "192.51292449",
-        "sample_accession": "SRS4893113",
-        "accession": "SRR9217462"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "20300454",
-        "avg_length": "189.978520924",
-        "sample_accession": "SRS4893114",
-        "accession": "SRR9217463"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "5132136",
-        "avg_length": "190.098062678",
-        "sample_accession": "SRS4893112",
-        "accession": "SRR9217464"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "658979",
-        "avg_length": "183.781114421",
-        "sample_accession": "SRS4893111",
-        "accession": "SRR9217465"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "132775",
-        "avg_length": "127.730152514",
-        "sample_accession": "SRS4893110",
-        "accession": "SRR9217466"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "290973",
-        "avg_length": "176.93709382",
-        "sample_accession": "SRS4893108",
-        "accession": "SRR9217467"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "779324",
-        "avg_length": "178.121479641",
-        "sample_accession": "SRS4893109",
-        "accession": "SRR9217468"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "294269",
-        "avg_length": "173.189792333",
-        "sample_accession": "SRS4893107",
-        "accession": "SRR9217469"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "4350821",
-        "avg_length": "183.01332622",
-        "sample_accession": "SRS4893106",
-        "accession": "SRR9217470"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "12320088",
-        "avg_length": "188.644357492",
-        "sample_accession": "SRS4893105",
-        "accession": "SRR9217471"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "2394954",
-        "avg_length": "178.85052239",
-        "sample_accession": "SRS4893104",
-        "accession": "SRR9217472"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "9340354",
-        "avg_length": "188.574531115",
-        "sample_accession": "SRS4893103",
-        "accession": "SRR9217473"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "2117625",
-        "avg_length": "186.23018712",
-        "sample_accession": "SRS4893102",
-        "accession": "SRR9217474"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "11211055",
-        "avg_length": "187.479264351",
-        "sample_accession": "SRS4893101",
-        "accession": "SRR9217475"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "828476",
-        "avg_length": "181.473037239",
-        "sample_accession": "SRS4893100",
-        "accession": "SRR9217476"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "77733",
-        "avg_length": "140.2926299",
-        "sample_accession": "SRS4893099",
-        "accession": "SRR9217477"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "3141896",
-        "avg_length": "187.24309557",
-        "sample_accession": "SRS4893098",
-        "accession": "SRR9217478"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "5577303",
-        "avg_length": "187.936307387",
-        "sample_accession": "SRS4893097",
-        "accession": "SRR9217479"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "370653",
-        "avg_length": "158.593679263",
-        "sample_accession": "SRS4893096",
-        "accession": "SRR9217480"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "427170",
-        "avg_length": "165.790121029",
-        "sample_accession": "SRS4893095",
-        "accession": "SRR9217481"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "87460",
-        "avg_length": "128.156791676",
-        "sample_accession": "SRS4893094",
-        "accession": "SRR9217482"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "1244096",
-        "avg_length": "183.423662643",
-        "sample_accession": "SRS4893093",
-        "accession": "SRR9217483"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "1820300",
-        "avg_length": "184.140705378",
-        "sample_accession": "SRS4893092",
-        "accession": "SRR9217484"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "437915",
-        "avg_length": "175.135503465",
-        "sample_accession": "SRS4893091",
-        "accession": "SRR9217485"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "102763",
-        "avg_length": "161.952648327",
-        "sample_accession": "SRS4893090",
-        "accession": "SRR9217486"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "5721253",
-        "avg_length": "187.108604706",
-        "sample_accession": "SRS4893089",
-        "accession": "SRR9217487"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "84517",
-        "avg_length": "132.672480093",
-        "sample_accession": "SRS4893088",
-        "accession": "SRR9217488"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "5800299",
-        "avg_length": "182.542713919",
-        "sample_accession": "SRS4893087",
-        "accession": "SRR9217489"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "9365808",
-        "avg_length": "184.217911364",
-        "sample_accession": "SRS4893086",
-        "accession": "SRR9217490"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "317302",
-        "avg_length": "169.0300786",
-        "sample_accession": "SRS4893085",
-        "accession": "SRR9217491"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "15743402",
-        "avg_length": "187.256662188",
-        "sample_accession": "SRS4893084",
-        "accession": "SRR9217492"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "239882",
-        "avg_length": "169.276281672",
-        "sample_accession": "SRS4893083",
-        "accession": "SRR9217493"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "1199921",
-        "avg_length": "185.486622036",
-        "sample_accession": "SRS4893082",
-        "accession": "SRR9217494"
-      },
-      {
-        "experiment": {
-          "library_layout": "PAIRED",
-          "platform": "ILLUMINA"
-        },
-        "total_spots": "137456",
-        "avg_length": "176.822925154",
-        "sample_accession": "SRS4893081",
-        "accession": "SRR9217495"
-      }
-    ],
-    "cursor": null,
-    "stats": {
-      "total": 113,
-      "took": 19
-    },
-    "success": true
-  }
+    "project": {
+        "hits": [
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "189639",
+                "avg_length": "146.176741071",
+                "sample_accession": "SRS4893193",
+                "accession": "SRR9217383",
+                "curation": {
+                    "test1": 1,
+                    "test2": 2
+                }
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "2031595",
+                "avg_length": "172.095760228",
+                "sample_accession": "SRS4893192",
+                "accession": "SRR9217384",
+                "curation": {
+                    "test1": 2,
+                    "test2": 3
+                }
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "427209",
+                "avg_length": "170.64703459",
+                "sample_accession": "SRS4893191",
+                "accession": "SRR9217385"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "118734",
+                "avg_length": "165.844349554",
+                "sample_accession": "SRS4893190",
+                "accession": "SRR9217386"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "256465",
+                "avg_length": "156.632862184",
+                "sample_accession": "SRS4893188",
+                "accession": "SRR9217387"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "4168149",
+                "avg_length": "180.821130195",
+                "sample_accession": "SRS4893189",
+                "accession": "SRR9217388"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "14736484",
+                "avg_length": "191.745782915",
+                "sample_accession": "SRS4893187",
+                "accession": "SRR9217389"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "76969",
+                "avg_length": "142.146279671",
+                "sample_accession": "SRS4893185",
+                "accession": "SRR9217390"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "23067999",
+                "avg_length": "187.664086729",
+                "sample_accession": "SRS4893186",
+                "accession": "SRR9217391"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "20281275",
+                "avg_length": "185.060389892",
+                "sample_accession": "SRS4893184",
+                "accession": "SRR9217392"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "21440507",
+                "avg_length": "189.545861579",
+                "sample_accession": "SRS4893183",
+                "accession": "SRR9217393"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "3898038",
+                "avg_length": "184.699055525",
+                "sample_accession": "SRS4893182",
+                "accession": "SRR9217394"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "163175",
+                "avg_length": "145.76959093",
+                "sample_accession": "SRS4893181",
+                "accession": "SRR9217395"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "5997864",
+                "avg_length": "187.424011782",
+                "sample_accession": "SRS4893180",
+                "accession": "SRR9217396"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "762248",
+                "avg_length": "176.673126069",
+                "sample_accession": "SRS4893179",
+                "accession": "SRR9217397"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "914090",
+                "avg_length": "175.533766916",
+                "sample_accession": "SRS4893178",
+                "accession": "SRR9217398"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "13918761",
+                "avg_length": "188.597877354",
+                "sample_accession": "SRS4893177",
+                "accession": "SRR9217399"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "15183616",
+                "avg_length": "190.704839282",
+                "sample_accession": "SRS4893176",
+                "accession": "SRR9217400"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "7972148",
+                "avg_length": "186.76747534",
+                "sample_accession": "SRS4893175",
+                "accession": "SRR9217401"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "9454914",
+                "avg_length": "186.448519151",
+                "sample_accession": "SRS4893174",
+                "accession": "SRR9217402"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "4374294",
+                "avg_length": "190.741372665",
+                "sample_accession": "SRS4893173",
+                "accession": "SRR9217403"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "6252940",
+                "avg_length": "191.457412033",
+                "sample_accession": "SRS4893172",
+                "accession": "SRR9217404"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "428668",
+                "avg_length": "177.577920442",
+                "sample_accession": "SRS4893171",
+                "accession": "SRR9217405"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "27405714",
+                "avg_length": "190.450345428",
+                "sample_accession": "SRS4893170",
+                "accession": "SRR9217406"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "167127",
+                "avg_length": "155.405793199",
+                "sample_accession": "SRS4893169",
+                "accession": "SRR9217407"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "13152020",
+                "avg_length": "185.813825937",
+                "sample_accession": "SRS4893168",
+                "accession": "SRR9217408"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "180802",
+                "avg_length": "171.281661707",
+                "sample_accession": "SRS4893167",
+                "accession": "SRR9217409"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "492625",
+                "avg_length": "185.692094392",
+                "sample_accession": "SRS4893166",
+                "accession": "SRR9217410"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "90163",
+                "avg_length": "131.605680823",
+                "sample_accession": "SRS4893165",
+                "accession": "SRR9217411"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "311874",
+                "avg_length": "148.085579433",
+                "sample_accession": "SRS4893164",
+                "accession": "SRR9217412"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "886329",
+                "avg_length": "181.830224443",
+                "sample_accession": "SRS4893163",
+                "accession": "SRR9217413"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "22285405",
+                "avg_length": "189.928317165",
+                "sample_accession": "SRS4893161",
+                "accession": "SRR9217414"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "14116820",
+                "avg_length": "190.059279002",
+                "sample_accession": "SRS4893162",
+                "accession": "SRR9217415"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "2998886",
+                "avg_length": "183.00419089",
+                "sample_accession": "SRS4893160",
+                "accession": "SRR9217416"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "498613",
+                "avg_length": "183.829398752",
+                "sample_accession": "SRS4893159",
+                "accession": "SRR9217417"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "114177",
+                "avg_length": "172.611857029",
+                "sample_accession": "SRS4893158",
+                "accession": "SRR9217418"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "18787189",
+                "avg_length": "188.953889589",
+                "sample_accession": "SRS4893157",
+                "accession": "SRR9217419"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "889242",
+                "avg_length": "188.111173336",
+                "sample_accession": "SRS4893156",
+                "accession": "SRR9217420"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "255561",
+                "avg_length": "139.388599982",
+                "sample_accession": "SRS4893155",
+                "accession": "SRR9217421"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "16917337",
+                "avg_length": "183.45549734",
+                "sample_accession": "SRS4893153",
+                "accession": "SRR9217422"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "12383939",
+                "avg_length": "190.572081387",
+                "sample_accession": "SRS4893154",
+                "accession": "SRR9217423"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "351018",
+                "avg_length": "152.472084053",
+                "sample_accession": "SRS4893152",
+                "accession": "SRR9217424"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "566835",
+                "avg_length": "186.227403036",
+                "sample_accession": "SRS4893151",
+                "accession": "SRR9217425"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "419903",
+                "avg_length": "176.770644649",
+                "sample_accession": "SRS4893150",
+                "accession": "SRR9217426"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "79737",
+                "avg_length": "171.251238446",
+                "sample_accession": "SRS4893149",
+                "accession": "SRR9217427"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "31513686",
+                "avg_length": "191.219367642",
+                "sample_accession": "SRS4893147",
+                "accession": "SRR9217428"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "158376",
+                "avg_length": "143.400471031",
+                "sample_accession": "SRS4893148",
+                "accession": "SRR9217429"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "2236140",
+                "avg_length": "190.101820995",
+                "sample_accession": "SRS4893146",
+                "accession": "SRR9217430"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "1887506",
+                "avg_length": "183.907119236",
+                "sample_accession": "SRS4893145",
+                "accession": "SRR9217431"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "432897",
+                "avg_length": "181.817825025",
+                "sample_accession": "SRS4893144",
+                "accession": "SRR9217432"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "7032462",
+                "avg_length": "186.378894475",
+                "sample_accession": "SRS4893142",
+                "accession": "SRR9217433"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "1409502",
+                "avg_length": "181.359320526",
+                "sample_accession": "SRS4893143",
+                "accession": "SRR9217434"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "10529073",
+                "avg_length": "188.763192923",
+                "sample_accession": "SRS4893141",
+                "accession": "SRR9217435"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "399124",
+                "avg_length": "167.811494673",
+                "sample_accession": "SRS4893140",
+                "accession": "SRR9217436"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "1732559",
+                "avg_length": "188.181697708",
+                "sample_accession": "SRS4893139",
+                "accession": "SRR9217437"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "3409628",
+                "avg_length": "188.999460645",
+                "sample_accession": "SRS4893138",
+                "accession": "SRR9217438"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "875732",
+                "avg_length": "187.829935414",
+                "sample_accession": "SRS4893137",
+                "accession": "SRR9217439"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "766634",
+                "avg_length": "182.037150713",
+                "sample_accession": "SRS4893136",
+                "accession": "SRR9217440"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "1390645",
+                "avg_length": "185.803450917",
+                "sample_accession": "SRS4893135",
+                "accession": "SRR9217441"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "545940",
+                "avg_length": "173.81868154",
+                "sample_accession": "SRS4893134",
+                "accession": "SRR9217442"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "165995",
+                "avg_length": "137.820554836",
+                "sample_accession": "SRS4893133",
+                "accession": "SRR9217443"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "665655",
+                "avg_length": "183.806027146",
+                "sample_accession": "SRS4893132",
+                "accession": "SRR9217444"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "112242",
+                "avg_length": "140.295700362",
+                "sample_accession": "SRS4893131",
+                "accession": "SRR9217445"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "1250219",
+                "avg_length": "181.555661048",
+                "sample_accession": "SRS4893129",
+                "accession": "SRR9217446"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "59535",
+                "avg_length": "168.539380197",
+                "sample_accession": "SRS4893130",
+                "accession": "SRR9217447"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "260823",
+                "avg_length": "181.063004413",
+                "sample_accession": "SRS4893128",
+                "accession": "SRR9217448"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "10740151",
+                "avg_length": "187.077062697",
+                "sample_accession": "SRS4893127",
+                "accession": "SRR9217449"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "2255948",
+                "avg_length": "186.998953433",
+                "sample_accession": "SRS4893126",
+                "accession": "SRR9217450"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "19045128",
+                "avg_length": "187.112973092",
+                "sample_accession": "SRS4893125",
+                "accession": "SRR9217451"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "23171587",
+                "avg_length": "188.370391894",
+                "sample_accession": "SRS4893124",
+                "accession": "SRR9217452"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "15740039",
+                "avg_length": "187.043190554",
+                "sample_accession": "SRS4893123",
+                "accession": "SRR9217453"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "9896875",
+                "avg_length": "186.539902343",
+                "sample_accession": "SRS4893121",
+                "accession": "SRR9217454"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "296484",
+                "avg_length": "178.403775583",
+                "sample_accession": "SRS4893122",
+                "accession": "SRR9217455"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "1443829",
+                "avg_length": "189.37898463",
+                "sample_accession": "SRS4893120",
+                "accession": "SRR9217456"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "21590299",
+                "avg_length": "186.506968245",
+                "sample_accession": "SRS4893119",
+                "accession": "SRR9217457"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "258523",
+                "avg_length": "160.861540366",
+                "sample_accession": "SRS4893118",
+                "accession": "SRR9217458"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "2265804",
+                "avg_length": "181.060156571",
+                "sample_accession": "SRS4893116",
+                "accession": "SRR9217459"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "1046499",
+                "avg_length": "176.871884254",
+                "sample_accession": "SRS4893117",
+                "accession": "SRR9217460"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "2387281",
+                "avg_length": "188.715068733",
+                "sample_accession": "SRS4893115",
+                "accession": "SRR9217461"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "4621575",
+                "avg_length": "192.51292449",
+                "sample_accession": "SRS4893113",
+                "accession": "SRR9217462"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "20300454",
+                "avg_length": "189.978520924",
+                "sample_accession": "SRS4893114",
+                "accession": "SRR9217463"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "5132136",
+                "avg_length": "190.098062678",
+                "sample_accession": "SRS4893112",
+                "accession": "SRR9217464"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "658979",
+                "avg_length": "183.781114421",
+                "sample_accession": "SRS4893111",
+                "accession": "SRR9217465"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "132775",
+                "avg_length": "127.730152514",
+                "sample_accession": "SRS4893110",
+                "accession": "SRR9217466"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "290973",
+                "avg_length": "176.93709382",
+                "sample_accession": "SRS4893108",
+                "accession": "SRR9217467"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "779324",
+                "avg_length": "178.121479641",
+                "sample_accession": "SRS4893109",
+                "accession": "SRR9217468"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "294269",
+                "avg_length": "173.189792333",
+                "sample_accession": "SRS4893107",
+                "accession": "SRR9217469"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "4350821",
+                "avg_length": "183.01332622",
+                "sample_accession": "SRS4893106",
+                "accession": "SRR9217470"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "12320088",
+                "avg_length": "188.644357492",
+                "sample_accession": "SRS4893105",
+                "accession": "SRR9217471"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "2394954",
+                "avg_length": "178.85052239",
+                "sample_accession": "SRS4893104",
+                "accession": "SRR9217472"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "9340354",
+                "avg_length": "188.574531115",
+                "sample_accession": "SRS4893103",
+                "accession": "SRR9217473"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "2117625",
+                "avg_length": "186.23018712",
+                "sample_accession": "SRS4893102",
+                "accession": "SRR9217474"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "11211055",
+                "avg_length": "187.479264351",
+                "sample_accession": "SRS4893101",
+                "accession": "SRR9217475"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "828476",
+                "avg_length": "181.473037239",
+                "sample_accession": "SRS4893100",
+                "accession": "SRR9217476"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "77733",
+                "avg_length": "140.2926299",
+                "sample_accession": "SRS4893099",
+                "accession": "SRR9217477"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "3141896",
+                "avg_length": "187.24309557",
+                "sample_accession": "SRS4893098",
+                "accession": "SRR9217478"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "5577303",
+                "avg_length": "187.936307387",
+                "sample_accession": "SRS4893097",
+                "accession": "SRR9217479"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "370653",
+                "avg_length": "158.593679263",
+                "sample_accession": "SRS4893096",
+                "accession": "SRR9217480"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "427170",
+                "avg_length": "165.790121029",
+                "sample_accession": "SRS4893095",
+                "accession": "SRR9217481"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "87460",
+                "avg_length": "128.156791676",
+                "sample_accession": "SRS4893094",
+                "accession": "SRR9217482"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "1244096",
+                "avg_length": "183.423662643",
+                "sample_accession": "SRS4893093",
+                "accession": "SRR9217483"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "1820300",
+                "avg_length": "184.140705378",
+                "sample_accession": "SRS4893092",
+                "accession": "SRR9217484"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "437915",
+                "avg_length": "175.135503465",
+                "sample_accession": "SRS4893091",
+                "accession": "SRR9217485"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "102763",
+                "avg_length": "161.952648327",
+                "sample_accession": "SRS4893090",
+                "accession": "SRR9217486"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "5721253",
+                "avg_length": "187.108604706",
+                "sample_accession": "SRS4893089",
+                "accession": "SRR9217487"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "84517",
+                "avg_length": "132.672480093",
+                "sample_accession": "SRS4893088",
+                "accession": "SRR9217488"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "5800299",
+                "avg_length": "182.542713919",
+                "sample_accession": "SRS4893087",
+                "accession": "SRR9217489"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "9365808",
+                "avg_length": "184.217911364",
+                "sample_accession": "SRS4893086",
+                "accession": "SRR9217490"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "317302",
+                "avg_length": "169.0300786",
+                "sample_accession": "SRS4893085",
+                "accession": "SRR9217491"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "15743402",
+                "avg_length": "187.256662188",
+                "sample_accession": "SRS4893084",
+                "accession": "SRR9217492"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "239882",
+                "avg_length": "169.276281672",
+                "sample_accession": "SRS4893083",
+                "accession": "SRR9217493"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "1199921",
+                "avg_length": "185.486622036",
+                "sample_accession": "SRS4893082",
+                "accession": "SRR9217494"
+            },
+            {
+                "experiment": {
+                    "library_layout": "PAIRED",
+                    "platform": "ILLUMINA"
+                },
+                "total_spots": "137456",
+                "avg_length": "176.822925154",
+                "sample_accession": "SRS4893081",
+                "accession": "SRR9217495"
+            }
+        ],
+        "cursor": null,
+        "stats": {
+            "total": 113,
+            "took": 19
+        },
+        "success": true
+    }
 }

@@ -9,13 +9,13 @@ models.ProjectProd = require("./ProjectProd")(sequelize, DataTypes);
 models.SampleProd = require("./SampleProd")(sequelize, DataTypes);
 
 models.Project.hasMany(models.Sample, {
-  as: "samples",
-  foreignKey: "ProjectId",
+    as: "samples",
+    foreignKey: "ProjectId",
 });
 models.Sample.belongsTo(models.Project);
 
 models.ProjectProd.hasMany(models.SampleProd, {
-  as: "sampleProds"
+    as: "sampleProds",
 });
 models.SampleProd.belongsTo(models.ProjectProd);
 

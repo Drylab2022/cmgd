@@ -1,74 +1,65 @@
 {
-  "auth": {
-    "cmgd": {
-      "service": "Cognito",
-      "serviceType": "managed",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [],
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
-      }
-    }
-  },
-  "api": {
-    "cmgdapi": {
-      "resourceName": "cmgdapi",
-      "dependsOn": [
-        {
-          "category": "",
-          "resourceName": "NetworkStack",
-          "attributes": [
-            "ClusterName",
-            "VpcId",
-            "VpcCidrBlock",
-            "SubnetIds",
-            "VpcLinkId",
-            "CloudMapNamespaceId"
-          ]
-        },
-        {
-          "category": "auth",
-          "resourceName": "cmgd",
-          "attributes": [
-            "UserPoolId",
-            "AppClientIDWeb"
-          ]
+    "auth": {
+        "cmgd": {
+            "service": "Cognito",
+            "serviceType": "managed",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [],
+            "frontendAuthConfig": {
+                "socialProviders": [],
+                "usernameAttributes": [],
+                "signupAttributes": ["EMAIL"],
+                "passwordProtectionSettings": {
+                    "passwordPolicyMinLength": 8,
+                    "passwordPolicyCharacters": []
+                },
+                "mfaConfiguration": "OFF",
+                "mfaTypes": ["SMS"],
+                "verificationMechanisms": ["EMAIL"]
+            }
         }
-      ],
-      "deploymentMechanism": "FULLY_MANAGED",
-      "imageSource": {
-        "type": "TEMPLATE",
-        "template": "dockerfile-rest-express"
-      },
-      "restrictAccess": true,
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "ElasticContainer",
-      "authName": "cmgd",
-      "skipHashing": false,
-      "apiType": "REST",
-      "iamAccessUnavailable": true
+    },
+    "api": {
+        "cmgdapi": {
+            "resourceName": "cmgdapi",
+            "dependsOn": [
+                {
+                    "category": "",
+                    "resourceName": "NetworkStack",
+                    "attributes": [
+                        "ClusterName",
+                        "VpcId",
+                        "VpcCidrBlock",
+                        "SubnetIds",
+                        "VpcLinkId",
+                        "CloudMapNamespaceId"
+                    ]
+                },
+                {
+                    "category": "auth",
+                    "resourceName": "cmgd",
+                    "attributes": ["UserPoolId", "AppClientIDWeb"]
+                }
+            ],
+            "deploymentMechanism": "FULLY_MANAGED",
+            "imageSource": {
+                "type": "TEMPLATE",
+                "template": "dockerfile-rest-express"
+            },
+            "restrictAccess": true,
+            "build": true,
+            "providerPlugin": "awscloudformation",
+            "service": "ElasticContainer",
+            "authName": "cmgd",
+            "skipHashing": false,
+            "apiType": "REST",
+            "iamAccessUnavailable": true
+        }
+    },
+    "hosting": {
+        "S3AndCloudFront": {
+            "service": "S3AndCloudFront",
+            "providerPlugin": "awscloudformation"
+        }
     }
-  },
-  "hosting": {
-    "S3AndCloudFront": {
-      "service": "S3AndCloudFront",
-      "providerPlugin": "awscloudformation"
-    }
-  }
 }

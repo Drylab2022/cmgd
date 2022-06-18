@@ -71,7 +71,7 @@ router.post("/add", productionController.addProduction);
  *         description: Return filtered samples
  *       400:
  *         description: Invalid operations in request body
- */ 
+ */
 
 router.post("/search", productionController.search);
 

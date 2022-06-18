@@ -2,18 +2,17 @@
     margin-right: 7px;
     top: 2px;
     animation: spin 1s infinite linear;
-  }
+}
 .LoaderButton {
-  height: 39px;
-  font-size: 1rem;
+    height: 39px;
+    font-size: 1rem;
 }
-  
+
 @keyframes spin {
-  from {
-    transform: scale(1) rotate(0deg);
-  }
-  to {
-    transform: scale(1) rotate(360deg);
-  }
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+    to {
+        transform: scale(1) rotate(360deg);
+    }
 }
-  

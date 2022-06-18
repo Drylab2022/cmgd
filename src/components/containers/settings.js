@@ -5,23 +5,22 @@ import LoaderButton from "../LoaderButton";
 import "./settings.css";
 
 export default function Settings() {
+    // useEffect(() => {
+    //   setStripe(window.Stripe(config.STRIPE_KEY));
+    // }, []);
 
-  // useEffect(() => {
-  //   setStripe(window.Stripe(config.STRIPE_KEY));
-  // }, []);
-
-  return (
-    <div className="settings">
-      <LinkContainer to="/settings/email">
-        <LoaderButton block bsSize="large">
-          Change Email
-        </LoaderButton>
-      </LinkContainer>
-      <LinkContainer to="/settings/password">
-        <LoaderButton block bsSize="large">
-          Change Password
-        </LoaderButton>
-      </LinkContainer>
-    </div>
-  );
+    return (
+        <div className="settings">
+            <LinkContainer to="/settings/email">
+                <LoaderButton block bsSize="large">
+                    Change Email
+                </LoaderButton>
+            </LinkContainer>
+            <LinkContainer to="/settings/password">
+                <LoaderButton block bsSize="large">
+                    Change Password
+                </LoaderButton>
+            </LinkContainer>
+        </div>
+    );
 }

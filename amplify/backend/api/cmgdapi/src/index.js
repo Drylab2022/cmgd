@@ -4,7 +4,7 @@ const cors = require("cors");
 const router = express.Router();
 const port = process.env.PORT || 5001;
 if (process.env.ENV === "PROD") {
-  require("dotenv").config({ path: ".env.prod" });
+    require("dotenv").config({ path: ".env.prod" });
 }
 //const models = require("./models");
 const indexRouter = require("./routes/index");
@@ -14,9 +14,9 @@ const sequelize = require("./config/database");
 
 // Test db connection
 sequelize
-  .authenticate()
-  .then(() => console.log("connected"))
-  .catch((err) => console.log("Err" + err));
+    .authenticate()
+    .then(() => console.log("connected"))
+    .catch((err) => console.log("Err" + err));
 // sequelize.sync({ force: true });
 
 const app = express();
@@ -25,14 +25,14 @@ const app = express();
 const swaggerJsdoc = require("swagger-jsdoc");
 
 const options = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Metagenomic Data Curation API",
-      version: "1.0.0",
+    definition: {
+        openapi: "3.0.0",
+        info: {
+            title: "Metagenomic Data Curation API",
+            version: "1.0.0",
+        },
     },
-  },
-  apis: ["./routes/*.js"], // files containing annotations as above
+    apis: ["./routes/*.js"], // files containing annotations as above
 };
 
 const swaggerSpec = swaggerJsdoc(options);
@@ -50,5 +50,5 @@ app.use(express.urlencoded({ limit: "25mb" }));
 app.use("/", indexRouter);
 
 app.listen(port, () => {
-  console.log("Example app listening at http://localhost:" + port);
+    console.log("Example app listening at http://localhost:" + port);
 });

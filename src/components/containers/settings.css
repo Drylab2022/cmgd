@@ -1,24 +1,25 @@
 @media all and (min-width: 480px) {
     .settings {
-      padding: 60px 0;
-      margin: 0 auto;
-      max-width: 480px;
+        padding: 60px 0;
+        margin: 0 auto;
+        max-width: 480px;
     }
-    .settings .btn-primary{
-      color: rgba(0, 0, 0, 0.87);
-      background-color: rgba(0, 0, 0, 0.04);
-      box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
-      border-color: rgba(0, 0, 0, 0.04);
-      transition: all .3s ease-in-out;
+    .settings .btn-primary {
+        color: rgba(0, 0, 0, 0.87);
+        background-color: rgba(0, 0, 0, 0.04);
+        box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+            0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+        border-color: rgba(0, 0, 0, 0.04);
+        transition: all 0.3s ease-in-out;
     }
-    .settings .btn-primary:hover, .settings .btn-primary:focus{
-      background-color: transparent;
-      border-color: rgba(0, 0, 0, 0.04);
-      transition: all .3s ease-in-out;
+    .settings .btn-primary:hover,
+    .settings .btn-primary:focus {
+        background-color: transparent;
+        border-color: rgba(0, 0, 0, 0.04);
+        transition: all 0.3s ease-in-out;
     }
-    
-  
+
     .settings > .LoaderButton:first-child {
-      margin-bottom: 15px;
+        margin-bottom: 15px;
     }
-  }
+}

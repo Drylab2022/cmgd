@@ -1,57 +1,41 @@
 {
-  "version": "1",
-  "cognitoConfig": {
-    "identityPoolName": "cmgd_identitypool_5ec4c90e",
-    "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "cmgd5ec4c90e",
-    "userPoolName": "cmgd_userpool_5ec4c90e",
-    "autoVerifiedAttributes": [
-      "email"
-    ],
-    "mfaConfiguration": "OFF",
-    "mfaTypes": [
-      "SMS Text Message"
-    ],
-    "smsAuthenticationMessage": "Your authentication code is {####}",
-    "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Your verification code",
-    "emailVerificationMessage": "Your verification code is {####}",
-    "defaultPasswordPolicy": false,
-    "passwordPolicyMinLength": 8,
-    "passwordPolicyCharacters": [],
-    "requiredAttributes": [
-      "email"
-    ],
-    "aliasAttributes": [],
-    "userpoolClientGenerateSecret": false,
-    "userpoolClientRefreshTokenValidity": 30,
-    "userpoolClientWriteAttributes": [
-      "email"
-    ],
-    "userpoolClientReadAttributes": [
-      "email"
-    ],
-    "userpoolClientLambdaRole": "cmgd5ec4c90e_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": false,
-    "authSelections": "identityPoolAndUserPool",
-    "resourceName": "cmgd",
-    "sharedId": "5ec4c90e",
-    "serviceName": "Cognito",
-    "useDefault": "manual",
-    "authRoleArn": {
-      "Fn::GetAtt": [
-        "AuthRole",
-        "Arn"
-      ]
-    },
-    "unauthRoleArn": {
-      "Fn::GetAtt": [
-        "UnauthRole",
-        "Arn"
-      ]
-    },
-    "breakCircularDependency": true,
-    "useEnabledMfas": true,
-    "dependsOn": []
-  }
+    "version": "1",
+    "cognitoConfig": {
+        "identityPoolName": "cmgd_identitypool_5ec4c90e",
+        "allowUnauthenticatedIdentities": false,
+        "resourceNameTruncated": "cmgd5ec4c90e",
+        "userPoolName": "cmgd_userpool_5ec4c90e",
+        "autoVerifiedAttributes": ["email"],
+        "mfaConfiguration": "OFF",
+        "mfaTypes": ["SMS Text Message"],
+        "smsAuthenticationMessage": "Your authentication code is {####}",
+        "smsVerificationMessage": "Your verification code is {####}",
+        "emailVerificationSubject": "Your verification code",
+        "emailVerificationMessage": "Your verification code is {####}",
+        "defaultPasswordPolicy": false,
+        "passwordPolicyMinLength": 8,
+        "passwordPolicyCharacters": [],
+        "requiredAttributes": ["email"],
+        "aliasAttributes": [],
+        "userpoolClientGenerateSecret": false,
+        "userpoolClientRefreshTokenValidity": 30,
+        "userpoolClientWriteAttributes": ["email"],
+        "userpoolClientReadAttributes": ["email"],
+        "userpoolClientLambdaRole": "cmgd5ec4c90e_userpoolclient_lambda_role",
+        "userpoolClientSetAttributes": false,
+        "authSelections": "identityPoolAndUserPool",
+        "resourceName": "cmgd",
+        "sharedId": "5ec4c90e",
+        "serviceName": "Cognito",
+        "useDefault": "manual",
+        "authRoleArn": {
+            "Fn::GetAtt": ["AuthRole", "Arn"]
+        },
+        "unauthRoleArn": {
+            "Fn::GetAtt": ["UnauthRole", "Arn"]
+        },
+        "breakCircularDependency": true,
+        "useEnabledMfas": true,
+        "dependsOn": []
+    }
 }

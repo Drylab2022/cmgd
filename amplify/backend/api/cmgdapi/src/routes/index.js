@@ -7,7 +7,7 @@ const checkRoutes = require("./check");
 const productionRoutes = require("./production");
 
 router.get("/", (req, res) => {
-  res.send("hello");
+    res.send("hello");
 });
 /* Project Router */
 router.use("/api/project", projectRoutes);

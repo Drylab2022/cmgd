@@ -17,48 +17,52 @@ import Settings from "./components/containers/settings";
 import ChangeEmail from "./components/containers/changeEmail";
 
 export default function Routes() {
-  return (
-    <Switch>
-      <Route exact path="/">
-        <Home />
-      </Route>
+    return (
+        <Switch>
+            <Route exact path="/">
+                <Home />
+            </Route>
 
-      <UnauthenticatedRoute exact path="/login">
-        <Login />
-      </UnauthenticatedRoute>
+            <UnauthenticatedRoute exact path="/login">
+                <Login />
+            </UnauthenticatedRoute>
 
-      <UnauthenticatedRoute exact path="/login/reset">
-        <ResetPassword />
-      </UnauthenticatedRoute>
+            <UnauthenticatedRoute exact path="/login/reset">
+                <ResetPassword />
+            </UnauthenticatedRoute>
 
-      <AuthenticatedRoute exact path="/settings/password">
-        <ChangePassword />
-      </AuthenticatedRoute>
+            <AuthenticatedRoute exact path="/settings/password">
+                <ChangePassword />
+            </AuthenticatedRoute>
 
-      <UnauthenticatedRoute exact path="/signup">
-        <Signup />
-      </UnauthenticatedRoute>
+            <UnauthenticatedRoute exact path="/signup">
+                <Signup />
+            </UnauthenticatedRoute>
 
-      <AuthenticatedRoute exact path="/settings">
-        <Settings />
-      </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/settings/email">
-        <ChangeEmail />
-      </AuthenticatedRoute>
+            <AuthenticatedRoute exact path="/settings">
+                <Settings />
+            </AuthenticatedRoute>
+            <AuthenticatedRoute exact path="/settings/email">
+                <ChangeEmail />
+            </AuthenticatedRoute>
 
-      <AuthenticatedRoute exact path="/home">
-        <HomePage />
-      </AuthenticatedRoute>
+            <AuthenticatedRoute exact path="/home">
+                <HomePage />
+            </AuthenticatedRoute>
 
-      <AuthenticatedRoute exact path="/project/:id" component={ProjectPage} />
+            <AuthenticatedRoute
+                exact
+                path="/project/:id"
+                component={ProjectPage}
+            />
 
-      <AuthenticatedRoute exact path="/sample">
-        <SamplePage />
-      </AuthenticatedRoute>
+            <AuthenticatedRoute exact path="/sample">
+                <SamplePage />
+            </AuthenticatedRoute>
 
-      <Route>
-        <NotFound />
-      </Route>
-    </Switch>
-  );
+            <Route>
+                <NotFound />
+            </Route>
+        </Switch>
+    );
 }

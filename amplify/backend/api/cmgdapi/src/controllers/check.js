@@ -6,5 +6,5 @@ module.exports = {
         const statusCode = checkResult.length === 0 ? 200 : 400;
 
         res.status(statusCode).send(checkResult);
-    }
+    },
 };

@@ -1,26 +1,31 @@
 export function translateToColumns(samples) {
-    return samples.map(({id, ...remainedPropertiesWithoutId}) => {
-        let {curation, ...remainedPropertiesWithoutCuration} = remainedPropertiesWithoutId;
+    return samples.map(({ id, ...remainedPropertiesWithoutId }) => {
+        let { curation, ...remainedPropertiesWithoutCuration } =
+            remainedPropertiesWithoutId;
         return {
             ...remainedPropertiesWithoutCuration,
-            ...curation
-        }
+            ...curation,
+        };
     });
 }
 
 export function translateToCurationObject(uploadData) {
-    return uploadData.map(({ProjectId,
-                               avgReadLength,
-                               createdAt,
-                               ncbiAccession,
-                               numberOfReads,
-                               sampleId,
-                               sequencingPlatform,
-                               updatedAt,
-                               ...curation}) => {
-        return {
+    return uploadData.map(
+        ({
+            ProjectId,
+            avgReadLength,
+            createdAt,
+            ncbiAccession,
+            numberOfReads,
             sampleId,
-            curation: { ...curation }
+            sequencingPlatform,
+            updatedAt,
+            ...curation
+        }) => {
+            return {
+                sampleId,
+                curation: { ...curation },
+            };
         }
-    });
+    );
 }
