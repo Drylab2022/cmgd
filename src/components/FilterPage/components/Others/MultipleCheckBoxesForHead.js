@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { addColumn, deleteColumn, updateColumn } from "../../actions";
 import { SELECT_ALL } from "../../stableVariables";
 
-const checkboxHeight = 45;
+const checkboxHeight = 40;
 
 class MultipleCheckBoxesForHead extends React.Component {
     constructor(props) {
@@ -125,9 +125,9 @@ class MultipleCheckBoxesForHead extends React.Component {
                                 ml: 5,
                                 height:
                                     this.props.options.length > 6
-                                        ? 6 * checkboxHeight
+                                        ? 6 * (checkboxHeight + 8)
                                         : this.props.options.length *
-                                          checkboxHeight,
+                                          (checkboxHeight + 8),
                                 overflow: "auto",
                             }}
                         >

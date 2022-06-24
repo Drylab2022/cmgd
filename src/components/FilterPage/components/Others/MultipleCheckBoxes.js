@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { addColumn, deleteColumn, updateColumn } from "../../actions";
 import { SELECT_ALL } from "../../stableVariables";
 
-const checkboxHeight = 45;
+const checkboxHeight = 40;
 
 class MultipleCheckBoxes extends React.Component {
     constructor(props) {
@@ -85,15 +85,17 @@ class MultipleCheckBoxes extends React.Component {
                         </>
                     }
                     control={
-                        <Checkbox
-                            checked={this.state.checkBoxSituations[option]}
-                            onChange={(event) =>
-                                this.handleChange(event, option)
-                            }
-                            style={{
-                                height: checkboxHeight,
-                            }}
-                        />
+                        <>
+                            <Checkbox
+                                checked={this.state.checkBoxSituations[option]}
+                                onChange={(event) =>
+                                    this.handleChange(event, option)
+                                }
+                                style={{
+                                    height: checkboxHeight,
+                                }}
+                            />
+                        </>
                     }
                     key={option}
                 />
@@ -152,10 +154,10 @@ class MultipleCheckBoxes extends React.Component {
                                 flexDirection: "column",
                                 ml: 5,
                                 height:
-                                    this.props.options.length > 6
-                                        ? 6 * checkboxHeight
+                                    this.props.options.length > 3
+                                        ? 3 * (checkboxHeight + 8)
                                         : this.props.options.length *
-                                          checkboxHeight,
+                                          (checkboxHeight + 8),
                                 overflow: "auto",
                             }}
                         >
