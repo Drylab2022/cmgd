@@ -55,11 +55,48 @@ export const getCurrentTable = () => async (dispatch, getState) => {
         filter: filter,
     };
 
+    if (getState().modal_content === "no-data") {
+        const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+        await delay(3000);
+
+        dispatch({
+            type: GET_MODAL_STATUS,
+            payload: false,
+        });
+        dispatch({
+            type: GET_MODAL_CONTENT,
+            payload: "",
+        });
+    }
+
+    dispatch({
+        type: GET_MODAL_CONTENT,
+        payload: "get",
+    });
+
+    dispatch({
+        type: GET_MODAL_STATUS,
+        payload: true,
+    });
+
     // request data for current page
     var currentData = await cmgdAPI.post("/api/production/search", json);
 
     // if the response data is empty
     if (currentData.data.total_number === 0) {
+        console.log("before setting no-data");
+
+        dispatch({
+            type: GET_MODAL_CONTENT,
+            payload: "no-data",
+        });
+
+        dispatch({
+            type: GET_MODAL_STATUS,
+            payload: true,
+        });
+
         if (getState().last_params.params) {
             dispatch({
                 type: BACK_COLUMN,
@@ -74,26 +111,6 @@ export const getCurrentTable = () => async (dispatch, getState) => {
             });
         }
 
-        dispatch({
-            type: GET_MODAL_STATUS,
-            payload: true,
-        });
-
-        dispatch({
-            type: GET_MODAL_CONTENT,
-            payload: "no-data",
-        });
-
-        setTimeout(() => {
-            dispatch({
-                type: GET_MODAL_STATUS,
-                payload: false,
-            });
-            dispatch({
-                type: GET_MODAL_CONTENT,
-                payload: "",
-            });
-        }, 3000);
         return;
     }
 
@@ -142,6 +159,16 @@ export const getCurrentTable = () => async (dispatch, getState) => {
     dispatch({
         type: GET_CURRENT_DATA_NUMBER,
         payload: total_number,
+    });
+
+    dispatch({
+        type: GET_MODAL_STATUS,
+        payload: false,
+    });
+
+    dispatch({
+        type: GET_MODAL_CONTENT,
+        payload: "",
     });
 };
 
