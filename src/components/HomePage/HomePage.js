@@ -137,6 +137,7 @@ class HomePage extends Component {
         alert: true,
         alertContent:
           "The projectId you entered dose not match with required format. Please enter ProjectId using standard format.",
+        showModal: false,
       });
       return;
     }
@@ -188,6 +189,7 @@ class HomePage extends Component {
         alert: true,
         alertContent:
           "Oops! Something went wrong. Please check you have the correct project id.",
+        showModal: false,
       });
       return;
     }
@@ -221,6 +223,7 @@ class HomePage extends Component {
       this.setState({
         alert: true,
         alertContent: `${error.response.data.errors[0].message}`,
+        showModal: false,
       });
     }
   }
