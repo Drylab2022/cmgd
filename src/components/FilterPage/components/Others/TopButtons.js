@@ -5,6 +5,11 @@ import { connect } from "react-redux";
 import * as Papa from "papaparse";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 import {
     getModalStatus,
@@ -14,6 +19,11 @@ import {
 import cmgdAPI from "../../apis/cmgdAPI";
 
 class TopButtons extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { open: false, currentSaveName: "" };
+    }
+
     componentDidMount() {
         this.props.getAllPreviousCombinations();
     }
@@ -72,11 +82,54 @@ class TopButtons extends React.Component {
         console.log(value);
     };
 
+    handleClickOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
+    handleSubmit = () => {
+        this.setState({ open: false });
+        console.log(this.state.currentSaveName);
+    };
+
+    handleTextChange = (event) => {
+        this.setState({ currentSaveName: event.target.value });
+    };
+
     render() {
         return (
             <Grid item container>
                 <Grid item xs={2} style={{ textAlign: "center" }}>
-                    <Button>Save</Button>
+                    <Button onClick={this.handleClickOpen}>Save</Button>
+                    <Dialog open={this.state.open} onClose={this.handleClose}>
+                        <DialogTitle>
+                            Save Current Parameter Combination
+                        </DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                To get the same result next time, please save
+                                current parameter combination with a unique
+                                name.
+                            </DialogContentText>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label="Combination Name"
+                                fullWidth
+                                variant="standard"
+                                onChange={this.handleTextChange}
+                                value={this.state.currentSaveName}
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={this.handleClose}>Cancel</Button>
+                            <Button onClick={this.handleSubmit}>Submit</Button>
+                        </DialogActions>
+                    </Dialog>
                 </Grid>
                 <Grid item xs={2} style={{ textAlign: "center" }}>
                     <Button onClick={this.downloadFile}>Download</Button>
@@ -104,26 +157,6 @@ class TopButtons extends React.Component {
         );
     }
 }
-
-const top100Films = [
-    { label: "The Shawshank Redemption", year: 1994 },
-    { label: "The Godfather", year: 1972 },
-    { label: "The Godfather: Part II", year: 1974 },
-    { label: "The Dark Knight", year: 2008 },
-    { label: "12 Angry Men", year: 1957 },
-    { label: "Schindler's List", year: 1993 },
-    { label: "Pulp Fiction", year: 1994 },
-    {
-        label: "The Lord of the Rings: The Return of the King",
-        year: 2003,
-    },
-    { label: "The Good, the Bad and the Ugly", year: 1966 },
-    { label: "Fight Club", year: 1999 },
-    {
-        label: "The Lord of the Rings: The Fellowship of the Ring",
-        year: 2001,
-    },
-];
 
 const mapStateToProps = (state) => {
     const columnTypes = state.columns;
