@@ -18,6 +18,7 @@ import {
     GET_LAST_PARAMETERS,
     BACK_COLUMN,
     GET_PARAMETERS_NUMBERS,
+    GET_ALL_PREVIOUS_COMBINATIONS,
 } from "./types";
 
 export const getCurrentTable = () => async (dispatch, getState) => {
@@ -315,4 +316,17 @@ export const getModalContent = (content) => {
         type: GET_MODAL_CONTENT,
         payload: content,
     };
+};
+
+export const getAllPreviousCombinations = () => (dispatch) => {
+    const allCombinations = [
+        "First Combination",
+        "Second Combination",
+        "Thrid Combination",
+    ];
+
+    dispatch({
+        type: GET_ALL_PREVIOUS_COMBINATIONS,
+        payload: allCombinations,
+    });
 };

@@ -12,6 +12,7 @@ import modalStatus from "./modalStatus";
 import modalContent from "./modalContent";
 import columnsLastParameters from "./columnsLastParameters";
 import parametersNumbers from "./parametersNumbers";
+import allCombinations from "./allPreviousCombinations";
 
 export default combineReducers({
     table: currentTable,
@@ -27,4 +28,5 @@ export default combineReducers({
     date: filterDate,
     modal_status: modalStatus,
     modal_content: modalContent,
+    all_combinations: allCombinations,
 });

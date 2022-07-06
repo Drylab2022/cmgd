@@ -3,11 +3,21 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import { connect } from "react-redux";
 import * as Papa from "papaparse";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
-import { getModalStatus, getModalContent } from "../../actions";
+import {
+    getModalStatus,
+    getModalContent,
+    getAllPreviousCombinations,
+} from "../../actions";
 import cmgdAPI from "../../apis/cmgdAPI";
 
 class TopButtons extends React.Component {
+    componentDidMount() {
+        this.props.getAllPreviousCombinations();
+    }
+
     downloadFile = async () => {
         // set modal be true
         this.props.getModalContent("get");
@@ -21,6 +31,7 @@ class TopButtons extends React.Component {
         for (const index in data) {
             downloadData.push(data[index]["curation"]);
         }
+        console.log(downloadData);
         const csv = Papa.unparse(downloadData);
         const blob = new Blob([csv]);
         this.downloadBlob(blob, "all_data.csv");
@@ -57,29 +68,62 @@ class TopButtons extends React.Component {
         document.body.removeChild(link);
     };
 
+    handleCombination = (event, value) => {
+        console.log(value);
+    };
+
     render() {
         return (
             <Grid item container>
-                <Grid
-                    item
-                    xs={1}
-                    sx={{ backgroundColor: "white" }}
-                    style={{ textAlign: "center" }}
-                >
+                <Grid item xs={2} style={{ textAlign: "center" }}>
                     <Button>Save</Button>
                 </Grid>
+                <Grid item xs={2} style={{ textAlign: "center" }}>
+                    <Button onClick={this.downloadFile}>Download</Button>
+                </Grid>
+                <Grid item xs={2}></Grid>
                 <Grid
                     item
-                    xs={2}
-                    sx={{ backgroundColor: "white" }}
-                    style={{ textAlign: "center" }}
+                    xs={6}
+                    style={{ textAlign: "center", justifyContent: "center" }}
                 >
-                    <Button onClick={this.downloadFile}>Download</Button>
+                    <Autocomplete
+                        onChange={this.handleCombination}
+                        disablePortal
+                        id="combo-box-demo"
+                        options={this.props.combinations}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Select Previous Parameter Combination"
+                            />
+                        )}
+                    />
                 </Grid>
             </Grid>
         );
     }
 }
+
+const top100Films = [
+    { label: "The Shawshank Redemption", year: 1994 },
+    { label: "The Godfather", year: 1972 },
+    { label: "The Godfather: Part II", year: 1974 },
+    { label: "The Dark Knight", year: 2008 },
+    { label: "12 Angry Men", year: 1957 },
+    { label: "Schindler's List", year: 1993 },
+    { label: "Pulp Fiction", year: 1994 },
+    {
+        label: "The Lord of the Rings: The Return of the King",
+        year: 2003,
+    },
+    { label: "The Good, the Bad and the Ugly", year: 1966 },
+    { label: "Fight Club", year: 1999 },
+    {
+        label: "The Lord of the Rings: The Fellowship of the Ring",
+        year: 2001,
+    },
+];
 
 const mapStateToProps = (state) => {
     const columnTypes = state.columns;
@@ -110,9 +154,12 @@ const mapStateToProps = (state) => {
     };
     return {
         json: json,
+        combinations: state.all_combinations,
     };
 };
 
-export default connect(mapStateToProps, { getModalStatus, getModalContent })(
-    TopButtons
-);
+export default connect(mapStateToProps, {
+    getModalStatus,
+    getModalContent,
+    getAllPreviousCombinations,
+})(TopButtons);

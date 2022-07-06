@@ -56,7 +56,7 @@ class App extends React.Component {
                         <Box
                             sx={{
                                 height: 40,
-                                m: 2,
+                                m: 4,
                             }}
                         >
                             <TopButtons />
