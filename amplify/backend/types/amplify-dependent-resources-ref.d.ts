@@ -18,6 +18,14 @@ export type AmplifyDependentResourcesAttributes = {
             "ContainerNames": "string",
             "ApiName": "string",
             "RootUrl": "string"
+        },
+        "cmgd": {
+            "ServiceName": "string",
+            "ClusterName": "string",
+            "PipelineName": "string",
+            "ContainerNames": "string",
+            "ApiName": "string",
+            "RootUrl": "string"
         }
     },
     "hosting": {
